@@ -321,14 +321,6 @@ function HomeSkeleton({locale}: {locale: Locale}) {
 
             <div className="relative min-h-[280px] lg:col-span-7 lg:min-h-[430px]">
               <div className="absolute inset-8 rounded-[2rem] border border-white/12 bg-white/6" />
-              <div
-                className={`absolute top-[53%] flex -translate-y-1/2 flex-col items-center ${
-                  localeIsRTL ? "right-[57%] translate-x-1/2" : "left-[57%] -translate-x-1/2"
-                }`}
-              >
-                <SkeletonCircle className="h-4 w-4 bg-alfs-orange" />
-                <SkeletonBlock className="mt-2 h-6 w-20 rounded bg-alfs-deep-blue/80" />
-              </div>
             </div>
           </div>
         </section>

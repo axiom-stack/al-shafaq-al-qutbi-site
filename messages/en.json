@@ -185,9 +185,12 @@
       },
       "contact": {
         "title": "Contact",
-        "address": "Amman, Jordan\nMain Operations Hub",
-        "email": "info@alfslogistics.com",
-        "phone": "+962 XX XXX XXXX"
+        "locations": {
+          "amman": "Jordan: Amman - Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor",
+          "hebron": "Palestine: Hebron - Ain Sara"
+        },
+        "email": "INFO@AURORA-LFS.COM",
+        "phone": "00962791010199 / 00962796495566"
       },
       "copyright": "© 2024 ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved."
     }

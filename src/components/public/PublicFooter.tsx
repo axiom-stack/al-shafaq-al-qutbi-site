@@ -14,6 +14,8 @@ export function PublicFooter() {
   const t = useTranslations("HomePage.footer");
   const locale = useLocale() as Locale;
   const localeIsRTL = isRTL(locale);
+  const locationKeys = ["amman", "hebron"] as const;
+  const contactKeys = ["email", "phone"] as const;
 
   const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
     landFreight: "/#services",
@@ -74,18 +76,24 @@ export function PublicFooter() {
         <div>
           <h3 className="mb-4 text-sm font-bold">{t("contact.title")}</h3>
           <ul className="space-y-4 text-sm text-white/76">
-            <li className="flex items-start gap-3">
-              <PublicIcon name="location" className="mt-0.5 h-[18px] w-[18px] shrink-0 text-alfs-orange" />
-              <span className="whitespace-pre-line">{t("contact.address")}</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <PublicIcon name="mail" className="h-[18px] w-[18px] shrink-0 text-alfs-orange" />
-              <span>{t("contact.email")}</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <PublicIcon name="phone" className="h-[18px] w-[18px] shrink-0 text-alfs-orange" />
-              <span>{t("contact.phone")}</span>
-            </li>
+            {locationKeys.map((key) => (
+              <li key={key} className="flex items-start gap-3">
+                <PublicIcon
+                  name="location"
+                  className="mt-0.5 h-[18px] w-[18px] shrink-0 text-alfs-orange"
+                />
+                <span className="whitespace-pre-line">{t(`contact.locations.${key}`)}</span>
+              </li>
+            ))}
+            {contactKeys.map((key) => (
+              <li key={key} className="flex items-center gap-3">
+                <PublicIcon
+                  name={key === "email" ? "mail" : "phone"}
+                  className="h-[18px] w-[18px] shrink-0 text-alfs-orange"
+                />
+                <span>{t(`contact.${key}`)}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

@@ -368,18 +368,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative min-h-[280px] lg:col-span-7 lg:min-h-[430px]">
-              <div
-                className={`absolute top-[53%] flex -translate-y-1/2 flex-col items-center ${
-                  localeIsRTL ? "right-[57%] translate-x-1/2" : "left-[57%] -translate-x-1/2"
-                }`}
-              >
-                <span className="h-4 w-4 rounded-full bg-alfs-orange shadow-[0_0_18px_#F47920]" />
-                <span className="mt-2 rounded bg-alfs-deep-blue/80 px-2 py-1 text-[11px] font-bold tracking-[0.12em] text-alfs-orange">
-                  {t("regionalCoverage.hub")}
-                </span>
-              </div>
-            </div>
+            <div className="relative min-h-[280px] lg:col-span-7 lg:min-h-[430px]" />
           </div>
         </section>
 
