@@ -1,0 +1,84 @@
+{
+  "HomePage": {
+    "meta": {
+      "title": "Al Shafaq Al Qutbi Logistics Services",
+      "description": "Trusted logistics and freight services across Jordan, the Levant, the Gulf, and global trade lanes."
+    },
+    "hero": {
+      "kicker": "Al Shafaq Al Qutbi Logistics Services",
+      "heading": "Your trusted logistics partner from Jordan to the world.",
+      "description": "Built for a professional regional operator: clear hierarchy, blue-dominant surfaces, orange as an accent, and typography that stays sharp across desktop and mobile.",
+      "primaryAction": "Explore services",
+      "secondaryAction": "View the design system",
+      "badgeOne": "Strong brand language",
+      "badgeTwo": "شريكك اللوجستي الموثوق"
+    },
+    "systemSnapshot": {
+      "eyebrow": "System snapshot",
+      "version": "ALFS v1"
+    },
+    "stats": {
+      "visibility": {
+        "value": "24/7",
+        "label": "Shipment visibility and support"
+      },
+      "width": {
+        "value": "1280px",
+        "label": "Content max-width and rhythm"
+      },
+      "accent": {
+        "value": "3px",
+        "label": "Signature orange section underline"
+      },
+      "system": {
+        "value": "1 system",
+        "label": "Shared tokens across the app"
+      }
+    },
+    "capabilities": {
+      "title": "Design system foundation",
+      "copy": "The repo now uses one shared visual language for colors, spacing, shadows, and typography so new pages can be assembled without drifting away from the brand.",
+      "speed": "Fast, clear layouts that stay easy to scan on every screen.",
+      "contrast": "Strong contrast on every surface and component.",
+      "tokens": "Reusable tokens for spacing, radius, shadows, and color.",
+      "typography": "Montserrat-first typography with Arabic fallback support."
+    },
+    "services": {
+      "title": "Core services",
+      "copy": "The homepage now reads like a real logistics brand landing page while staying grounded in the same token set for future expansion.",
+      "freightForwarding": {
+        "eyebrow": "Service 01",
+        "title": "Freight Forwarding",
+        "description": "Air, sea, and land coordination with clear milestones, shipment visibility, and dependable handoffs."
+      },
+      "crossBorderLogistics": {
+        "eyebrow": "Service 02",
+        "title": "Cross-Border Logistics",
+        "description": "Regional movement planning across Jordan, the Levant, and Gulf trade routes with practical execution."
+      },
+      "customsSupport": {
+        "eyebrow": "Service 03",
+        "title": "Customs Support",
+        "description": "Documentation and clearance coordination that keeps shipments moving with fewer surprises."
+      }
+    },
+    "implementation": {
+      "kicker": "Implementation notes",
+      "heading": "A practical setup for real pages.",
+      "copy": "Use the same semantic tokens for every future section so cards, buttons, and headings stay visually consistent without rewriting local styles.",
+      "action": "Back to top",
+      "whatWeCover": {
+        "title": "What the system already covers",
+        "one": "Semantic color tokens for surfaces, text, borders, and brand accents.",
+        "two": "Shared spacing scale and container width for consistent page rhythm.",
+        "three": "Next.js font loading through next/font with Montserrat and Cairo."
+      }
+    }
+  },
+  "NotFound": {
+    "kicker": "Not found",
+    "title": "We could not find that page.",
+    "description": "The requested route does not exist. Use the button below to return to the localized homepage.",
+    "action": "Go home"
+  }
+}
