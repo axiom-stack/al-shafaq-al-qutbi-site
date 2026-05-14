@@ -73,8 +73,8 @@ export default async function HomePage() {
   return (
     <>
       <PublicNavbar currentPage="home" />
-      <main id="top" className="min-h-screen bg-[#fbf8ff] pt-[72px]">
-        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-24 pt-4 sm:px-6 lg:px-8">
+      <main id="top" className="min-h-screen bg-[#fbf8ff] pt-[56px]">
+        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-24 pt-0 sm:px-6 lg:px-8">
           <div className="absolute inset-0">
             <Image
               src="/images/homepage/hero-image.png"
@@ -87,7 +87,7 @@ export default async function HomePage() {
             <div className="absolute inset-0 bg-[rgba(13,31,92,0.78)]" />
           </div>
 
-          <div className="relative mx-auto grid w-full max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
+          <div className="relative mx-auto grid w-full max-w-[1360px] gap-10 lg:grid-cols-12 lg:items-center">
             <div className={`lg:col-span-8 lg:py-10 ${localeIsRTL ? "text-right" : "text-left"}`}>
               <h1 className="max-w-[760px] text-[2.7rem] leading-[0.98] font-bold tracking-[-0.045em] text-white sm:text-[3.75rem] lg:text-[4.25rem]">
                 {t("hero.heading")}
@@ -141,7 +141,7 @@ export default async function HomePage() {
                 localeIsRTL ? "lg:justify-start" : "lg:justify-end"
               }`}
             >
-              <div className="w-full max-w-[320px] rounded-2xl border border-white/18 bg-white/10 p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] backdrop-blur-md">
+              <div className="w-full max-w-[344px] rounded-2xl border border-white/18 bg-white/10 p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] backdrop-blur-md">
                 <div
                   className={`mb-5 flex items-center gap-2 text-alfs-orange ${
                     localeIsRTL ? "justify-start text-right" : "justify-start text-left"
@@ -172,14 +172,14 @@ export default async function HomePage() {
 
         <section
           id="track"
-          className="relative z-10 mx-auto -mt-9 mb-12 max-w-[1280px] px-4 sm:px-6 lg:px-8"
+          className="relative z-10 -mt-9 mb-12 px-4 sm:px-6 lg:px-8"
         >
-          <div className="grid gap-2.5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid w-full max-w-[1360px] gap-2.5 md:grid-cols-2 lg:grid-cols-12">
             {quickActions.map((action) => (
               <a
                 key={action.title}
                 href={action.href}
-                className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-5 py-6 text-center shadow-[0_8px_24px_rgba(26,47,122,0.12)] transition-transform hover:-translate-y-1"
+                className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-5 py-6 text-center shadow-[0_8px_24px_rgba(26,47,122,0.12)] transition-transform hover:-translate-y-1 md:col-span-1 lg:col-span-3"
               >
                 <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-alfs-navy/8 text-alfs-navy">
                   <PublicIcon

@@ -3,6 +3,7 @@ import {useTranslations} from "next-intl";
 
 import {isRTL, type Locale} from "@/i18n/routing";
 
+import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
 import {PublicLogo} from "./PublicLogo";
 
@@ -43,9 +44,12 @@ export function PublicFooter() {
           <ul className="space-y-2.5 text-sm text-white/76">
             {serviceKeys.map((key) => (
               <li key={key}>
-                <a href={serviceLinks[key]} className="transition-colors hover:text-alfs-orange">
+                <PageTransitionLink
+                  href={serviceLinks[key]}
+                  className="transition-colors hover:text-alfs-orange"
+                >
                   {t(`services.links.${key}`)}
-                </a>
+                </PageTransitionLink>
               </li>
             ))}
           </ul>
@@ -56,9 +60,12 @@ export function PublicFooter() {
           <ul className="space-y-2.5 text-sm text-white/76">
             {companyKeys.map((key) => (
               <li key={key}>
-                <a href={companyLinks[key]} className="transition-colors hover:text-alfs-orange">
+                <PageTransitionLink
+                  href={companyLinks[key]}
+                  className="transition-colors hover:text-alfs-orange"
+                >
                   {t(`company.links.${key}`)}
-                </a>
+                </PageTransitionLink>
               </li>
             ))}
           </ul>

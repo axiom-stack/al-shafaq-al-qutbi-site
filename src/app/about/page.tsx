@@ -6,6 +6,7 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
+import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -139,12 +140,12 @@ export default async function AboutPage() {
                 >
                   {t("hero.primaryAction")}
                 </a>
-                <a
+                <PageTransitionLink
                   href="/#services"
                   className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
                   {t("hero.secondaryAction")}
-                </a>
+                </PageTransitionLink>
               </div>
             </div>
 

@@ -11,3 +11,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Do not hardcode page copy, labels, headings, buttons, empty states, or other visible text directly in page components.
 - If content comes from a database or CMS, resolve it through a locale helper in code first, then render the localized value.
 - Prefer utility functions for locale-aware value resolution over ad hoc string branching inside components.
+- Any new page MUST include a matching layout skeleton. Skeletons must be implemented alongside the page and used during loading + language switching to prevent layout shift.

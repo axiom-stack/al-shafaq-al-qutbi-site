@@ -7,6 +7,8 @@ import {useLocale, useTranslations} from "next-intl";
 import {persistLocale} from "@/i18n/localePersistence";
 import {locales, type Locale} from "@/i18n/routing";
 
+import {usePageTransition} from "./PageTransitionProvider";
+
 const labels: Record<Locale, string> = {
   en: "EN",
   ar: "AR",
@@ -17,6 +19,7 @@ export function LocaleSwitch() {
   const t = useTranslations("HomePage.navbar");
   const locale = useLocale() as Locale;
   const [activeLocale, setActiveLocale] = useState(locale);
+  const {beginTransition} = usePageTransition();
 
   useEffect(() => {
     setActiveLocale(locale);
@@ -28,6 +31,7 @@ export function LocaleSwitch() {
     }
 
     setActiveLocale(nextLocale);
+    beginTransition({pathname: window.location.pathname, locale: nextLocale});
     persistLocale(nextLocale);
 
     startTransition(() => {
