@@ -1,7 +1,11 @@
 import type {Metadata} from "next";
 
+import Image from "next/image";
 import {getTranslations, setRequestLocale} from "next-intl/server";
 
+import {PublicFooter} from "@/components/public/PublicFooter";
+import {PublicIcon} from "@/components/public/PublicIcon";
+import {PublicNavbar} from "@/components/public/PublicNavbar";
 import type {Locale} from "@/i18n/routing";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,25 +17,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const capabilityKeys = [
-  "speed",
-  "contrast",
-  "tokens",
-  "typography",
-] as const;
-
+const quickActionKeys = ["track", "quote", "services", "contact"] as const;
 const serviceKeys = [
-  "freightForwarding",
-  "crossBorderLogistics",
-  "customsSupport",
+  "seaFreight",
+  "landFreight",
+  "airFreight",
+  "customsClearance",
+  "warehousing",
+  "consolidation",
 ] as const;
-
-const statKeys = [
-  "visibility",
-  "width",
-  "accent",
-  "system",
-] as const;
+const heroChipKeys = ["seaFreight", "landFreight", "airFreight", "customs"] as const;
+const supportStepKeys = ["consultation", "plan", "execution"] as const;
+const proofKeys = ["flexibleSupplyChain", "clearTracking"] as const;
+const regionalPanelKeys = ["landCoverage", "partnerNetwork"] as const;
 
 export default async function HomePage({
   params,
@@ -42,184 +40,345 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const t = await getTranslations("HomePage");
-
-  const capabilities = capabilityKeys.map((key) => t(`capabilities.${key}`));
   const services = serviceKeys.map((key) => ({
-    eyebrow: t(`services.${key}.eyebrow`),
     title: t(`services.${key}.title`),
     description: t(`services.${key}.description`),
+    icon: t(`services.${key}.icon`),
   }));
-  const stats = statKeys.map((key) => ({
-    value: t(`stats.${key}.value`),
-    label: t(`stats.${key}.label`),
+  const quickActions = quickActionKeys.map((key) => ({
+    title: t(`quickAccess.${key}.title`),
+    description: t(`quickAccess.${key}.description`),
+    icon: t(`quickAccess.${key}.icon`),
+    href: t(`quickAccess.${key}.href`),
+  }));
+  const heroChips = heroChipKeys.map((key) => t(`hero.chips.${key}`));
+  const supportSteps = supportStepKeys.map((key, index) => ({
+    title: t(`hero.support.${key}.title`),
+    description: t(`hero.support.${key}.description`),
+    index: index + 1,
+  }));
+  const proofs = proofKeys.map((key) => ({
+    title: t(`about.proofs.${key}.title`),
+    description: t(`about.proofs.${key}.description`),
+    icon: t(`about.proofs.${key}.icon`),
+  }));
+  const regionalPanels = regionalPanelKeys.map((key) => ({
+    title: t(`regionalCoverage.panels.${key}.title`),
+    description: t(`regionalCoverage.panels.${key}.description`),
+    icon: t(`regionalCoverage.panels.${key}.icon`),
+    accent: t(`regionalCoverage.panels.${key}.accent`),
   }));
 
   return (
-    <main id="top" className="min-h-screen">
-      <section className="relative overflow-hidden border-b border-outline-variant/50">
-        <div className="absolute inset-0 bg-surface-gradient opacity-95" />
-        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-alfs-orange/20 blur-3xl" />
-        <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+    <>
+      <PublicNavbar currentPage="home" />
+      <main id="top" className="min-h-screen bg-[#fbf8ff] pt-[72px]">
+        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-24 pt-4 sm:px-6 lg:px-8">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/homepage/hero-image.png"
+              alt={t("hero.imageAlt")}
+              fill
+              priority
+              className="object-cover object-center opacity-48"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[rgba(13,31,92,0.78)]" />
+          </div>
 
-        <div className="relative brand-shell py-section">
-          <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div className="max-w-3xl text-white">
-              <p className="brand-kicker text-white/80">{t("hero.kicker")}</p>
-              <h1 className="mt-5 text-5xl font-bold tracking-tight sm:text-6xl lg:text-[4.5rem] lg:leading-[1.05]">
+          <div className="relative mx-auto grid w-full max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-8 lg:py-10">
+              <h1 className="max-w-[760px] text-[2.7rem] leading-[0.98] font-bold tracking-[-0.045em] text-white sm:text-[3.75rem] lg:text-[4.25rem]">
                 {t("hero.heading")}
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
+              <p className="mt-5 max-w-[670px] text-[1.08rem] leading-8 text-white/84 sm:text-[1.14rem]">
                 {t("hero.description")}
               </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <a href="#services" className="brand-button">
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a
+                  id="quote"
+                  href="#final-cta"
+                  className="rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber"
+                >
                   {t("hero.primaryAction")}
                 </a>
                 <a
-                  href="#system"
-                  className="brand-button-secondary border-white/70 text-white"
+                  href="#services"
+                  className="rounded-md border border-white/35 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/12"
                 >
                   {t("hero.secondaryAction")}
                 </a>
               </div>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                <div className="brand-pill border-white/20 bg-white/10 text-white">
-                  {t("hero.badgeOne")}
-                </div>
-                <div className="brand-pill border-white/20 bg-white/10 text-white">
-                  <span className="font-arabic text-base">{t("hero.badgeTwo")}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="brand-card-dark p-8 text-white shadow-brand-soft">
-              <div className="flex items-center justify-between">
-                <span className="brand-pill border-white/15 bg-white/5 text-white">
-                  {t("systemSnapshot.eyebrow")}
-                </span>
-                <span className="text-sm text-white/60">{t("systemSnapshot.version")}</span>
-              </div>
-
-              <div className="mt-10 space-y-6">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="flex items-end justify-between gap-4 border-b border-white/10 pb-4 last:border-b-0"
+              <div className="mt-7 flex flex-wrap gap-2">
+                {heroChips.map((chip, index) => (
+                  <span
+                    key={chip}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/22 bg-white/10 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-sm"
                   >
-                    <div>
-                      <p className="text-4xl font-bold tracking-tight text-white">
-                        {stat.value}
-                      </p>
-                      <p className="mt-2 text-sm leading-6 text-white/70">
-                        {stat.label}
-                      </p>
-                    </div>
-                    <span className="mb-3 h-2.5 w-2.5 rounded-full bg-alfs-orange" />
-                  </div>
+                    <PublicIcon
+                      name={
+                        index === 0
+                          ? "ship"
+                          : index === 1
+                            ? "truck"
+                            : index === 2
+                              ? "plane"
+                              : "customs"
+                      }
+                      className="h-3.5 w-3.5"
+                    />
+                    {chip}
+                  </span>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section id="system" className="brand-section">
-        <div className="brand-shell">
-          <h2 className="section-heading">{t("capabilities.title")}</h2>
-          <p className="section-copy">{t("capabilities.copy")}</p>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {capabilities.map((item) => (
-              <div key={item} className="brand-card p-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-alfs-orange/10 text-alfs-orange">
-                  <span className="h-2.5 w-2.5 rounded-full bg-alfs-orange" />
+            <div className="hidden lg:col-span-4 lg:flex lg:justify-end">
+              <div className="w-full max-w-[320px] rounded-2xl border border-white/18 bg-white/10 p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                <div className="mb-5 flex items-center gap-2 text-alfs-orange">
+                  <PublicIcon name="support" className="h-5 w-5" />
+                  <h2 className="text-lg font-bold">{t("hero.support.title")}</h2>
                 </div>
-                <p className="mt-5 text-base leading-7 text-on-surface-variant">
-                  {item}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="services" className="brand-section pt-0">
-        <div className="brand-shell">
-          <h2 className="section-heading">{t("services.title")}</h2>
-          <p className="section-copy">{t("services.copy")}</p>
-
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {services.map((service) => (
-              <article key={service.title} className="brand-card p-8">
-                <div className="flex items-center gap-3">
-                  <span className="h-3 w-3 rounded-full bg-alfs-orange" />
-                  <p className="text-sm font-semibold uppercase tracking-[0.24em] text-alfs-navy">
-                    {service.eyebrow}
-                  </p>
-                </div>
-                <h3 className="mt-5 text-2xl font-bold tracking-tight text-alfs-navy">
-                  {service.title}
-                </h3>
-                <p className="mt-4 text-base leading-7 text-on-surface-variant">
-                  {service.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="brand-section pt-0">
-        <div className="brand-shell">
-          <div className="brand-card overflow-hidden">
-            <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="bg-alfs-deep-blue p-8 text-white sm:p-10">
-                <p className="brand-kicker text-white/75">{t("implementation.kicker")}</p>
-                <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-                  {t("implementation.heading")}
-                </h2>
-                <p className="mt-5 max-w-xl text-base leading-7 text-white/80">
-                  {t("implementation.copy")}
-                </p>
-                <a
-                  href="#top"
-                  className="brand-button-secondary mt-8 border-white/70 text-white"
-                >
-                  {t("implementation.action")}
-                </a>
-              </div>
-
-              <div className="bg-surface-container-low p-8 sm:p-10">
-                <h3 className="text-2xl font-bold tracking-tight text-alfs-navy">
-                  {t("implementation.whatWeCover.title")}
-                </h3>
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-start gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-alfs-orange" />
-                    <span className="text-base leading-7 text-on-surface-variant">
-                      {t("implementation.whatWeCover.one")}
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-alfs-orange" />
-                    <span className="text-base leading-7 text-on-surface-variant">
-                      {t("implementation.whatWeCover.two")}
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-alfs-orange" />
-                    <span className="text-base leading-7 text-on-surface-variant">
-                      {t("implementation.whatWeCover.three")}
-                    </span>
-                  </li>
+                <ul className="space-y-4">
+                  {supportSteps.map((step) => (
+                    <li key={step.title} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-alfs-orange/18 text-[11px] font-bold text-alfs-orange">
+                        {step.index}
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-white">{step.title}</p>
+                        <p className="mt-0.5 text-xs leading-5 text-white/76">
+                          {step.description}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <section
+          id="track"
+          className="relative z-10 mx-auto -mt-9 mb-12 max-w-[1280px] px-4 sm:px-6 lg:px-8"
+        >
+          <div className="grid gap-2.5 md:grid-cols-2 lg:grid-cols-4">
+            {quickActions.map((action) => (
+              <a
+                key={action.title}
+                href={action.href}
+                className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-5 py-6 text-center shadow-[0_8px_24px_rgba(26,47,122,0.12)] transition-transform hover:-translate-y-1"
+              >
+                <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-alfs-navy/8 text-alfs-navy">
+                  <PublicIcon
+                    name={action.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                    className="h-5 w-5"
+                  />
+                </span>
+                <h2 className="mt-4 text-[0.92rem] font-semibold text-alfs-navy">
+                  {action.title}
+                </h2>
+                <p className="mt-1.5 text-xs leading-5 text-on-surface-variant">
+                  {action.description}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section id="whyAlfs" className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+            <div id="about" className="max-w-[560px]">
+              <h2 className="relative text-[2.05rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
+                {t("about.heading")}
+                <span className="mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              </h2>
+              <p className="mt-6 text-[0.98rem] leading-8 text-on-surface-variant">
+                {t("about.description")}
+              </p>
+
+              <ul className="mt-7 space-y-3">
+                <li className="flex items-center gap-3">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-alfs-orange text-white">
+                    <PublicIcon name="check" className="h-3 w-3" />
+                  </span>
+                  <span className="text-sm font-medium text-on-surface">
+                    {t("about.bullets.expertise")}
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-alfs-orange text-white">
+                    <PublicIcon name="check" className="h-3 w-3" />
+                  </span>
+                  <span className="text-sm font-medium text-on-surface">
+                    {t("about.bullets.documentation")}
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-2">
+              <article className="relative overflow-hidden rounded-2xl bg-alfs-deep-blue p-7 text-white shadow-[0_8px_24px_rgba(26,47,122,0.12)] md:col-span-2">
+                <div className="absolute -right-4 -top-4 h-28 w-28 rounded-full bg-alfs-royal-blue/55 blur-2xl" />
+                <div className="relative">
+                  <PublicIcon name="globe" className="h-8 w-8 text-alfs-orange" />
+                  <h3 className="mt-4 text-[1.25rem] font-bold">{t("about.feature.title")}</h3>
+                  <p className="mt-2 max-w-[410px] text-sm leading-6 text-white/78">
+                    {t("about.feature.description")}
+                  </p>
+                </div>
+              </article>
+
+              {proofs.map((proof) => (
+                <article
+                  key={proof.title}
+                  className="rounded-2xl border border-outline-variant/40 bg-white p-6 shadow-sm"
+                >
+                  <PublicIcon
+                    name={proof.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                    className="h-7 w-7 text-alfs-navy"
+                  />
+                  <h3 className="mt-4 text-[0.94rem] font-semibold text-alfs-navy">
+                    {proof.title}
+                  </h3>
+                  <p className="mt-1.5 text-xs leading-5 text-on-surface-variant">
+                    {proof.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="services"
+          className="bg-[#f2eff8] px-4 py-[4.5rem] sm:px-6 lg:px-8 lg:py-20"
+        >
+          <div className="mx-auto max-w-[1280px]">
+            <div className="text-center">
+              <h2 className="inline-block text-[2.2rem] font-bold tracking-[-0.04em] text-alfs-navy">
+                {t("servicesSection.heading")}
+                <span className="mx-auto mt-4 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              </h2>
+              <p className="mx-auto mt-4 max-w-[620px] text-[0.96rem] leading-7 text-on-surface-variant">
+                {t("servicesSection.description")}
+              </p>
+            </div>
+
+            <div className="mt-11 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {services.map((service) => (
+                <article
+                  key={service.title}
+                  className="overflow-hidden rounded-2xl border border-outline-variant/20 bg-white shadow-[0_4px_16px_rgba(26,47,122,0.08)] transition-shadow hover:shadow-[0_8px_24px_rgba(26,47,122,0.15)]"
+                >
+                  <div className="h-1.5 w-full bg-light-grey" />
+                  <div className="p-7">
+                    <PublicIcon
+                      name={service.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                      className="h-8 w-8 text-alfs-navy"
+                    />
+                    <h3 className="mt-5 text-[1.3rem] font-bold text-alfs-navy">
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 min-h-[72px] text-sm leading-6 text-on-surface-variant">
+                      {service.description}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-alfs-orange">
+                      {t("servicesSection.learnMore")}
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="coverage"
+          className="relative overflow-hidden bg-alfs-deep-blue px-4 py-16 text-white sm:px-6 lg:px-8 lg:py-20"
+        >
+          <div className="absolute inset-0 opacity-42">
+            <Image
+              src="/images/homepage/regional-core.png"
+              alt={t("regionalCoverage.imageAlt")}
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.56)_42%,rgba(13,31,92,0.88)_100%)]" />
+          </div>
+
+          <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-5">
+              <h2 className="text-[2.15rem] leading-[1.1] font-bold tracking-[-0.04em]">
+                {t("regionalCoverage.heading")}
+                <span className="mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              </h2>
+              <p className="mt-5 max-w-[430px] text-[0.98rem] leading-7 text-white/78">
+                {t("regionalCoverage.description")}
+              </p>
+
+              <div className="mt-8 space-y-4">
+                {regionalPanels.map((panel) => (
+                  <article
+                    key={panel.title}
+                    className="rounded-r-2xl border-l-4 bg-white/10 px-5 py-4 backdrop-blur-sm"
+                    style={{
+                      borderLeftColor:
+                        panel.accent === "orange" ? "var(--alfs-orange)" : "var(--alfs-royal-blue)",
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <PublicIcon
+                        name={panel.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                        className={`h-[18px] w-[18px] ${
+                          panel.accent === "orange" ? "text-alfs-orange" : "text-alfs-royal-blue"
+                        }`}
+                      />
+                      <h3 className="text-sm font-semibold text-white">{panel.title}</h3>
+                    </div>
+                    <p className="pl-6 text-xs leading-5 text-white/70">{panel.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative min-h-[280px] lg:col-span-7 lg:min-h-[430px]">
+              <div className="absolute left-[57%] top-[53%] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+                <span className="h-4 w-4 rounded-full bg-alfs-orange shadow-[0_0_18px_#F47920]" />
+                <span className="mt-2 rounded bg-alfs-deep-blue/80 px-2 py-1 text-[11px] font-bold tracking-[0.12em] text-alfs-orange">
+                  {t("regionalCoverage.hub")}
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="final-cta"
+          className="bg-alfs-orange px-4 py-14 text-center text-white sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto max-w-[760px]">
+            <h2 className="text-[2.25rem] leading-[1.2] font-bold tracking-[-0.04em]">
+              {t("finalCta.heading")}
+            </h2>
+            <p className="mt-4 text-[0.96rem] leading-7 text-white/90">
+              {t("finalCta.description")}
+            </p>
+            <a
+              href="#top"
+              className="mt-7 inline-flex rounded-md bg-white px-7 py-3 text-sm font-semibold text-alfs-orange shadow-lg transition-colors hover:bg-[#f5f5f5]"
+            >
+              {t("finalCta.action")}
+            </a>
+          </div>
+        </section>
+      </main>
+      <PublicFooter />
+    </>
   );
 }

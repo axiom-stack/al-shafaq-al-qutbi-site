@@ -1,79 +1,322 @@
 {
   "HomePage": {
     "meta": {
-      "title": "Al Shafaq Al Qutbi Logistics Services",
-      "description": "Trusted logistics and freight services across Jordan, the Levant, the Gulf, and global trade lanes."
+      "title": "ALFS Logistics",
+      "description": "Integrated logistics solutions across land, sea, and air from Jordan to global trade lanes."
+    },
+    "brand": {
+      "name": "ALFS Logistics",
+      "tagline": "Logistics Services"
+    },
+    "navbar": {
+      "links": {
+        "home": "Home",
+        "services": "Services",
+        "coverage": "Coverage",
+        "whyAlfs": "Why ALFS",
+        "about": "About",
+        "contact": "Contact"
+      },
+      "trackShipment": "Track Shipment",
+      "getQuote": "Get a Quote",
+      "menu": "Toggle navigation menu",
+      "languageSwitch": "Switch language",
+      "switchTo": "Switch to {locale}"
     },
     "hero": {
-      "kicker": "Al Shafaq Al Qutbi Logistics Services",
-      "heading": "Your trusted logistics partner from Jordan to the world.",
-      "description": "Built for a professional regional operator: clear hierarchy, blue-dominant surfaces, orange as an accent, and typography that stays sharp across desktop and mobile.",
-      "primaryAction": "Explore services",
-      "secondaryAction": "View the design system",
-      "badgeOne": "Strong brand language",
-      "badgeTwo": "شريكك اللوجستي الموثوق"
-    },
-    "systemSnapshot": {
-      "eyebrow": "System snapshot",
-      "version": "ALFS v1"
-    },
-    "stats": {
-      "visibility": {
-        "value": "24/7",
-        "label": "Shipment visibility and support"
+      "heading": "Integrated Logistics Solutions Across Land, Sea & Air",
+      "description": "ALFS helps businesses move cargo with speed, accuracy, and confidence. Tailored supply chain management for the Levant, Gulf, and beyond.",
+      "primaryAction": "Get a Quote",
+      "secondaryAction": "Explore Services",
+      "imageAlt": "Freight logistics hero scene with containers, truck, ship, and aircraft at sunset.",
+      "chips": {
+        "seaFreight": "Sea Freight",
+        "landFreight": "Land Freight",
+        "airFreight": "Air Freight",
+        "customs": "Customs"
       },
-      "width": {
-        "value": "1280px",
-        "label": "Content max-width and rhythm"
-      },
-      "accent": {
-        "value": "3px",
-        "label": "Signature orange section underline"
-      },
-      "system": {
-        "value": "1 system",
-        "label": "Shared tokens across the app"
+      "support": {
+        "title": "Shipment Support",
+        "consultation": {
+          "title": "Consultation",
+          "description": "Define requirements & route."
+        },
+        "plan": {
+          "title": "Customized Plan",
+          "description": "Tailored logistics strategy."
+        },
+        "execution": {
+          "title": "Execution",
+          "description": "Seamless cargo movement."
+        }
       }
     },
-    "capabilities": {
-      "title": "Design system foundation",
-      "copy": "The repo now uses one shared visual language for colors, spacing, shadows, and typography so new pages can be assembled without drifting away from the brand.",
-      "speed": "Fast, clear layouts that stay easy to scan on every screen.",
-      "contrast": "Strong contrast on every surface and component.",
-      "tokens": "Reusable tokens for spacing, radius, shadows, and color.",
-      "typography": "Montserrat-first typography with Arabic fallback support."
+    "quickAccess": {
+      "track": {
+        "title": "Track Shipment",
+        "description": "Real-time status updates",
+        "icon": "search",
+        "href": "#track"
+      },
+      "quote": {
+        "title": "Request Quote",
+        "description": "Fast & accurate pricing",
+        "icon": "quote",
+        "href": "#final-cta"
+      },
+      "services": {
+        "title": "Explore Services",
+        "description": "Comprehensive solutions",
+        "icon": "services",
+        "href": "#services"
+      },
+      "contact": {
+        "title": "Contact ALFS",
+        "description": "24/7 expert support",
+        "icon": "support",
+        "href": "#contact"
+      }
+    },
+    "about": {
+      "heading": "A fully integrated logistics institution headquartered in Amman",
+      "description": "Operating at the crossroads of major trade routes, ALFS delivers end-to-end supply chain mastery. We combine regional insight with global standards to ensure your cargo navigates complex borders, regulations, and timelines seamlessly.",
+      "bullets": {
+        "expertise": "Decades of Regional Expertise",
+        "documentation": "End-to-End Documentation Handling"
+      },
+      "feature": {
+        "title": "Local & International Trade",
+        "description": "Connecting Jordanian businesses to global markets and facilitating seamless imports via Aqaba and QAIA."
+      },
+      "proofs": {
+        "flexibleSupplyChain": {
+          "title": "Flexible Supply Chain",
+          "description": "Adaptive routing to circumvent disruptions.",
+          "icon": "route"
+        },
+        "clearTracking": {
+          "title": "Clear Tracking",
+          "description": "Transparency from origin to final destination.",
+          "icon": "eye"
+        }
+      }
+    },
+    "servicesSection": {
+      "heading": "Core Services",
+      "description": "Comprehensive freight and logistics solutions designed for reliability and scale.",
+      "learnMore": "Learn More"
     },
     "services": {
-      "title": "Core services",
-      "copy": "The homepage now reads like a real logistics brand landing page while staying grounded in the same token set for future expansion.",
-      "freightForwarding": {
-        "eyebrow": "Service 01",
-        "title": "Freight Forwarding",
-        "description": "Air, sea, and land coordination with clear milestones, shipment visibility, and dependable handoffs."
+      "seaFreight": {
+        "title": "Sea Freight",
+        "description": "FCL and LCL shipments globally, with specialized handling at the Port of Aqaba.",
+        "icon": "ship"
       },
-      "crossBorderLogistics": {
-        "eyebrow": "Service 02",
-        "title": "Cross-Border Logistics",
-        "description": "Regional movement planning across Jordan, the Levant, and Gulf trade routes with practical execution."
+      "landFreight": {
+        "title": "Land Freight",
+        "description": "Extensive overland network connecting the Levant, GCC, and wider Middle East regions.",
+        "icon": "truck"
       },
-      "customsSupport": {
-        "eyebrow": "Service 03",
-        "title": "Customs Support",
-        "description": "Documentation and clearance coordination that keeps shipments moving with fewer surprises."
+      "airFreight": {
+        "title": "Air Freight",
+        "description": "Expedited cargo solutions via QAIA for time-critical shipments worldwide.",
+        "icon": "plane"
+      },
+      "customsClearance": {
+        "title": "Customs Clearance",
+        "description": "Expert navigation of border regulations to prevent delays and ensure compliance.",
+        "icon": "customs"
+      },
+      "warehousing": {
+        "title": "Warehousing",
+        "description": "Secure storage facilities strategically located to optimize distribution networks.",
+        "icon": "warehouse"
+      },
+      "consolidation": {
+        "title": "Consolidation",
+        "description": "Cost-effective groupage services maximizing container space and efficiency.",
+        "icon": "box"
       }
     },
-    "implementation": {
-      "kicker": "Implementation notes",
-      "heading": "A practical setup for real pages.",
-      "copy": "Use the same semantic tokens for every future section so cards, buttons, and headings stay visually consistent without rewriting local styles.",
-      "action": "Back to top",
-      "whatWeCover": {
-        "title": "What the system already covers",
-        "one": "Semantic color tokens for surfaces, text, borders, and brand accents.",
-        "two": "Shared spacing scale and container width for consistent page rhythm.",
-        "three": "Next.js font loading through next/font with Montserrat and Cairo."
+    "regionalCoverage": {
+      "heading": "Regional Core, Global Reach",
+      "description": "From our hub in Jordan, we manage complex supply chains that span continents, with specialized strength in overland Middle East routes.",
+      "imageAlt": "Glowing world logistics map showing Jordan as a central trade hub.",
+      "hub": "AMMAN HUB",
+      "panels": {
+        "landCoverage": {
+          "title": "Land Transportation Coverage",
+          "description": "Extensive fleet coverage across the Levant and GCC, ensuring border compliance and timely delivery.",
+          "icon": "pin",
+          "accent": "orange"
+        },
+        "partnerNetwork": {
+          "title": "Worldwide Partner Network",
+          "description": "Vetted international agents enabling door-to-door service across major global trade lanes.",
+          "icon": "globe",
+          "accent": "blue"
+        }
       }
+    },
+    "finalCta": {
+      "heading": "Move your cargo with clarity, speed, and confidence.",
+      "description": "Partner with ALFS for logistics solutions that scale with your business.",
+      "action": "Get a Quote Today"
+    },
+    "footer": {
+      "description": "Al Shafaq Al Qutbi Logistics Services. Providing integrated supply chain solutions with regional expertise and global standards.",
+      "services": {
+        "title": "Services",
+        "links": {
+          "landFreight": "Land Freight",
+          "seaFreight": "Sea Freight",
+          "airFreight": "Air Freight",
+          "warehousing": "Warehousing"
+        }
+      },
+      "company": {
+        "title": "Company",
+        "links": {
+          "aboutUs": "About Us",
+          "ourNetwork": "Our Network",
+          "careers": "Careers",
+          "contactUs": "Contact Us"
+        }
+      },
+      "contact": {
+        "title": "Contact",
+        "address": "Amman, Jordan\nMain Operations Hub",
+        "email": "info@alfslogistics.com",
+        "phone": "+962 XX XXX XXXX"
+      },
+      "copyright": "© 2024 ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved."
     }
+  },
+  "AboutPage": {
+    "meta": {
+      "title": "About ALFS Logistics",
+      "description": "Built to move regional and global trade with confidence through integrated freight and supply chain solutions."
+    },
+    "hero": {
+      "kicker": "About ALFS",
+      "heading": "Built to move regional and global trade with confidence.",
+      "description": "AL SHAFAQ AL QUTBI LOGISTICS SERVICES is a fully integrated logistics institution headquartered in Amman, Jordan. We connect businesses across borders with integrated freight and supply chain solutions, designed for clarity, coordination, and operational excellence.",
+      "primaryAction": "Get a Quote",
+      "secondaryAction": "Explore Our Services",
+      "imageAlt": "Cargo truck and aircraft in a twilight logistics scene.",
+      "support": {
+        "title": "Integrated Logistics Support",
+        "services": {
+          "seaFreight": "Sea Freight Operations",
+          "landTransport": "Cross-Border Land Transport",
+          "airFreight": "Air Freight Solutions",
+          "warehousing": "Secure Warehousing",
+          "customs": "Customs Clearance",
+          "tracking": "Shipment Tracking"
+        }
+      }
+    },
+    "snapshot": {
+      "heading": "A logistics partner for businesses moving across borders",
+      "descriptionOne": "At ALFS, we understand that supply chains are the lifeblood of modern business. Operating from our strategic hub, we provide comprehensive logistics services that simplify complex trade routes with a focus on accuracy, speed, and professional execution.",
+      "descriptionTwo": "Our approach is rooted in operational clarity and reliable execution. We do not just move cargo; we coordinate every step of the journey, ensuring your goods reach their destination efficiently and safely, whether by sea, land, or air.",
+      "cards": {
+        "integratedFreight": {
+          "title": "Integrated freight services",
+          "description": "Seamless connectivity across all transport modes for end-to-end supply chain continuity."
+        },
+        "operationalClarity": {
+          "title": "Operational clarity",
+          "description": "Transparent processes and proactive communication at every stage of the shipment lifecycle."
+        },
+        "flexibleHandling": {
+          "title": "Flexible cargo handling",
+          "description": "Adaptable solutions designed to accommodate diverse cargo requirements and urgent timelines."
+        }
+      }
+    },
+    "missionVision": {
+      "vision": {
+        "title": "Our Vision",
+        "description": "To become the trusted logistics partner of choice, known for our commitment to excellence, innovation, and seamless global connectivity, driving sustainable growth for our clients and our communities."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "description": "We strive to provide comprehensive and flexible logistics solutions that empower businesses to operate efficiently across borders. We are dedicated to delivering precision, speed, and continuous support in every shipment we manage."
+      }
+    },
+    "values": {
+      "heading": "Trust built through clarity, coordination, and reliable execution.",
+      "items": {
+        "accuracy": {
+          "title": "Accuracy & Precision",
+          "description": "Flawless execution in every logistical detail, ensuring perfect delivery."
+        },
+        "speed": {
+          "title": "Speed & Responsiveness",
+          "description": "Swift action and agile responses to meet tight deadlines."
+        },
+        "flexibility": {
+          "title": "Flexibility",
+          "description": "Adaptable solutions designed to meet your unique logistical needs."
+        },
+        "tracking": {
+          "title": "Transparency & Tracking",
+          "description": "Real-time visibility and clear communication throughout the journey."
+        }
+      }
+    },
+    "team": {
+      "heading": "Experienced logistics professionals behind every shipment",
+      "description": "Our team brings years of specialized expertise in logistics and supply chain management. We are dedicated to delivering excellence through specialized skills and continuous improvement.",
+      "imageAlt": "ALFS logistics team members in a warehouse environment.",
+      "points": {
+        "professionalism": {
+          "title": "Professionalism & Precision",
+          "description": "We handle every shipment with the utmost care and attention to detail, ensuring accuracy and reliability at every step."
+        },
+        "support": {
+          "title": "Continuous Customer Support",
+          "description": "Our dedicated support team is available to assist you, providing proactive updates and resolving issues swiftly."
+        },
+        "training": {
+          "title": "Ongoing Development & Training",
+          "description": "We invest in our people, equipping them with the latest industry knowledge and skills to provide cutting-edge solutions."
+        }
+      }
+    },
+    "coverage": {
+      "heading": "Headquartered in Amman, connecting the region and beyond.",
+      "description": "From our strategic center in Jordan, ALFS orchestrates a robust logistics network linking key regional markets, Palestine, Syria, Lebanon, and the GCC, with seamless global connections.",
+      "mapAlt": "Regional logistics route map centered on Jordan.",
+      "offices": {
+        "amman": {
+          "title": "Amman Office",
+          "address": "Jabal Amman\nAmman, Jordan"
+        },
+        "hebron": {
+          "title": "Hebron Office",
+          "address": "Wadi Al-Tuffah Street\nHebron, Palestine"
+        }
+      },
+      "mapLabels": {
+        "hub": "Jordan Hub",
+        "syria": "Syria",
+        "lebanon": "Lebanon",
+        "gcc": "GCC",
+        "palestine": "Palestine",
+        "global": "Global"
+      }
+    },
+    "cta": {
+      "heading": "Ready to plan your next shipment?",
+      "description": "Connect with our logistics experts to develop a tailored freight strategy for your business.",
+      "primaryAction": "Get a Quote",
+      "secondaryAction": "Contact Our Team",
+      "email": "info@alfs-logistics.com",
+      "phone": "+962 6 123 4567"
+    },
+    "whatsAppLabel": "Open WhatsApp contact shortcut"
   },
   "NotFound": {
     "kicker": "Not found",
