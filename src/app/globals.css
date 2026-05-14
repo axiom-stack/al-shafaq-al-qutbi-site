@@ -154,6 +154,10 @@
     line-height: 1.7;
   }
 
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic);
+  }
+
   ::selection {
     background: var(--alfs-navy);
     color: var(--on-primary);

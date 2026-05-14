@@ -5,7 +5,7 @@ import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
 import {Link} from "@/i18n/navigation";
-import type {Locale} from "@/i18n/routing";
+import {isRTL, type Locale} from "@/i18n/routing";
 
 import {LocaleSwitch} from "./LocaleSwitch";
 import {PublicIcon} from "./PublicIcon";
@@ -24,28 +24,27 @@ type PublicNavbarProps = {
   currentPage?: "home" | "about";
 };
 
-function getNavHref(locale: Locale, currentPage: "home" | "about", itemType: (typeof navItems)[number]["type"]) {
-  const homePath = `/${locale}`;
-
+function getNavHref(currentPage: "home" | "about", itemType: (typeof navItems)[number]["type"]) {
   switch (itemType) {
     case "home":
-      return currentPage === "home" ? "#top" : homePath;
+      return currentPage === "home" ? "#top" : "/";
     case "services":
-      return currentPage === "home" ? "#services" : `${homePath}#services`;
+      return currentPage === "home" ? "#services" : "/#services";
     case "coverage":
-      return currentPage === "home" ? "#coverage" : `${homePath}#coverage`;
+      return currentPage === "home" ? "#coverage" : "/#coverage";
     case "whyAlfs":
-      return currentPage === "home" ? "#whyAlfs" : `${homePath}#whyAlfs`;
+      return currentPage === "home" ? "#whyAlfs" : "/#whyAlfs";
     case "about":
-      return `/${locale}/about`;
+      return "/about";
     case "contact":
-      return currentPage === "home" ? "#contact" : `${homePath}#contact`;
+      return currentPage === "home" ? "#contact" : "/#contact";
   }
 }
 
 export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
   const t = useTranslations("HomePage.navbar");
   const locale = useLocale() as Locale;
+  const localeIsRTL = isRTL(locale);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -59,7 +58,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
           {navItems.map((item) => (
             <a
               key={item.key}
-              href={getNavHref(locale, currentPage, item.type)}
+              href={getNavHref(currentPage, item.type)}
               className={`text-[12px] font-medium transition-colors ${
                 item.key === currentPage
                   ? "border-b border-alfs-orange pb-0.5 text-alfs-orange"
@@ -74,7 +73,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
         <div className="hidden items-center gap-3 lg:flex">
           <LocaleSwitch />
           <a
-            href={currentPage === "home" ? "#track" : `/${locale}#track`}
+            href={currentPage === "home" ? "#track" : "/#track"}
             className="rounded-md border border-alfs-navy px-4 py-2 text-[12px] font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white"
           >
             {t("trackShipment")}
@@ -102,12 +101,12 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
       </div>
 
       {menuOpen ? (
-        <div className="border-t border-outline-variant bg-white px-4 py-4 lg:hidden">
+        <div className={`border-t border-outline-variant bg-white px-4 py-4 lg:hidden ${localeIsRTL ? "text-right" : "text-left"}`}>
           <nav className="flex flex-col gap-4">
             {navItems.map((item) => (
               <a
                 key={item.key}
-                href={getNavHref(locale, currentPage, item.type)}
+                href={getNavHref(currentPage, item.type)}
                 className={`text-sm font-medium ${
                   item.key === currentPage ? "text-alfs-orange" : "text-on-surface-variant"
                 }`}
@@ -118,7 +117,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
             ))}
             <div className="flex flex-col gap-3 pt-2">
               <a
-                href={currentPage === "home" ? "#track" : `/${locale}#track`}
+                href={currentPage === "home" ? "#track" : "/#track"}
                 className="rounded-md border border-alfs-navy px-4 py-2 text-center text-sm font-semibold text-alfs-navy"
                 onClick={() => setMenuOpen(false)}
               >

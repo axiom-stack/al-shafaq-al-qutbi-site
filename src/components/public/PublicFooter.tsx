@@ -1,7 +1,7 @@
 import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
-import type {Locale} from "@/i18n/routing";
+import {isRTL, type Locale} from "@/i18n/routing";
 
 import {PublicIcon} from "./PublicIcon";
 import {PublicLogo} from "./PublicLogo";
@@ -12,25 +12,25 @@ const companyKeys = ["aboutUs", "ourNetwork", "careers", "contactUs"] as const;
 export function PublicFooter() {
   const t = useTranslations("HomePage.footer");
   const locale = useLocale() as Locale;
-  const homePath = `/${locale}`;
+  const localeIsRTL = isRTL(locale);
 
   const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
-    landFreight: `${homePath}#services`,
-    seaFreight: `${homePath}#services`,
-    airFreight: `${homePath}#services`,
-    warehousing: `${homePath}#services`,
+    landFreight: "/#services",
+    seaFreight: "/#services",
+    airFreight: "/#services",
+    warehousing: "/#services",
   };
 
   const companyLinks: Record<(typeof companyKeys)[number], string> = {
-    aboutUs: `/${locale}/about`,
-    ourNetwork: `${homePath}#coverage`,
-    careers: `${homePath}#whyAlfs`,
-    contactUs: `${homePath}#contact`,
+    aboutUs: "/about",
+    ourNetwork: "/#coverage",
+    careers: "/#whyAlfs",
+    contactUs: "/#contact",
   };
 
   return (
     <footer id="contact" className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
-      <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr] lg:px-8">
+      <div className={`mx-auto grid max-w-[1280px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr] lg:px-8 ${localeIsRTL ? "text-right" : "text-left"}`}>
         <div className="space-y-4">
           <div className="inline-flex rounded-md bg-white px-2 py-2">
             <PublicLogo />

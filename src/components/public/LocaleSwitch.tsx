@@ -1,8 +1,10 @@
 "use client";
 
+import {startTransition, useEffect, useState} from "react";
+import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 
-import {Link, usePathname} from "@/i18n/navigation";
+import {persistLocale} from "@/i18n/localePersistence";
 import {locales, type Locale} from "@/i18n/routing";
 
 const labels: Record<Locale, string> = {
@@ -11,9 +13,27 @@ const labels: Record<Locale, string> = {
 };
 
 export function LocaleSwitch() {
+  const router = useRouter();
   const t = useTranslations("HomePage.navbar");
   const locale = useLocale() as Locale;
-  const pathname = usePathname();
+  const [activeLocale, setActiveLocale] = useState(locale);
+
+  useEffect(() => {
+    setActiveLocale(locale);
+  }, [locale]);
+
+  function handleLocaleChange(nextLocale: Locale) {
+    if (nextLocale === activeLocale) {
+      return;
+    }
+
+    setActiveLocale(nextLocale);
+    persistLocale(nextLocale);
+
+    startTransition(() => {
+      router.refresh();
+    });
+  }
 
   return (
     <div
@@ -22,23 +42,23 @@ export function LocaleSwitch() {
       role="group"
     >
       {locales.map((nextLocale) => {
-        const isActive = nextLocale === locale;
+        const isActive = nextLocale === activeLocale;
 
         return (
-          <Link
+          <button
             key={nextLocale}
-            href={pathname}
-            locale={nextLocale}
+            type="button"
             className={`rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.18em] transition-colors ${
               isActive
                 ? "bg-alfs-orange text-white"
                 : "text-on-surface-variant hover:text-alfs-navy"
             }`}
             aria-pressed={isActive}
+            onClick={() => handleLocaleChange(nextLocale)}
           >
             <span className="sr-only">{t("switchTo", {locale: nextLocale})}</span>
             <span aria-hidden="true">{labels[nextLocale]}</span>
-          </Link>
+          </button>
         );
       })}
     </div>

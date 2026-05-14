@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import "./globals.css";
 import { getDirection, type Locale } from "@/i18n/routing";
+import { LocaleClientSync } from "@/components/public/LocaleClientSync";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -31,7 +32,10 @@ export default async function RootLayout({
       className={`${montserrat.variable} ${cairo.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-surface text-on-surface">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <LocaleClientSync />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

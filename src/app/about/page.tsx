@@ -1,12 +1,12 @@
 import type {Metadata} from "next";
 
 import Image from "next/image";
-import {getTranslations, setRequestLocale} from "next-intl/server";
+import {getLocale, getTranslations} from "next-intl/server";
 
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
-import type {Locale} from "@/i18n/routing";
+import {isRTL, type Locale} from "@/i18n/routing";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("AboutPage");
@@ -21,16 +21,18 @@ const introCardKeys = ["integratedFreight", "operationalClarity", "flexibleHandl
 const valueKeys = ["accuracy", "speed", "flexibility", "tracking"] as const;
 const teamPointKeys = ["professionalism", "support", "training"] as const;
 const officeKeys = ["amman", "hebron"] as const;
-const serviceChipKeys = ["seaFreight", "landTransport", "airFreight", "warehousing", "customs", "tracking"] as const;
+const serviceChipKeys = [
+  "seaFreight",
+  "landTransport",
+  "airFreight",
+  "warehousing",
+  "customs",
+  "tracking",
+] as const;
 
-export default async function AboutPage({
-  params,
-}: Readonly<{
-  params: Promise<{locale: Locale}>;
-}>) {
-  const {locale} = await params;
-  setRequestLocale(locale);
-
+export default async function AboutPage() {
+  const locale = (await getLocale()) as Locale;
+  const localeIsRTL = isRTL(locale);
   const t = await getTranslations("AboutPage");
 
   const introCards = introCardKeys.map((key) => ({
@@ -89,6 +91,18 @@ export default async function AboutPage({
                 : "location",
   }));
 
+  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
+  const heroOverlayClass = localeIsRTL
+    ? "bg-[linear-gradient(270deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]"
+    : "bg-[linear-gradient(90deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]";
+  const ctaGlowSideClass = localeIsRTL
+    ? "left-0 bg-[linear-gradient(90deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]"
+    : "right-0 bg-[linear-gradient(270deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]";
+  const mapFontFamily = localeIsRTL ? "var(--font-cairo)" : "var(--font-montserrat)";
+  const officeCardClass = localeIsRTL
+    ? "border-r-4 border-l-0 text-right"
+    : "border-l-4 border-r-0 text-left";
+
   return (
     <>
       <PublicNavbar currentPage="about" />
@@ -103,12 +117,12 @@ export default async function AboutPage({
               className="object-cover object-center"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]" />
+            <div className={`absolute inset-0 ${heroOverlayClass}`} />
           </div>
 
           <div className="relative mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-16">
-            <div className="lg:col-span-7">
-              <p className="text-[0.72rem] font-bold tracking-[0.22em] text-alfs-orange uppercase">
+            <div className={`lg:col-span-7 ${localeIsRTL ? "text-right" : "text-left"}`}>
+              <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.kicker")}
               </p>
               <h1 className="mt-3 max-w-[620px] text-[2.4rem] leading-[1.02] font-bold tracking-[-0.05em] text-white sm:text-[3.4rem] lg:text-[4rem]">
@@ -126,7 +140,7 @@ export default async function AboutPage({
                   {t("hero.primaryAction")}
                 </a>
                 <a
-                  href={`/${locale}#services`}
+                  href="/#services"
                   className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
                   {t("hero.secondaryAction")}
@@ -134,14 +148,23 @@ export default async function AboutPage({
               </div>
             </div>
 
-            <div className="lg:col-span-5 lg:justify-self-end">
+            <div
+              className={`lg:col-span-5 ${
+                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
+              }`}
+            >
               <div className="max-w-[350px] rounded-[18px] border border-white/18 bg-white/14 p-6 text-white shadow-[0_18px_45px_rgba(0,0,0,0.28)] backdrop-blur-md">
-                <h2 className="text-[1.55rem] leading-tight font-bold">{t("hero.support.title")}</h2>
+                <h2 className={`text-[1.55rem] leading-tight font-bold ${localeIsRTL ? "text-right" : "text-left"}`}>
+                  {t("hero.support.title")}
+                </h2>
                 <div className="mt-5 space-y-3">
                   {serviceChips.map((item) => (
                     <div key={item.label} className="flex items-center gap-3 text-sm font-medium">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/12 text-alfs-orange">
-                        <PublicIcon name={item.icon as Parameters<typeof PublicIcon>[0]["name"]} className="h-4 w-4" />
+                        <PublicIcon
+                          name={item.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                          className="h-4 w-4"
+                        />
                       </span>
                       <span>{item.label}</span>
                     </div>
@@ -154,11 +177,11 @@ export default async function AboutPage({
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            <div className="max-w-[510px]">
+            <div className={`max-w-[510px] ${localeIsRTL ? "text-right" : "text-left"}`}>
               <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("snapshot.heading")}
               </h2>
-              <span className="mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
               <p className="mt-6 text-[0.96rem] leading-7 text-on-surface-variant">
                 {t("snapshot.descriptionOne")}
               </p>
@@ -171,11 +194,14 @@ export default async function AboutPage({
               {introCards.map((card) => (
                 <article
                   key={card.title}
-                  className="rounded-[14px] border border-[#ebe8f3] bg-white px-5 py-4 shadow-[0_14px_30px_rgba(26,47,122,0.10)]"
+                  className={`rounded-[14px] border border-[#ebe8f3] bg-white px-5 py-4 shadow-[0_14px_30px_rgba(26,47,122,0.10)] ${localeIsRTL ? "text-right" : "text-left"}`}
                 >
                   <div className="flex items-start gap-4">
                     <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f3f5ff] text-alfs-royal-blue">
-                      <PublicIcon name={card.icon as Parameters<typeof PublicIcon>[0]["name"]} className="h-5 w-5" />
+                      <PublicIcon
+                        name={card.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                        className="h-5 w-5"
+                      />
                     </span>
                     <div>
                       <h3 className="text-[1rem] font-semibold text-alfs-navy">{card.title}</h3>
@@ -233,7 +259,10 @@ export default async function AboutPage({
                   className="rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 text-center shadow-[0_12px_28px_rgba(26,47,122,0.10)]"
                 >
                   <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-alfs-orange/8 text-alfs-orange">
-                    <PublicIcon name={item.icon as Parameters<typeof PublicIcon>[0]["name"]} className="h-5 w-5" />
+                    <PublicIcon
+                      name={item.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                      className="h-5 w-5"
+                    />
                   </span>
                   <h3 className="mt-4 text-[1.02rem] leading-6 font-semibold text-alfs-navy">
                     {item.title}
@@ -249,7 +278,11 @@ export default async function AboutPage({
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
-            <div className="relative order-2 overflow-hidden rounded-[14px] shadow-[0_18px_36px_rgba(26,47,122,0.14)] lg:order-1">
+            <div
+              className={`relative overflow-hidden rounded-[14px] shadow-[0_18px_36px_rgba(26,47,122,0.14)] ${
+                localeIsRTL ? "order-1 lg:order-2" : "order-2 lg:order-1"
+              }`}
+            >
               <Image
                 src="/images/about/our-team.png"
                 alt={t("team.imageAlt")}
@@ -260,11 +293,11 @@ export default async function AboutPage({
               />
             </div>
 
-            <div className="order-1 lg:order-2">
+            <div className={localeIsRTL ? "order-2 text-right lg:order-1" : "order-1 text-left lg:order-2"}>
               <h2 className="max-w-[520px] text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("team.heading")}
               </h2>
-              <span className="mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
               <p className="mt-6 max-w-[540px] text-[0.96rem] leading-7 text-on-surface-variant">
                 {t("team.description")}
               </p>
@@ -273,7 +306,10 @@ export default async function AboutPage({
                 {teamPoints.map((point) => (
                   <div key={point.title} className="flex items-start gap-4">
                     <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-alfs-orange/10 text-alfs-orange">
-                      <PublicIcon name={point.icon as Parameters<typeof PublicIcon>[0]["name"]} className="h-5 w-5" />
+                      <PublicIcon
+                        name={point.icon as Parameters<typeof PublicIcon>[0]["name"]}
+                        className="h-5 w-5"
+                      />
                     </span>
                     <div>
                       <h3 className="text-[0.98rem] font-semibold text-alfs-navy">{point.title}</h3>
@@ -290,11 +326,11 @@ export default async function AboutPage({
 
         <section className="overflow-hidden bg-[#f7f5fb] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div>
+            <div className={localeIsRTL ? "text-right" : "text-left"}>
               <h2 className="max-w-[520px] text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("coverage.heading")}
               </h2>
-              <span className="mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
               <p className="mt-6 max-w-[570px] text-[0.96rem] leading-7 text-on-surface-variant">
                 {t("coverage.description")}
               </p>
@@ -303,7 +339,7 @@ export default async function AboutPage({
                 {offices.map((office) => (
                   <article
                     key={office.title}
-                    className="rounded-[10px] border-l-4 border-alfs-orange bg-white px-5 py-4 shadow-[0_12px_24px_rgba(26,47,122,0.08)]"
+                    className={`rounded-[10px] bg-white px-5 py-4 shadow-[0_12px_24px_rgba(26,47,122,0.08)] ${officeCardClass}`}
                   >
                     <h3 className="flex items-center gap-2 text-[1rem] font-semibold text-alfs-navy">
                       <PublicIcon name="city" className="h-[18px] w-[18px] text-alfs-orange" />
@@ -338,22 +374,22 @@ export default async function AboutPage({
                 <circle cx="320" cy="320" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
                 <circle cx="80" cy="300" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
                 <circle cx="200" cy="50" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <text x="219" y="214" fill="#1A2F7A" fontFamily="var(--font-montserrat)" fontSize="14" fontWeight="700">
+                <text x="219" y="214" fill="#1A2F7A" fontFamily={mapFontFamily} fontSize="14" fontWeight="700">
                   {t("coverage.mapLabels.hub")}
                 </text>
-                <text x="60" y="70" fill="#454651" fontFamily="var(--font-montserrat)" fontSize="12" fontWeight="600">
+                <text x="60" y="70" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
                   {t("coverage.mapLabels.syria")}
                 </text>
-                <text x="360" y="90" fill="#454651" fontFamily="var(--font-montserrat)" fontSize="12" fontWeight="600">
+                <text x="360" y="90" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
                   {t("coverage.mapLabels.lebanon")}
                 </text>
-                <text x="330" y="340" fill="#454651" fontFamily="var(--font-montserrat)" fontSize="12" fontWeight="600">
+                <text x="330" y="340" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
                   {t("coverage.mapLabels.gcc")}
                 </text>
-                <text x="38" y="320" fill="#454651" fontFamily="var(--font-montserrat)" fontSize="12" fontWeight="600">
+                <text x="38" y="320" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
                   {t("coverage.mapLabels.palestine")}
                 </text>
-                <text x="205" y="40" fill="#454651" fontFamily="var(--font-montserrat)" fontSize="12" fontWeight="600">
+                <text x="205" y="40" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
                   {t("coverage.mapLabels.global")}
                 </text>
               </svg>
@@ -373,7 +409,7 @@ export default async function AboutPage({
               backgroundSize: "20px 20px",
             }}
           />
-          <div className="absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(270deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]" />
+          <div className={`absolute inset-y-0 w-1/2 ${ctaGlowSideClass}`} />
           <div className="relative mx-auto max-w-[760px]">
             <h2 className="text-[2rem] leading-[1.1] font-bold tracking-[-0.04em] text-white sm:text-[2.6rem]">
               {t("cta.heading")}
@@ -413,7 +449,9 @@ export default async function AboutPage({
       <a
         href="#contact"
         aria-label={t("whatsAppLabel")}
-        className="fixed right-4 bottom-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-transform hover:scale-105 hover:bg-[#1da851] sm:right-6 sm:bottom-6"
+        className={`fixed bottom-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-transform hover:scale-105 hover:bg-[#1da851] sm:bottom-6 ${
+          localeIsRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"
+        }`}
       >
         <PublicIcon name="whatsapp" className="h-6 w-6" />
       </a>
