@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 import Image from "next/image";
 import {getLocale, getTranslations} from "next-intl/server";
 
+import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkeleton";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
@@ -65,27 +66,15 @@ export default async function HomePage() {
   }));
   const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
   const aboutFeatureGlowClass = localeIsRTL ? "-left-4 -top-4" : "-right-4 -top-4";
-  const regionalPanelClass = localeIsRTL
-    ? "rounded-l-2xl border-r-4 pr-5"
-    : "rounded-r-2xl border-l-4 pl-5";
-  const regionalPanelDescriptionClass = localeIsRTL ? "pr-6 text-right" : "pl-6 text-left";
-
   return (
     <>
       <PublicNavbar currentPage="home" />
       <main id="top" className="min-h-screen bg-[#fbf8ff] pt-[56px]">
-        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-24 pt-0 sm:px-6 lg:px-8">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/homepage/hero-image.png"
-              alt={t("hero.imageAlt")}
-              fill
-              priority
-              className="object-cover object-center opacity-48"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-[rgba(13,31,92,0.78)]" />
-          </div>
+        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-24 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pt-0">
+          <HeroBackdropWithSkeleton
+            src="/images/homepage/hero-image.png"
+            alt={t("hero.imageAlt")}
+          />
 
           <div className="relative mx-auto grid w-full max-w-[1360px] gap-10 lg:grid-cols-12 lg:items-center">
             <div className={`lg:col-span-8 lg:py-10 ${localeIsRTL ? "text-right" : "text-left"}`}>
@@ -310,7 +299,7 @@ export default async function HomePage() {
 
         <section
           id="coverage"
-          className="relative overflow-hidden bg-alfs-deep-blue px-4 py-16 text-white sm:px-6 lg:px-8 lg:py-20"
+          className="relative overflow-hidden bg-alfs-deep-blue px-4 pt-12 pb-12 text-white sm:px-6 sm:pt-14 sm:pb-16 lg:px-8 lg:py-20"
         >
           <div className="absolute inset-0 opacity-42">
             <Image
@@ -323,52 +312,61 @@ export default async function HomePage() {
             <div
               className={`absolute inset-0 ${
                 localeIsRTL
-                  ? "bg-[linear-gradient(270deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.56)_42%,rgba(13,31,92,0.88)_100%)]"
-                  : "bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.56)_42%,rgba(13,31,92,0.88)_100%)]"
+                  ? "bg-[linear-gradient(180deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.72)_45%,rgba(13,31,92,0.9)_100%)] lg:bg-[linear-gradient(270deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.56)_42%,rgba(13,31,92,0.88)_100%)]"
+                  : "bg-[linear-gradient(180deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.72)_45%,rgba(13,31,92,0.9)_100%)] lg:bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.56)_42%,rgba(13,31,92,0.88)_100%)]"
               }`}
             />
           </div>
 
-          <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
+          <div className="relative mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className={`lg:col-span-5 ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h2 className="text-[2.15rem] leading-[1.1] font-bold tracking-[-0.04em]">
+              <h2 className="text-[1.7rem] leading-[1.12] font-bold tracking-[-0.04em] sm:text-[2.15rem] sm:leading-[1.1]">
                 {t("regionalCoverage.heading")}
                 <span
-                  className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
+                  className={`mt-3 block h-[3px] w-11 rounded-full bg-alfs-orange sm:mt-4 sm:w-[52px] ${sideHeadingAccentClass}`}
                 />
               </h2>
-              <p className="mt-5 max-w-[430px] text-[0.98rem] leading-7 text-white/78">
+              <p className="mt-4 max-w-[430px] text-sm leading-6 text-white/78 sm:mt-5 sm:text-[0.98rem] sm:leading-7">
                 {t("regionalCoverage.description")}
               </p>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:gap-3 lg:mt-8 lg:gap-4">
                 {regionalPanels.map((panel) => (
                   <article
                     key={panel.title}
-                    className={`bg-white/10 py-4 backdrop-blur-sm ${regionalPanelClass}`}
-                    style={{
-                      borderColor:
-                        panel.accent === "orange" ? "var(--alfs-orange)" : "var(--alfs-royal-blue)",
-                    }}
+                    className={`flex gap-3 rounded-xl border border-white/12 bg-white/10 p-3 shadow-sm backdrop-blur-sm sm:gap-3.5 sm:p-4 lg:gap-4 lg:rounded-2xl lg:p-4 ${
+                      panel.accent === "orange"
+                        ? "border-s-[3px] border-s-alfs-orange sm:border-s-4"
+                        : "border-s-[3px] border-s-alfs-royal-blue sm:border-s-4"
+                    }`}
                   >
-                    <div className="flex items-center gap-2">
+                    <div
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10 sm:h-11 sm:w-11 ${
+                        panel.accent === "orange" ? "text-alfs-orange" : "text-alfs-royal-blue"
+                      }`}
+                    >
                       <PublicIcon
                         name={panel.icon as Parameters<typeof PublicIcon>[0]["name"]}
-                        className={`h-[18px] w-[18px] ${
-                          panel.accent === "orange" ? "text-alfs-orange" : "text-alfs-royal-blue"
-                        }`}
+                        className="h-[18px] w-[18px]"
                       />
-                      <h3 className="text-sm font-semibold text-white">{panel.title}</h3>
                     </div>
-                    <p className={`text-xs leading-5 text-white/70 ${regionalPanelDescriptionClass}`}>
-                      {panel.description}
-                    </p>
+                    <div className="min-w-0 flex-1 text-start">
+                      <h3 className="text-[0.8125rem] font-semibold leading-snug text-white sm:text-sm">
+                        {panel.title}
+                      </h3>
+                      <p className="mt-1 text-[11px] leading-[1.45] text-white/72 sm:text-xs sm:leading-5">
+                        {panel.description}
+                      </p>
+                    </div>
                   </article>
                 ))}
               </div>
             </div>
 
-            <div className="relative min-h-[280px] lg:col-span-7 lg:min-h-[430px]" />
+            <div
+              aria-hidden
+              className="relative hidden lg:col-span-7 lg:block lg:min-h-[380px]"
+            />
           </div>
         </section>
 

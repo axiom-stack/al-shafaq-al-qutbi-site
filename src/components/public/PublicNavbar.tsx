@@ -4,11 +4,12 @@ import {useState} from "react";
 import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
+import {FiMenu, FiX} from "react-icons/fi";
+
 import {isRTL, type Locale} from "@/i18n/routing";
 
 import {LocaleSwitch} from "./LocaleSwitch";
 import {PageTransitionLink} from "./PageTransitionLink";
-import {PublicIcon} from "./PublicIcon";
 import {PublicLogo} from "./PublicLogo";
 
 const navItems = [
@@ -107,12 +108,20 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
           <LocaleSwitch />
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-outline-variant text-alfs-navy"
+            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-alfs-orange focus-visible:ring-offset-2 ${
+              menuOpen
+                ? "bg-alfs-orange text-white shadow-[0_4px_14px_rgba(244,121,32,0.35)]"
+                : "bg-alfs-deep-blue/[0.07] text-alfs-navy hover:bg-alfs-deep-blue/[0.11] active:bg-alfs-deep-blue/[0.15]"
+            }`}
             onClick={() => setMenuOpen((value) => !value)}
             aria-expanded={menuOpen}
             aria-label={t("menu")}
           >
-            <PublicIcon name={menuOpen ? "close" : "menu"} className="h-5 w-5" />
+            {menuOpen ? (
+              <FiX className="h-5 w-5 shrink-0" strokeWidth={2.25} aria-hidden />
+            ) : (
+              <FiMenu className="h-5 w-5 shrink-0" strokeWidth={2.25} aria-hidden />
+            )}
           </button>
         </div>
       </div>

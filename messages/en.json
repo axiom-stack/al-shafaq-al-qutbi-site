@@ -164,7 +164,7 @@
       "action": "Get a Quote Today"
     },
     "footer": {
-      "description": "Al Shafaq Al Qutbi Logistics Services. Providing integrated supply chain solutions with regional expertise and global standards.",
+      "description": "Integrated freight and supply chain solutions with regional expertise and global standards.",
       "services": {
         "title": "Services",
         "links": {
@@ -189,10 +189,10 @@
           "amman": "Jordan: Amman - Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor",
           "hebron": "Palestine: Hebron - Ain Sara"
         },
-        "email": "INFO@AURORA-LFS.COM",
+        "email": "info@aurora-lfs.com",
         "phone": "00962791010199 / 00962796495566"
       },
-      "copyright": "© 2024 ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved."
+      "copyright": "© {year} ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved."
     }
   },
   "AboutPage": {
@@ -295,11 +295,11 @@
       "offices": {
         "amman": {
           "title": "Amman Office",
-          "address": "Jabal Amman\nAmman, Jordan"
+          "address": "Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor"
         },
         "hebron": {
           "title": "Hebron Office",
-          "address": "Wadi Al-Tuffah Street\nHebron, Palestine"
+          "address": "Ain Sara\nHebron, Palestine"
         }
       },
       "mapLabels": {
@@ -316,8 +316,8 @@
       "description": "Connect with our logistics experts to develop a tailored freight strategy for your business.",
       "primaryAction": "Get a Quote",
       "secondaryAction": "Contact Our Team",
-      "email": "info@alfs-logistics.com",
-      "phone": "+962 6 123 4567"
+      "email": "info@aurora-lfs.com",
+      "phone": "00962791010199 / 00962796495566"
     },
     "whatsAppLabel": "Open WhatsApp contact shortcut"
   },

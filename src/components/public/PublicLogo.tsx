@@ -3,7 +3,7 @@
 import Image from "next/image";
 import {useLocale, useTranslations} from "next-intl";
 
-import logoImage from "../../../public/images/ALFS_LOGO.jpeg";
+import logoImage from "../../../public/images/ALFS_LOGO.png";
 import {isRTL, type Locale} from "@/i18n/routing";
 
 export function PublicLogo() {
