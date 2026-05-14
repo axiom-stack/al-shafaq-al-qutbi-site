@@ -78,7 +78,7 @@ export default async function HomePage() {
 
           <div className="relative mx-auto grid w-full max-w-[1360px] gap-10 lg:grid-cols-12 lg:items-center">
             <div className={`lg:col-span-8 lg:py-10 ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h1 className="max-w-[760px] text-[2.7rem] leading-[0.98] font-bold tracking-[-0.045em] text-white sm:text-[3.75rem] lg:text-[4.25rem]">
+              <h1 className="max-w-[760px] text-[2.7rem] leading-[1.1] font-bold tracking-[-0.045em] text-white sm:text-[3.75rem] lg:text-[4.25rem]">
                 {t("hero.heading")}
               </h1>
               <p className="mt-5 max-w-[670px] text-[1.08rem] leading-8 text-white/84 sm:text-[1.14rem]">
