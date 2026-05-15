@@ -7,7 +7,10 @@ import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkel
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
+import {AnchorNavLink} from "@/components/public/AnchorNavLink";
+import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
+import {contactInquiryHref, serviceRoutes} from "@/lib/site-routes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("HomePage");
@@ -28,6 +31,22 @@ const serviceKeys = [
   "consolidation",
 ] as const;
 const heroChipKeys = ["seaFreight", "landFreight", "airFreight", "customs"] as const;
+
+const heroChipRoutes: Record<(typeof heroChipKeys)[number], string> = {
+  seaFreight: serviceRoutes.seaFreight,
+  landFreight: serviceRoutes.landFreight,
+  airFreight: serviceRoutes.airFreight,
+  customs: serviceRoutes.customsClearance,
+};
+
+const serviceRoutesMap: Record<(typeof serviceKeys)[number], string> = {
+  seaFreight: serviceRoutes.seaFreight,
+  landFreight: serviceRoutes.landFreight,
+  airFreight: serviceRoutes.airFreight,
+  customsClearance: serviceRoutes.customsClearance,
+  warehousing: serviceRoutes.warehousing,
+  consolidation: serviceRoutes.consolidation,
+};
 const supportStepKeys = ["consultation", "plan", "execution"] as const;
 const proofKeys = ["flexibleSupplyChain", "clearTracking"] as const;
 const regionalPanelKeys = ["landCoverage", "partnerNetwork"] as const;
@@ -37,9 +56,11 @@ export default async function HomePage() {
   const localeIsRTL = isRTL(locale);
   const t = await getTranslations("HomePage");
   const services = serviceKeys.map((key) => ({
+    key,
     title: t(`services.${key}.title`),
     description: t(`services.${key}.description`),
     icon: t(`services.${key}.icon`),
+    href: serviceRoutesMap[key],
   }));
   const quickActions = quickActionKeys.map((key) => ({
     title: t(`quickAccess.${key}.title`),
@@ -47,7 +68,10 @@ export default async function HomePage() {
     icon: t(`quickAccess.${key}.icon`),
     href: t(`quickAccess.${key}.href`),
   }));
-  const heroChips = heroChipKeys.map((key) => t(`hero.chips.${key}`));
+  const heroChips = heroChipKeys.map((key) => ({
+    label: t(`hero.chips.${key}`),
+    href: heroChipRoutes[key],
+  }));
   const supportSteps = supportStepKeys.map((key, index) => ({
     title: t(`hero.support.${key}.title`),
     description: t(`hero.support.${key}.description`),
@@ -86,41 +110,42 @@ export default async function HomePage() {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                <a
+                <PageTransitionLink
                   id="quote"
-                  href="#final-cta"
+                  href={contactInquiryHref}
                   className="rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber"
                 >
                   {t("hero.primaryAction")}
-                </a>
-                <a
-                  href="#services"
+                </PageTransitionLink>
+                <PageTransitionLink
+                  href="/services"
                   className="rounded-md border border-white/35 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/12"
                 >
                   {t("hero.secondaryAction")}
-                </a>
+                </PageTransitionLink>
               </div>
 
               <div className="mt-7 flex flex-wrap gap-2">
-                {heroChips.map((chip, index) => (
-                  <span
-                    key={chip}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/22 bg-white/10 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-sm"
+                {heroChips.map((chip) => (
+                  <PageTransitionLink
+                    key={chip.label}
+                    href={chip.href}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/22 bg-white/10 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/16"
                   >
                     <PublicIcon
                       name={
-                        index === 0
+                        chip.href === serviceRoutes.seaFreight
                           ? "ship"
-                          : index === 1
+                          : chip.href === serviceRoutes.landFreight
                             ? "truck"
-                            : index === 2
+                            : chip.href === serviceRoutes.airFreight
                               ? "plane"
                               : "customs"
                       }
                       className="h-3.5 w-3.5"
                     />
-                    {chip}
-                  </span>
+                    {chip.label}
+                  </PageTransitionLink>
                 ))}
               </div>
             </div>
@@ -161,11 +186,11 @@ export default async function HomePage() {
 
         <section
           id="track"
-          className="relative z-10 -mt-9 mb-12 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 -mt-9 mb-12 scroll-mt-24 px-4 sm:px-6 lg:px-8"
         >
           <div className="mx-auto grid w-full max-w-[1360px] gap-2.5 md:grid-cols-2 lg:grid-cols-12">
             {quickActions.map((action) => (
-              <a
+              <AnchorNavLink
                 key={action.title}
                 href={action.href}
                 className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-5 py-6 text-center shadow-[0_8px_24px_rgba(26,47,122,0.12)] transition-transform hover:-translate-y-1 md:col-span-1 lg:col-span-3"
@@ -182,12 +207,12 @@ export default async function HomePage() {
                 <p className="mt-1.5 text-xs leading-5 text-on-surface-variant">
                   {action.description}
                 </p>
-              </a>
+              </AnchorNavLink>
             ))}
           </div>
         </section>
 
-        <section id="whyAlfs" className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <section id="whyAlfs" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
             <div id="about" className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
               <h2 className="relative text-[2.05rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
@@ -270,9 +295,10 @@ export default async function HomePage() {
 
             <div className="mt-11 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => (
-                <article
-                  key={service.title}
-                  className={`overflow-hidden rounded-2xl border border-outline-variant/20 bg-white shadow-[0_4px_16px_rgba(26,47,122,0.08)] transition-shadow hover:shadow-[0_8px_24px_rgba(26,47,122,0.15)] ${localeIsRTL ? "text-right" : "text-left"}`}
+                <PageTransitionLink
+                  key={service.key}
+                  href={service.href}
+                  className={`group block overflow-hidden rounded-2xl border border-outline-variant/20 bg-white shadow-[0_4px_16px_rgba(26,47,122,0.08)] transition-shadow hover:shadow-[0_8px_24px_rgba(26,47,122,0.15)] ${localeIsRTL ? "text-right" : "text-left"}`}
                 >
                   <div className="h-1.5 w-full bg-light-grey" />
                   <div className="p-7">
@@ -291,7 +317,7 @@ export default async function HomePage() {
                       <span aria-hidden="true">{localeIsRTL ? "←" : "→"}</span>
                     </span>
                   </div>
-                </article>
+                </PageTransitionLink>
               ))}
             </div>
           </div>
@@ -299,7 +325,7 @@ export default async function HomePage() {
 
         <section
           id="coverage"
-          className="relative overflow-hidden bg-alfs-deep-blue px-4 pt-12 pb-12 text-white sm:px-6 sm:pt-14 sm:pb-16 lg:px-8 lg:py-20"
+          className="relative scroll-mt-24 overflow-hidden bg-alfs-deep-blue px-4 pt-12 pb-12 text-white sm:px-6 sm:pt-14 sm:pb-16 lg:px-8 lg:py-20"
         >
           <div className="absolute inset-0 opacity-42">
             <Image
@@ -381,12 +407,12 @@ export default async function HomePage() {
             <p className="mt-4 text-[0.96rem] leading-7 text-white/90">
               {t("finalCta.description")}
             </p>
-            <a
-              href="#top"
+            <PageTransitionLink
+              href={contactInquiryHref}
               className="mt-7 inline-flex rounded-md bg-white px-7 py-3 text-sm font-semibold text-alfs-orange shadow-lg transition-colors hover:bg-[#f5f5f5]"
             >
               {t("finalCta.action")}
-            </a>
+            </PageTransitionLink>
           </div>
         </section>
       </main>

@@ -14,7 +14,7 @@ export function NotFoundSkeleton({locale}: {locale: Locale}) {
             <SkeletonBlock className="mx-auto h-4 w-28 rounded-full bg-white/12" />
             <SkeletonBlock className="mx-auto mt-5 h-20 w-36 rounded-[1.25rem] bg-white/12 sm:h-24 sm:w-44" />
             <SkeletonBlock className="mx-auto mt-5 h-8 w-full max-w-md rounded-full bg-white/12" />
-            <div className={`mx-auto mt-4 max-w-xl space-y-3 ${localeIsRTL ? "text-right" : "text-center"}`}>
+            <div className={`mx-auto mt-4 w-full max-w-[576px] space-y-3 ${localeIsRTL ? "text-right" : "text-center"}`}>
               <SkeletonBlock className="h-4 w-full rounded-full bg-white/12" />
               <SkeletonBlock className="h-4 w-5/6 rounded-full bg-white/12" />
             </div>

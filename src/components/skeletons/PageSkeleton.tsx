@@ -1,11 +1,15 @@
 import {isRTL, type Locale} from "@/i18n/routing";
 
 import {SkeletonBlock, SkeletonCircle, SkeletonText} from "./SkeletonPrimitives";
-import {isAboutPath, normalizeSkeletonPath} from "./resolveSkeleton";
+import {
+  isAboutPath,
+  isContactPath,
+  isServiceDetailPath,
+  isServicesPath,
+  normalizeSkeletonPath,
+} from "./resolveSkeleton";
 
 function PublicNavbarSkeleton({locale}: {locale: Locale}) {
-  const localeIsRTL = isRTL(locale);
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#e2e1ec] bg-white/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-3 px-2 py-2 sm:px-4 lg:px-6">
@@ -41,9 +45,7 @@ function PublicNavbarSkeleton({locale}: {locale: Locale}) {
       </div>
 
       <div
-        className={`border-t border-outline-variant/40 bg-white px-4 py-4 lg:hidden ${
-          localeIsRTL ? "text-right" : "text-left"
-        }`}
+        className="border-t border-outline-variant/40 bg-white px-4 py-4 lg:hidden text-start"
       >
         <div className="flex flex-col gap-4">
           {Array.from({length: 4}, (_, index) => (
@@ -56,14 +58,10 @@ function PublicNavbarSkeleton({locale}: {locale: Locale}) {
 }
 
 function PublicFooterSkeleton({locale}: {locale: Locale}) {
-  const localeIsRTL = isRTL(locale);
-
   return (
     <footer className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
       <div
-        className={`mx-auto grid max-w-[1280px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr] lg:px-8 ${
-          localeIsRTL ? "text-right" : "text-left"
-        }`}
+        className="mx-auto grid max-w-[1280px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr] lg:px-8 text-start"
       >
         <div className="space-y-4">
           <SkeletonBlock className="h-16 w-44 rounded-xl bg-white/14" />
@@ -117,12 +115,8 @@ function PublicFooterSkeleton({locale}: {locale: Locale}) {
 }
 
 function HomeSkeleton({locale}: {locale: Locale}) {
-  const localeIsRTL = isRTL(locale);
-  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
-  const aboutFeatureGlowClass = localeIsRTL ? "-left-4 -top-4" : "-right-4 -top-4";
-  const regionalPanelClass = localeIsRTL
-    ? "rounded-l-2xl border-r-4 pr-5"
-    : "rounded-r-2xl border-l-4 pl-5";
+  const sideHeadingAccentClass = "me-auto ms-0";
+  const aboutFeatureGlowClass = "-start-4 -top-4";
 
   return (
     <>
@@ -132,7 +126,7 @@ function HomeSkeleton({locale}: {locale: Locale}) {
           <div className="absolute inset-0 bg-[rgba(13,31,92,0.9)]" />
 
           <div className="relative mx-auto grid w-full max-w-[1360px] gap-10 lg:grid-cols-12 lg:items-center">
-            <div className={`lg:col-span-8 lg:py-10 ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="lg:col-span-8 lg:py-10 text-start">
               <SkeletonBlock className="h-16 max-w-[760px] rounded-[1.5rem] bg-white/12 sm:h-20 lg:h-24" />
               <SkeletonText
                 className="mt-5 max-w-[670px]"
@@ -160,9 +154,7 @@ function HomeSkeleton({locale}: {locale: Locale}) {
             </div>
 
             <div
-              className={`hidden lg:col-span-4 lg:flex ${
-                localeIsRTL ? "lg:justify-start" : "lg:justify-end"
-              }`}
+              className="hidden lg:col-span-4 lg:flex lg:justify-end"
             >
               <div className="w-full max-w-[344px] rounded-2xl border border-white/18 bg-white/10 p-6 shadow-[0_18px_40px_rgba(0,0,0,0.24)] backdrop-blur-md">
                 <div className="mb-5 flex items-center gap-2">
@@ -208,7 +200,7 @@ function HomeSkeleton({locale}: {locale: Locale}) {
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-            <div className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="max-w-[560px] text-start">
               <SkeletonBlock className="h-12 w-full max-w-[420px] rounded-[1.25rem]" />
               <SkeletonBlock
                 className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
@@ -287,7 +279,7 @@ function HomeSkeleton({locale}: {locale: Locale}) {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.68)_42%,rgba(13,31,92,0.88)_100%)] opacity-90" />
 
           <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
-            <div className={`lg:col-span-5 ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="lg:col-span-5 text-start">
               <SkeletonBlock className="h-12 w-full max-w-[330px] rounded-[1.25rem] bg-white/14" />
               <SkeletonBlock
                 className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
@@ -303,14 +295,13 @@ function HomeSkeleton({locale}: {locale: Locale}) {
                 {Array.from({length: 2}, (_, index) => (
                   <article
                     key={index}
-                    className={`bg-white/10 py-4 backdrop-blur-sm ${regionalPanelClass}`}
-                    style={{borderColor: "var(--alfs-orange)"}}
+                    className="bg-white/10 py-4 backdrop-blur-sm border-s-[3px] border-s-alfs-orange sm:border-s-4 rounded-e-2xl"
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 px-4">
                       <SkeletonCircle className="h-[18px] w-[18px] bg-white/18" />
                       <SkeletonBlock className="h-4 w-36 rounded-full bg-white/18" />
                     </div>
-                    <div className={`${localeIsRTL ? "pr-6" : "pl-6"} pt-2`}>
+                    <div className="ps-10 pt-2 pe-4">
                       <SkeletonBlock className="h-3 w-full rounded-full bg-white/14" />
                       <SkeletonBlock className="mt-2 h-3 w-4/5 rounded-full bg-white/14" />
                     </div>
@@ -344,11 +335,8 @@ function HomeSkeleton({locale}: {locale: Locale}) {
 }
 
 function AboutSkeleton({locale}: {locale: Locale}) {
-  const localeIsRTL = isRTL(locale);
-  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
-  const officeCardClass = localeIsRTL
-    ? "border-r-4 border-l-0 text-right"
-    : "border-l-4 border-r-0 text-left";
+  const sideHeadingAccentClass = "me-auto ms-0";
+  const officeCardClass = "border-s-4 border-e-0 text-start";
 
   return (
     <>
@@ -358,7 +346,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]" />
 
           <div className="relative mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-16">
-            <div className={`lg:col-span-7 ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="lg:col-span-7 text-start">
               <SkeletonBlock className="h-3.5 w-24 rounded-full bg-alfs-orange/50" />
               <SkeletonBlock className="mt-3 h-16 w-full max-w-[620px] rounded-[1.5rem] bg-white/12 sm:h-20 lg:h-24" />
               <SkeletonText
@@ -375,9 +363,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
             </div>
 
             <div
-              className={`lg:col-span-5 ${
-                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
-              }`}
+              className="lg:col-span-5 lg:justify-self-end"
             >
               <div className="max-w-[350px] rounded-[18px] border border-white/18 bg-white/14 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] backdrop-blur-md">
                 <SkeletonBlock className="h-8 w-32 rounded-full bg-white/18" />
@@ -396,7 +382,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            <div className={`max-w-[510px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="max-w-[510px] text-start">
               <SkeletonBlock className="h-12 w-full max-w-[330px] rounded-[1.25rem]" />
               <SkeletonBlock
                 className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
@@ -404,7 +390,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
               <SkeletonText className="mt-6" lines={4} lastLineWidth="70%" />
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 text-start">
               {Array.from({length: 3}, (_, index) => (
                 <article
                   key={index}
@@ -471,14 +457,12 @@ function AboutSkeleton({locale}: {locale: Locale}) {
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
             <div
-              className={`relative overflow-hidden rounded-[14px] shadow-[0_18px_36px_rgba(26,47,122,0.14)] ${
-                localeIsRTL ? "order-1 lg:order-2" : "order-2 lg:order-1"
-              }`}
+              className="relative overflow-hidden rounded-[14px] shadow-[0_18px_36px_rgba(26,47,122,0.14)] order-2 lg:order-1"
             >
               <SkeletonBlock className="aspect-[22/19] w-full rounded-[14px]" />
             </div>
 
-            <div className={localeIsRTL ? "order-2 text-right lg:order-1" : "order-1 text-left lg:order-2"}>
+            <div className="order-1 text-start lg:order-2">
               <SkeletonBlock className="h-12 w-full max-w-[420px] rounded-[1.25rem]" />
               <SkeletonBlock
                 className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
@@ -489,7 +473,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
                 {Array.from({length: 3}, (_, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <SkeletonCircle className="mt-1 h-10 w-10 bg-alfs-orange/10" />
-                    <div className="w-full">
+                    <div className="w-full text-start">
                       <SkeletonBlock className="h-4 w-36 rounded-full" />
                       <SkeletonText className="mt-2" lines={2} lastLineWidth="76%" />
                     </div>
@@ -502,7 +486,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
 
         <section className="overflow-hidden bg-[#f7f5fb] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div className={localeIsRTL ? "text-right" : "text-left"}>
+            <div className="text-start">
               <SkeletonBlock className="h-12 w-full max-w-[360px] rounded-[1.25rem]" />
               <SkeletonBlock
                 className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
@@ -583,9 +567,7 @@ function AboutSkeleton({locale}: {locale: Locale}) {
       </main>
 
       <div
-        className={`fixed bottom-4 z-40 h-12 w-12 rounded-full bg-[#25D366]/85 shadow-[0_14px_30px_rgba(0,0,0,0.18)] sm:bottom-6 ${
-          localeIsRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"
-        }`}
+        className="fixed bottom-4 z-40 h-12 w-12 rounded-full bg-[#25D366]/85 shadow-[0_14px_30px_rgba(0,0,0,0.18)] sm:bottom-6 start-4 sm:start-6"
         aria-hidden="true"
       />
 
@@ -594,11 +576,337 @@ function AboutSkeleton({locale}: {locale: Locale}) {
   );
 }
 
+function ServicesSkeleton({locale}: {locale: Locale}) {
+  return (
+    <>
+      <PublicNavbarSkeleton locale={locale} />
+      <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
+        <section className="relative flex min-h-[520px] items-center overflow-hidden bg-alfs-deep-blue px-4 pb-20 pt-10 sm:min-h-[600px] sm:px-6 lg:min-h-[720px] lg:px-8">
+          <SkeletonBlock
+            aria-hidden
+            className="absolute inset-0 min-h-full bg-alfs-royal-blue/35"
+          />
+          <div className="relative z-20 mx-auto w-full max-w-[1280px]">
+            <ServicesHeroSkeleton />
+          </div>
+        </section>
+        <section className="relative z-10 mx-auto -mt-9 mb-12 max-w-[1280px] px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {Array.from({length: 4}, (_, index) => (
+              <div
+                key={index}
+                className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-6 py-8 text-center shadow-[0_8px_30px_rgba(26,47,122,0.12)]"
+              >
+                <SkeletonCircle className="mx-auto h-16 w-16 bg-alfs-navy/8" />
+                <SkeletonBlock className="mx-auto mt-4 h-4 w-28 rounded-full" />
+                <SkeletonText className="mx-auto mt-2 max-w-[200px]" lines={2} lastLineWidth="70%" />
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-2">
+            <SkeletonText lines={4} lastLineWidth="68%" />
+            <SkeletonBlock className="h-80 rounded-xl bg-alfs-deep-blue/20" />
+          </div>
+        </section>
+        <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-[1280px]">
+            <SkeletonBlock className="mx-auto h-10 w-64 rounded-full" />
+            <div className="mt-10 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+              {Array.from({length: 6}, (_, index) => (
+                <SkeletonBlock key={index} className="min-h-[220px] rounded-xl" />
+              ))}
+            </div>
+          </div>
+        </section>
+        {Array.from({length: 6}, (_, index) => (
+          <section key={index} className="border-t border-outline-variant/30 px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+            <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-2 lg:items-center">
+              <SkeletonBlock className="h-[380px] rounded-xl sm:h-[500px]" />
+              <SkeletonText lines={5} lastLineWidth="72%" />
+            </div>
+          </section>
+        ))}
+      </main>
+      <PublicFooterSkeleton locale={locale} />
+    </>
+  );
+}
+
+function ServicesHeroSkeleton() {
+  return (
+    <div className="relative mx-auto max-w-[1280px] text-start">
+      <SkeletonBlock className="h-4 w-40 rounded-full bg-white/14" />
+      <SkeletonBlock className="mt-4 h-16 w-full max-w-[620px] rounded-[1.5rem] bg-white/12 sm:h-20" />
+      <SkeletonText
+        className="mt-5 w-full max-w-[670px]"
+        lineClassName="h-4 rounded-full bg-white/12"
+        lines={3}
+        lastLineWidth="76%"
+      />
+      <ServicesHeroSkeletonChips />
+    </div>
+  );
+}
+
+function ServicesHeroSkeletonChips() {
+  return (
+    <div className="mt-7 flex flex-wrap gap-2">
+      {Array.from({length: 5}, (_, index) => (
+        <SkeletonBlock key={index} className="h-8 w-24 rounded-full bg-white/14" />
+      ))}
+    </div>
+  );
+}
+
+function AirFreightSkeleton({locale}: {locale: Locale}) {
+  const sideHeadingAccentClass = "me-auto ms-0";
+
+  return (
+    <>
+      <PublicNavbarSkeleton locale={locale} />
+      <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
+        <section className="relative flex min-h-[520px] items-center overflow-hidden bg-alfs-deep-blue px-4 py-12 sm:min-h-[600px] sm:px-6 lg:min-h-[640px] lg:px-8 lg:py-16">
+          <SkeletonBlock
+            aria-hidden
+            className="absolute inset-0 min-h-full bg-alfs-royal-blue/35"
+          />
+          <div className="relative z-20 mx-auto w-full max-w-[1280px]">
+            <ServiceDetailHeroTextSkeleton />
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1fr_0.4fr]">
+            <div className="max-w-[640px] text-start">
+              <SkeletonBlock className="h-12 w-full max-w-[420px] rounded-[1.25rem]" />
+              <SkeletonBlock
+                className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
+              />
+              <SkeletonText className="mt-6" lines={3} lastLineWidth="70%" />
+            </div>
+            <div className="text-start lg:text-end">
+              <SkeletonBlock className="h-4 w-36 rounded-full" />
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[1280px]">
+            <div className="mx-auto max-w-[760px] text-center">
+              <SkeletonBlock className="mx-auto h-10 w-64 rounded-full" />
+              <SkeletonBlock className="mx-auto mt-4 h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              <SkeletonText className="mx-auto mt-5 max-w-[520px]" lines={2} lastLineWidth="72%" />
+            </div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({length: 6}, (_, index) => (
+                <article
+                  key={index}
+                  className="rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 shadow-[0_12px_28px_rgba(26,47,122,0.10)]"
+                >
+                  <SkeletonCircle className="h-11 w-11 bg-alfs-orange/10" />
+                  <SkeletonBlock className="mt-4 h-4 w-32 rounded-full" />
+                  <SkeletonText className="mt-2" lines={2} lastLineWidth="76%" />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <AirFreightBenefitsSkeleton
+            sideHeadingAccentClass={sideHeadingAccentClass}
+          />
+        </section>
+
+        <section className="bg-alfs-deep-blue px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[1280px]">
+            <SkeletonBlock className="mx-auto h-10 w-48 rounded-full bg-white/14" />
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {Array.from({length: 4}, (_, index) => (
+                <SkeletonBlock key={index} className="h-40 rounded-[12px] bg-white/8" />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-alfs-deep-blue px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[760px]">
+            <SkeletonBlock className="mx-auto h-12 w-full max-w-[460px] rounded-[1.25rem] bg-white/14" />
+            <SkeletonText
+              className="mx-auto mt-5 max-w-[520px]"
+              lineClassName="bg-white/12"
+              lines={2}
+              lastLineWidth="72%"
+            />
+            <SkeletonBlock className="mx-auto mt-8 h-11 w-40 rounded-md bg-white/16" />
+          </div>
+        </section>
+      </main>
+      <PublicFooterSkeleton locale={locale} />
+    </>
+  );
+}
+
+function ServiceDetailHeroTextSkeleton() {
+  return (
+    <div className="max-w-[760px] text-start">
+      <SkeletonBlock className="h-3.5 w-32 rounded-full bg-alfs-orange/50" />
+      <SkeletonBlock className="mt-3 h-16 w-full max-w-[640px] rounded-[1.5rem] bg-white/12 sm:h-20 lg:h-24" />
+      <SkeletonText
+        className="mt-5 max-w-[580px]"
+        lineClassName="h-4 rounded-full bg-white/12"
+        lines={3}
+        lastLineWidth="72%"
+      />
+      <ServiceDetailHeroChipsSkeleton />
+      <ServiceDetailHeroCtasSkeleton />
+    </div>
+  );
+}
+
+function ServiceDetailHeroChipsSkeleton() {
+  return (
+    <div className="mt-7 flex flex-wrap gap-2">
+      {Array.from({length: 5}, (_, index) => (
+        <SkeletonBlock key={index} className="h-8 w-24 rounded-full bg-white/14" />
+      ))}
+    </div>
+  );
+}
+
+function ServiceDetailHeroCtasSkeleton() {
+  return (
+    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+      <SkeletonBlock className="h-11 w-40 rounded-md bg-white/16" />
+      <SkeletonBlock className="h-11 w-36 rounded-md bg-white/10" />
+    </div>
+  );
+}
+
+function AirFreightBenefitsSkeleton({
+  sideHeadingAccentClass,
+}: {
+  sideHeadingAccentClass: string;
+}) {
+  return (
+    <div className="mx-auto max-w-[1280px]">
+      <div className="max-w-[560px] text-start">
+        <SkeletonBlock className="h-12 w-full max-w-[360px] rounded-[1.25rem]" />
+        <SkeletonBlock
+          className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
+        />
+        <SkeletonText className="mt-6" lines={2} lastLineWidth="70%" />
+      </div>
+      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {Array.from({length: 6}, (_, index) => (
+          <SkeletonBlock key={index} className="h-24 rounded-[12px]" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ContactSkeleton({locale}: {locale: Locale}) {
+  const sideHeadingAccentClass = "me-auto ms-0";
+
+  return (
+    <>
+      <PublicNavbarSkeleton locale={locale} />
+      <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
+        <section className="relative overflow-hidden bg-alfs-deep-blue">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]" />
+          <div className="relative mx-auto grid max-w-[1280px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-16">
+            <div className="lg:col-span-7 text-start">
+              <SkeletonBlock className="h-3.5 w-24 rounded-full bg-alfs-orange/50" />
+              <SkeletonBlock className="mt-3 h-16 w-full max-w-[640px] rounded-[1.5rem] bg-white/12 sm:h-20" />
+              <SkeletonText
+                className="mt-5 max-w-[600px]"
+                lineClassName="h-4 rounded-full bg-white/12"
+                lines={3}
+                lastLineWidth="72%"
+              />
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <SkeletonBlock className="h-11 w-40 rounded-md bg-white/16" />
+                <SkeletonBlock className="h-11 w-40 rounded-md bg-white/10" />
+              </div>
+            </div>
+            <div
+              className="lg:col-span-5 lg:justify-self-end"
+            >
+              <div className="max-w-[350px] rounded-[18px] border border-white/18 bg-white/14 p-6 backdrop-blur-md">
+                <SkeletonBlock className="h-8 w-32 rounded-full bg-white/18" />
+                <div className="mt-5 space-y-3">
+                  {Array.from({length: 3}, (_, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <SkeletonCircle className="h-8 w-8 bg-white/16" />
+                      <SkeletonBlock className="h-4 w-32 rounded-full bg-white/16" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f2eff8] px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
+          <div className="mx-auto max-w-[1280px] text-center">
+            <SkeletonBlock className="mx-auto h-10 w-64 rounded-[1.25rem]" />
+            <SkeletonText className="mx-auto mt-4 max-w-[620px]" lines={2} lastLineWidth="60%" />
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {Array.from({length: 3}, (_, index) => (
+                <SkeletonBlock key={index} className="h-44 rounded-2xl" />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-2">
+            <div className="text-start">
+              <SkeletonBlock className="h-12 w-full max-w-[360px] rounded-[1.25rem]" />
+              <SkeletonText className="mt-4" lines={2} lastLineWidth="70%" />
+              <SkeletonBlock className="mt-8 h-[420px] rounded-[14px]" />
+            </div>
+            <div className="text-start">
+              <SkeletonBlock className="h-12 w-full max-w-[280px] rounded-[1.25rem]" />
+              <SkeletonBlock
+                className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
+              />
+              <SkeletonText className="mt-5" lines={2} lastLineWidth="68%" />
+              <div className="mt-7 space-y-4">
+                {Array.from({length: 2}, (_, index) => (
+                  <SkeletonBlock key={index} className="h-24 rounded-[10px]" />
+                ))}
+              </div>
+              <SkeletonBlock className="mt-8 h-28 rounded-[14px]" />
+            </div>
+          </div>
+        </section>
+      </main>
+      <PublicFooterSkeleton locale={locale} />
+    </>
+  );
+}
+
 export function PageSkeleton({locale, pathname}: {locale: Locale; pathname: string}) {
   const normalizedPath = normalizeSkeletonPath(pathname);
 
+  if (isContactPath(normalizedPath)) {
+    return <ContactSkeleton locale={locale} />;
+  }
+
   if (isAboutPath(normalizedPath)) {
     return <AboutSkeleton locale={locale} />;
+  }
+
+  if (isServiceDetailPath(normalizedPath)) {
+    return <AirFreightSkeleton locale={locale} />;
+  }
+
+  if (isServicesPath(normalizedPath)) {
+    return <ServicesSkeleton locale={locale} />;
   }
 
   return <HomeSkeleton locale={locale} />;

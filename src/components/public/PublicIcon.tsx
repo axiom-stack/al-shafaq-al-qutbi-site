@@ -10,6 +10,8 @@ import {
   FiGlobe,
   FiGrid,
   FiHeadphones,
+  FiLayers,
+  FiShield,
   FiMail,
   FiMap,
   FiMapPin,
@@ -41,6 +43,8 @@ type IconName =
   | "customs"
   | "warehouse"
   | "box"
+  | "layers"
+  | "shield"
   | "check"
   | "globe"
   | "route"
@@ -71,6 +75,8 @@ const icons: Record<IconName, IconType> = {
   customs: MdOutlineFactCheck,
   warehouse: FaWarehouse,
   box: FiBox,
+  layers: FiLayers,
+  shield: FiShield,
   check: FiCheck,
   globe: FiGlobe,
   route: FiMap,
