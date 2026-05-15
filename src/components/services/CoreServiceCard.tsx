@@ -66,10 +66,10 @@ function CardContent({
 >) {
   return (
     <div
-      className={`absolute bottom-0 left-0 w-full p-5 sm:p-6 ${localeIsRTL ? "text-right" : "text-left"}`}
+      className="absolute bottom-0 left-0 w-full p-5 sm:p-6 text-start"
     >
       {badges && badges.length > 0 ? (
-        <div className={`mb-2 flex flex-wrap gap-2 ${localeIsRTL ? "justify-end" : ""}`}>
+        <div className="mb-2 flex flex-wrap gap-2">
           {badges.map((badge) => (
             <span
               key={badge}
@@ -82,9 +82,7 @@ function CardContent({
       ) : null}
       <h3 className="text-[1.35rem] font-bold leading-snug text-white sm:text-[1.55rem]">
         <span
-          className={`inline-flex max-w-full items-center gap-2 ${
-            localeIsRTL ? "flex-row-reverse" : ""
-          }`}
+          className="inline-flex max-w-full items-center gap-2"
         >
           <PublicIcon name={icon} className="h-6 w-6 shrink-0" />
           <span className="min-w-0 whitespace-normal">{title}</span>
@@ -94,12 +92,10 @@ function CardContent({
         <p className="mt-2 text-sm leading-5 text-off-white/90">{description}</p>
       </div>
       <div
-        className={`mt-4 flex items-center text-sm font-semibold text-alfs-orange opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
-          localeIsRTL ? "flex-row-reverse justify-end" : ""
-        }`}
+        className="mt-4 flex items-center text-sm font-semibold text-alfs-orange opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       >
         <span className="whitespace-nowrap">{exploreLabel}</span>
-        <span aria-hidden className={localeIsRTL ? "mr-1" : "ml-1"}>
+        <span aria-hidden className="mx-1">
           {localeIsRTL ? "←" : "→"}
         </span>
       </div>

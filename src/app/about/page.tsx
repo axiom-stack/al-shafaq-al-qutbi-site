@@ -393,7 +393,15 @@ export default async function AboutPage() {
                 <circle cx="320" cy="320" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
                 <circle cx="80" cy="300" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
                 <circle cx="200" cy="50" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <text x="219" y="214" fill="#1A2F7A" fontFamily={mapFontFamily} fontSize="14" fontWeight="700">
+                <text
+                  x={localeIsRTL ? "200" : "219"}
+                  y={localeIsRTL ? "238" : "214"}
+                  textAnchor={localeIsRTL ? "middle" : "start"}
+                  fill="#1A2F7A"
+                  fontFamily={mapFontFamily}
+                  fontSize="14"
+                  fontWeight="700"
+                >
                   {t("coverage.mapLabels.hub")}
                 </text>
                 <text x="60" y="70" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">

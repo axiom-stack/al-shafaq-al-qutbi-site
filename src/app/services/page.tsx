@@ -76,7 +76,7 @@ export default async function ServicesPage() {
   const localeIsRTL = isRTL(locale);
   const t = await getTranslations("ServicesPage");
 
-  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
+  const sideHeadingAccentClass = "me-auto ms-0";
   const heroOverlayClass = localeIsRTL
     ? "bg-[linear-gradient(270deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.75)_55%,rgba(13,31,92,0.2)_100%)]"
     : "bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.75)_55%,rgba(13,31,92,0.2)_100%)]";
@@ -115,7 +115,7 @@ export default async function ServicesPage() {
           <HeroOverlay heroOverlayClass={heroOverlayClass} />
 
           <div className="relative z-20 mx-auto flex w-full max-w-[1280px] flex-col items-stretch justify-between gap-10 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:px-8 lg:py-16">
-            <div className={`w-full min-w-0 lg:w-3/5 ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="w-full min-w-0 lg:w-3/5 text-start">
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.kicker")}
               </p>
@@ -125,7 +125,7 @@ export default async function ServicesPage() {
               <p className="mt-5 w-full max-w-[670px] text-[0.98rem] leading-7 text-off-white/90 sm:text-[1.05rem]">
                 {t("hero.description")}
               </p>
-              <div className={`mt-7 flex flex-row flex-wrap gap-2 ${localeIsRTL ? "justify-end" : ""}`}>
+              <div className="mt-7 flex flex-row flex-wrap gap-2">
                 {heroChips.map((chip) => (
                   <span
                     key={chip.label}
@@ -139,9 +139,7 @@ export default async function ServicesPage() {
             </div>
 
             <div
-              className={`hidden w-full lg:block lg:w-1/3 ${
-                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
-              }`}
+              className="hidden w-full lg:block lg:w-1/3"
             >
               <CoveragePanel
                 title={t("hero.coverage.title")}
@@ -236,19 +234,17 @@ function CoveragePanel({
 }) {
   return (
     <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-lg backdrop-blur-md">
-      <h3 className={`text-[1.4rem] font-bold text-white ${localeIsRTL ? "text-right" : "text-left"}`}>
+      <h3 className="text-[1.4rem] font-bold text-white text-start">
         {title}
       </h3>
-      <p className={`mt-3 text-sm text-white/80 ${localeIsRTL ? "text-right" : "text-left"}`}>
+      <p className="mt-3 text-sm text-white/80 text-start">
         {description}
       </p>
-      <ul className={`mt-5 space-y-2 ${localeIsRTL ? "text-right" : "text-left"}`}>
+      <ul className="mt-5 space-y-2 text-start">
         {regions.map((region) => (
           <li
             key={region}
-            className={`flex items-center gap-2 text-sm font-semibold text-white ${
-              localeIsRTL ? "flex-row-reverse justify-end" : ""
-            }`}
+            className="flex items-center gap-2 text-sm font-semibold text-white"
           >
             <PublicIcon name="check" className="h-5 w-5 text-alfs-orange" />
             {region}
@@ -308,7 +304,7 @@ function OverviewSection({
 }) {
   return (
     <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
-      <div className={localeIsRTL ? "text-right" : "text-left"}>
+      <div className="text-start">
         <h2 className="text-[1.85rem] leading-[1.15] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.35rem]">
           {heading}
         </h2>
@@ -316,9 +312,7 @@ function OverviewSection({
         <p className="mt-6 text-[1rem] leading-8 text-on-surface-variant">{description}</p>
         <PageTransitionLink
           href="/about"
-          className={`mt-8 inline-flex items-center gap-2 rounded-md border-2 border-alfs-navy px-6 py-2.5 text-sm font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white ${
-            localeIsRTL ? "flex-row-reverse" : ""
-          }`}
+          className="mt-8 inline-flex items-center gap-2 rounded-md border-2 border-alfs-navy px-6 py-2.5 text-sm font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white"
         >
           {cta}
           <span aria-hidden>{localeIsRTL ? "←" : "→"}</span>
@@ -331,7 +325,7 @@ function OverviewSection({
             localeIsRTL ? "-left-20 -top-20" : "-right-20 -top-20"
           }`}
         />
-        <h3 className={`relative text-[1.4rem] font-bold text-white sm:text-[1.65rem] ${localeIsRTL ? "text-right" : "text-left"}`}>
+        <h3 className="relative text-[1.4rem] font-bold text-white sm:text-[1.65rem] text-start">
           {journeyTitle}
         </h3>
         <ol
@@ -347,9 +341,7 @@ function OverviewSection({
                 } ${step.active ? "bg-alfs-orange shadow-[0_0_10px_rgba(244,121,32,0.5)]" : "bg-surface-tint"}`}
               />
               <h4
-                className={`flex items-center gap-2 text-[1rem] font-semibold text-white ${
-                  localeIsRTL ? "flex-row-reverse justify-end" : ""
-                }`}
+                className="flex items-center gap-2 text-[1rem] font-semibold text-white"
               >
                 <PublicIcon
                   name={step.icon}
@@ -357,7 +349,7 @@ function OverviewSection({
                 />
                 {step.title}
               </h4>
-              <p className={`mt-1 text-sm text-off-white/80 ${localeIsRTL ? "text-right" : "text-left"}`}>
+              <p className="mt-1 text-sm text-off-white/80 text-start">
                 {step.description}
               </p>
             </li>
@@ -491,7 +483,7 @@ function SectionHeader({
 }) {
   return (
     <>
-      <div className={`mb-4 flex items-center gap-3 ${localeIsRTL ? "flex-row-reverse justify-end" : ""}`}>
+      <div className="mb-4 flex items-center gap-3">
         <span
           className={`flex h-12 w-12 items-center justify-center rounded-full ${
             dark ? "border border-white/20 bg-white/10 text-alfs-orange" : "bg-primary-container/10 text-alfs-navy"
@@ -557,7 +549,7 @@ function ServiceSectionShell({
     >
       <div className="mx-auto grid w-full max-w-[1280px] gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div className={imageOrder}>{image}</div>
-        <div className={`${contentOrder} ${localeIsRTL ? "text-right" : "text-left"}`}>{content}</div>
+        <div className={`${contentOrder} text-start`}>{content}</div>
       </div>
     </section>
   );
@@ -568,13 +560,11 @@ function FeatureBox({
   icon,
   title,
   description,
-  localeIsRTL,
   dark = false,
 }: {
   icon: IconName;
   title: string;
   description: string;
-  localeIsRTL: boolean;
   dark?: boolean;
 }) {
   return (
@@ -583,7 +573,7 @@ function FeatureBox({
         dark
           ? "border border-white/10 bg-white/5 backdrop-blur-sm"
           : "border border-outline-variant bg-surface shadow-sm"
-      } ${localeIsRTL ? "flex-row-reverse text-right" : ""}`}
+      } text-start`}
     >
       <PublicIcon name={icon} className="mt-1 h-5 w-5 shrink-0 text-alfs-orange" />
       <div>
@@ -625,16 +615,14 @@ function SeaFreightSection({
               icon="box"
               title={t("seaFreight.fcl.title")}
               description={t("seaFreight.fcl.description")}
-              localeIsRTL={localeIsRTL}
             />
             <FeatureBox
               icon="layers"
               title={t("seaFreight.lcl.title")}
               description={t("seaFreight.lcl.description")}
-              localeIsRTL={localeIsRTL}
             />
           </div>
-          <div className={`mt-8 flex flex-wrap gap-4 ${localeIsRTL ? "justify-end" : ""}`}>
+          <div className="mt-8 flex flex-wrap gap-4">
             <PageTransitionLink
               href={serviceQuoteHref(serviceRoutes.seaFreight)}
               className="rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber"
@@ -690,7 +678,7 @@ function LandFreightSection({
             ).map(([labelKey, textKey]) => (
               <li
                 key={labelKey}
-                className={`flex items-start gap-2 ${localeIsRTL ? "flex-row-reverse text-right" : ""}`}
+                className="flex items-start gap-2 text-start"
               >
                 <PublicIcon name="check" className="mt-1 h-5 w-5 shrink-0 text-alfs-orange" />
                 <LandBullet labelKey={labelKey} textKey={textKey} t={t} />
@@ -699,9 +687,7 @@ function LandFreightSection({
           </ul>
           <PageTransitionLink
             href={serviceQuoteHref(serviceRoutes.landFreight)}
-            className={`mt-8 inline-flex rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber ${
-              localeIsRTL ? "float-left" : ""
-            }`}
+            className="mt-8 inline-flex rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber"
           >
             {t("landFreight.cta")}
           </PageTransitionLink>
@@ -761,18 +747,16 @@ function AirFreightSection({
               icon="spark"
               title={t("airFreight.urgent.title")}
               description={t("airFreight.urgent.description")}
-              localeIsRTL={localeIsRTL}
               dark
             />
             <FeatureBox
               icon="spark"
               title={t("airFreight.delicate.title")}
               description={t("airFreight.delicate.description")}
-              localeIsRTL={localeIsRTL}
               dark
             />
           </div>
-          <div className={`mt-8 flex flex-wrap gap-4 ${localeIsRTL ? "justify-end" : ""}`}>
+          <div className="mt-8 flex flex-wrap gap-4">
             <PageTransitionLink
               href={serviceQuoteHref(serviceRoutes.airFreight)}
               className="rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber"
@@ -824,18 +808,16 @@ function ConsolidationSection({
             localeIsRTL={localeIsRTL}
             sideHeadingAccentClass={sideHeadingAccentClass}
           />
-          <div className={`mt-8 space-y-6 ${localeIsRTL ? "text-right" : "text-left"}`}>
+          <div className="mt-8 space-y-6 text-start">
             <BenefitRow
               icon="flex"
               title={t("consolidation.cost.title")}
               description={t("consolidation.cost.description")}
-              localeIsRTL={localeIsRTL}
             />
             <BenefitRow
               icon="globe"
               title={t("consolidation.network.title")}
               description={t("consolidation.network.description")}
-              localeIsRTL={localeIsRTL}
             />
           </div>
         </>
@@ -848,15 +830,13 @@ function BenefitRow({
   icon,
   title,
   description,
-  localeIsRTL,
 }: {
   icon: IconName;
   title: string;
   description: string;
-  localeIsRTL: boolean;
 }) {
   return (
-    <div className={`flex gap-4 ${localeIsRTL ? "flex-row-reverse" : ""}`}>
+    <div className="flex gap-4 text-start">
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-alfs-orange/10 text-alfs-orange">
         <PublicIcon name={icon} className="h-5 w-5" />
       </span>
@@ -911,7 +891,7 @@ function WarehousingSection({
             {featureKeys.map((key) => (
               <li
                 key={key}
-                className={`flex items-center gap-2 ${localeIsRTL ? "flex-row-reverse justify-end" : ""}`}
+                className="flex items-center gap-2 text-start"
               >
                 <PublicIcon name={icons[key]} className="h-5 w-5 text-alfs-orange" />
                 <span className="text-on-surface-variant">{t(`warehousing.features.${key}`)}</span>
@@ -920,9 +900,7 @@ function WarehousingSection({
           </ul>
           <PageTransitionLink
             href={serviceQuoteHref(serviceRoutes.warehousing)}
-            className={`mt-8 inline-flex rounded-md border-2 border-alfs-navy px-6 py-2.5 text-sm font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white ${
-              localeIsRTL ? "float-left" : ""
-            }`}
+            className="mt-8 inline-flex rounded-md border-2 border-alfs-navy px-6 py-2.5 text-sm font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white"
           >
             {t("warehousing.cta")}
           </PageTransitionLink>
@@ -964,7 +942,7 @@ function CustomsSection({
             {featureKeys.map((key) => (
               <li
                 key={key}
-                className={`flex items-center gap-2 ${localeIsRTL ? "flex-row-reverse justify-end" : ""}`}
+                className="flex items-center gap-2 text-start"
               >
                 <PublicIcon name="check" className="h-5 w-5 text-alfs-orange" />
                 <span className="text-on-surface-variant">{t(`customsClearance.features.${key}`)}</span>

@@ -20,7 +20,7 @@ export function ServiceQuoteForm({
   localeIsRTL,
 }: ServiceQuoteFormProps) {
   return (
-    <div className={`mx-auto max-w-[720px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+    <div className="mx-auto max-w-[720px] text-start">
       <h2 className="text-center text-[2rem] leading-[1.12] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
         {title}
       </h2>

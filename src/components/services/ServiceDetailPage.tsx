@@ -23,13 +23,13 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
   const localeIsRTL = isRTL(locale);
   const t = await getTranslations(config.translationNamespace);
 
-  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
+  const sideHeadingAccentClass = "me-auto ms-0";
   const heroOverlayClass = localeIsRTL
     ? "bg-[linear-gradient(270deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.75)_55%,rgba(13,31,92,0.2)_100%)]"
     : "bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.75)_55%,rgba(13,31,92,0.2)_100%)]";
   const ctaGlowSideClass = localeIsRTL
-    ? "left-0 bg-[linear-gradient(90deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]"
-    : "right-0 bg-[linear-gradient(270deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]";
+    ? "start-0 bg-[linear-gradient(90deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]"
+    : "end-0 bg-[linear-gradient(270deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]";
 
   const whenToChooseItems = config.whenToChooseKeys.map((key) => ({
     key,
@@ -81,7 +81,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
           <div className={`absolute inset-0 z-10 ${heroOverlayClass}`} />
 
           <div className="relative z-20 mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <div className={`max-w-[760px] ${localeIsRTL ? "mr-auto text-right" : "text-left"}`}>
+            <div className="max-w-[760px] text-start">
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.eyebrow")}
               </p>
@@ -92,7 +92,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
                 {t("hero.subheadline")}
               </p>
 
-              <div className={`mt-7 flex flex-wrap gap-2 ${localeIsRTL ? "justify-end" : ""}`}>
+              <div className="mt-7 flex flex-wrap gap-2">
                 {config.chipKeys.map((key) => (
                   <span
                     key={key}
@@ -105,7 +105,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
               </div>
 
               <div
-                className={`mt-8 flex flex-col gap-3 sm:flex-row ${localeIsRTL ? "sm:justify-end" : ""}`}
+                className="mt-8 flex flex-col gap-3 sm:flex-row"
               >
                 <a
                   href="#quote-form"
@@ -127,7 +127,12 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1fr_0.4fr] lg:items-start">
-            <div className={`max-w-[640px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="max-w-[640px] text-start">
+              {localeIsRTL && (
+                <div className="mb-8">
+                  <OverviewBackLink localeIsRTL={localeIsRTL} label={t("overview.backToServices")} />
+                </div>
+              )}
               <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("overview.heading")}
               </h2>
@@ -141,7 +146,9 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
                 {t("overview.paragraphTwo")}
               </p>
             </div>
-            <OverviewBackLink localeIsRTL={localeIsRTL} label={t("overview.backToServices")} />
+            {!localeIsRTL && (
+              <OverviewBackLink localeIsRTL={localeIsRTL} label={t("overview.backToServices")} />
+            )}
           </div>
         </section>
 
@@ -160,7 +167,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-[1280px]">
-            <div className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="max-w-[560px] text-start">
               <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("capabilities.heading")}
               </h2>
@@ -171,7 +178,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {capabilityItems.map((item) => (
-                <CapabilityCard key={item.key} item={item} localeIsRTL={localeIsRTL} />
+                <CapabilityCard key={item.key} item={item} />
               ))}
             </div>
           </div>
@@ -179,7 +186,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
 
         <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-[1280px]">
-            <div className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="max-w-[560px] text-start">
               <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("useCases.heading")}
               </h2>
@@ -192,9 +199,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
               {useCaseItems.map((item) => (
                 <li
                   key={item}
-                  className={`flex items-center gap-2 rounded-[10px] border border-[#e8e4ef] bg-white px-4 py-3 text-[0.9rem] text-on-surface-variant ${
-                    localeIsRTL ? "flex-row-reverse text-right" : ""
-                  }`}
+                  className="flex items-center gap-2 rounded-[10px] border border-[#e8e4ef] bg-white px-4 py-3 text-[0.9rem] text-on-surface-variant text-start"
                 >
                   <PublicIcon name="check" className="h-5 w-5 shrink-0 text-alfs-orange" />
                   {item}
@@ -213,18 +218,12 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
               {processSteps.map((step) => (
                 <li
                   key={step.key}
-                  className={`relative rounded-[12px] border border-white/12 bg-white/6 p-6 backdrop-blur-sm ${
-                    localeIsRTL ? "text-right" : "text-left"
-                  }`}
+                  className="relative rounded-[12px] border border-white/12 bg-white/6 p-6 backdrop-blur-sm text-start"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-alfs-orange text-sm font-bold text-white">
                     {step.step}
                   </span>
-                  <div
-                    className={`mt-4 flex items-center gap-2 ${
-                      localeIsRTL ? "flex-row-reverse justify-end" : ""
-                    }`}
-                  >
+                  <div className="mt-4 flex items-center gap-2">
                     <PublicIcon name={step.icon} className="h-5 w-5 text-alfs-orange" />
                     <h3 className="text-[1rem] font-semibold text-white">{step.title}</h3>
                   </div>
@@ -237,7 +236,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
 
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-[1280px]">
-            <div className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+            <div className="max-w-[560px] text-start">
               <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("whyAlfs.heading")}
               </h2>
@@ -248,7 +247,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
                 {whyAlfsItems.map((item) => (
                   <li
                     key={item}
-                    className={`flex items-start gap-2 ${localeIsRTL ? "flex-row-reverse text-right" : ""}`}
+                    className="flex items-start gap-2 text-start"
                   >
                     <PublicIcon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-alfs-orange" />
                     <span className="text-[0.96rem] leading-7 text-on-surface-variant">{item}</span>
@@ -273,9 +272,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
                 <PageTransitionLink
                   key={item.key}
                   href={item.href}
-                  className={`group flex flex-col rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 shadow-[0_12px_28px_rgba(26,47,122,0.10)] transition-transform duration-300 hover:-translate-y-1 ${
-                    localeIsRTL ? "text-right" : "text-left"
-                  }`}
+                  className="group flex flex-col rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 shadow-[0_12px_28px_rgba(26,47,122,0.10)] transition-transform duration-300 hover:-translate-y-1 text-start"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-full bg-alfs-orange/10 text-alfs-orange">
                     <PublicIcon name={item.icon} className="h-5 w-5" />
@@ -283,13 +280,9 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
                   <h3 className="mt-4 text-[1.02rem] font-semibold text-alfs-navy group-hover:text-alfs-orange">
                     {item.title}
                   </h3>
-                  <span
-                    className={`mt-3 text-sm font-semibold text-alfs-orange ${
-                      localeIsRTL ? "text-left" : ""
-                    }`}
-                  >
+                  <span className="mt-3 text-sm font-semibold text-alfs-orange">
                     {t("related.explore")}
-                    <span aria-hidden className={localeIsRTL ? " mr-1" : " ml-1"}>
+                    <span aria-hidden className="mx-1">
                       {localeIsRTL ? "←" : "→"}
                     </span>
                   </span>
@@ -350,12 +343,10 @@ function DotPattern() {
 
 function OverviewBackLink({localeIsRTL, label}: {localeIsRTL: boolean; label: string}) {
   return (
-    <div className={`${localeIsRTL ? "text-right lg:text-left" : "text-left lg:text-right"}`}>
+    <div className={localeIsRTL ? "text-start" : "text-start lg:text-end"}>
       <PageTransitionLink
         href="/services"
-        className={`inline-flex items-center gap-2 text-sm font-semibold text-alfs-navy transition-colors hover:text-alfs-orange ${
-          localeIsRTL ? "flex-row-reverse" : ""
-        }`}
+        className="inline-flex items-center gap-2 text-sm font-semibold text-alfs-navy transition-colors hover:text-alfs-orange"
       >
         <span aria-hidden>{localeIsRTL ? "→" : "←"}</span>
         {label}
@@ -377,7 +368,6 @@ function ProcessSectionHeader({heading}: {heading: string}) {
 
 function WhenToChooseGrid({
   whenToChooseItems,
-  localeIsRTL,
 }: {
   whenToChooseItems: {
     key: string;
@@ -392,14 +382,10 @@ function WhenToChooseGrid({
       {whenToChooseItems.map((item) => (
         <article
           key={item.key}
-          className={`rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 shadow-[0_12px_28px_rgba(26,47,122,0.10)] ${
-            localeIsRTL ? "text-right" : "text-left"
-          }`}
+          className="rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 shadow-[0_12px_28px_rgba(26,47,122,0.10)] text-start"
         >
           <span
-            className={`flex h-11 w-11 items-center justify-center rounded-full bg-alfs-orange/10 text-alfs-orange ${
-              localeIsRTL ? "mr-auto" : ""
-            }`}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-alfs-orange/10 text-alfs-orange"
           >
             <PublicIcon name={item.icon} className="h-5 w-5" />
           </span>
@@ -413,16 +399,12 @@ function WhenToChooseGrid({
 
 function CapabilityCard({
   item,
-  localeIsRTL,
 }: {
   item: {key: string; title: string; description: string; icon: IconName};
-  localeIsRTL: boolean;
 }) {
   return (
     <div
-      className={`flex gap-4 rounded-[12px] border border-[#ebe8f3] bg-[#fbf8ff] px-5 py-5 ${
-        localeIsRTL ? "flex-row-reverse text-right" : ""
-      }`}
+      className="flex gap-4 rounded-[12px] border border-[#ebe8f3] bg-[#fbf8ff] px-5 py-5 text-start"
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-alfs-orange/10 text-alfs-orange">
         <PublicIcon name={item.icon} className="h-5 w-5" />
