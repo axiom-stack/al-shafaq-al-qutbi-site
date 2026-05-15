@@ -1,7 +1,7 @@
 import type {ComponentProps} from "react";
 
 import type {PublicIcon} from "@/components/public/PublicIcon";
-import {serviceImages} from "@/lib/service-images";
+import {serviceHeroImages, serviceImages} from "@/lib/service-images";
 import {siteAnchors} from "@/lib/site-routes";
 
 export type ServiceSlug =
@@ -24,6 +24,7 @@ export type ServicePageConfig = {
     | "WarehousingPage"
     | "CustomsClearancePage";
   image: string;
+  heroImage: string;
   heroIcon: IconName;
   chipKeys: readonly string[];
   whenToChooseKeys: readonly string[];
@@ -45,6 +46,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
     slug: "sea-freight",
     translationNamespace: "SeaFreightPage",
     image: serviceImages.seaFreight,
+    heroImage: serviceHeroImages.seaFreight,
     heroIcon: "ship",
     chipKeys: ["lcl", "fcl", "bulk", "partial", "oversized", "sensitive"],
     whenToChooseKeys: [
@@ -108,6 +110,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
     slug: "land-freight",
     translationNamespace: "LandFreightPage",
     image: serviceImages.landFreight,
+    heroImage: serviceHeroImages.landFreight,
     heroIcon: "truck",
     chipKeys: ["ftl", "ltl", "flatbed", "temperature", "regional", "crossBorder"],
     whenToChooseKeys: [
@@ -171,6 +174,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
     slug: "air-freight",
     translationNamespace: "AirFreightPage",
     image: serviceImages.airFreight,
+    heroImage: serviceHeroImages.airFreight,
     heroIcon: "plane",
     chipKeys: ["timeSensitive", "delicate", "small", "large", "updates"],
     whenToChooseKeys: [
@@ -234,6 +238,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
     slug: "cargo-consolidation",
     translationNamespace: "CargoConsolidationPage",
     image: serviceImages.consolidation,
+    heroImage: serviceHeroImages.consolidation,
     heroIcon: "box",
     chipKeys: ["grouping", "container", "cost", "organization", "supplyChain"],
     whenToChooseKeys: [
@@ -297,6 +302,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
     slug: "warehousing",
     translationNamespace: "WarehousingPage",
     image: serviceImages.warehousing,
+    heroImage: serviceHeroImages.warehousing,
     heroIcon: "warehouse",
     chipKeys: ["secure", "management", "inventory", "protection", "flexible"],
     whenToChooseKeys: [
@@ -360,6 +366,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
     slug: "customs-clearance",
     translationNamespace: "CustomsClearancePage",
     image: serviceImages.customsClearance,
+    heroImage: serviceHeroImages.customsClearance,
     heroIcon: "customs",
     chipKeys: ["documentation", "compliance", "faster", "smooth", "regulations"],
     whenToChooseKeys: [

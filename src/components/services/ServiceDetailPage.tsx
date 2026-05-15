@@ -1,8 +1,8 @@
 import type {ComponentProps} from "react";
 
-import Image from "next/image";
 import {getLocale, getTranslations} from "next-intl/server";
 
+import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkeleton";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
@@ -24,6 +24,9 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
   const t = await getTranslations(config.translationNamespace);
 
   const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
+  const heroOverlayClass = localeIsRTL
+    ? "bg-[linear-gradient(270deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.75)_55%,rgba(13,31,92,0.2)_100%)]"
+    : "bg-[linear-gradient(90deg,rgba(13,31,92,0.95)_0%,rgba(13,31,92,0.75)_55%,rgba(13,31,92,0.2)_100%)]";
   const ctaGlowSideClass = localeIsRTL
     ? "left-0 bg-[linear-gradient(90deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]"
     : "right-0 bg-[linear-gradient(270deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]";
@@ -73,12 +76,12 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
     <>
       <PublicNavbar currentPage="services" />
       <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
-        <section className="relative overflow-hidden bg-alfs-deep-blue">
-          <DotPattern />
-          <HeroGlow localeIsRTL={localeIsRTL} />
+        <section className="relative flex min-h-[520px] items-center overflow-hidden bg-alfs-deep-blue sm:min-h-[600px] lg:min-h-[640px]">
+          <HeroBackdropWithSkeleton src={config.heroImage} alt={t("hero.imageAlt")} />
+          <div className={`absolute inset-0 z-10 ${heroOverlayClass}`} />
 
-          <div className="relative mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-16">
-            <div className={`lg:col-span-7 ${localeIsRTL ? "text-right" : "text-left"}`}>
+          <div className="relative z-20 mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div className={`max-w-[760px] ${localeIsRTL ? "mr-auto text-right" : "text-left"}`}>
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.eyebrow")}
               </p>
@@ -119,24 +122,6 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
               </div>
             </div>
 
-            <div
-              className={`lg:col-span-5 ${
-                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
-              }`}
-            >
-              <div className="relative mx-auto w-full max-w-[480px] overflow-hidden rounded-2xl border border-white/15 bg-[#1a2f7a] shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
-                <HeroImageFrame>
-                  <Image
-                    src={config.image}
-                    alt={t("hero.imageAlt")}
-                    fill
-                    priority
-                    className="object-contain object-center p-4 sm:p-6"
-                    sizes="(max-width: 1024px) 90vw, 480px"
-                  />
-                </HeroImageFrame>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -361,20 +346,6 @@ function DotPattern() {
       }}
     />
   );
-}
-
-function HeroGlow({localeIsRTL}: {localeIsRTL: boolean}) {
-  return (
-    <div
-      className={`pointer-events-none absolute top-0 h-72 w-72 rounded-full bg-alfs-orange/15 blur-3xl ${
-        localeIsRTL ? "left-0 -translate-x-1/4" : "right-0 translate-x-1/4"
-      }`}
-    />
-  );
-}
-
-function HeroImageFrame({children}: {children: React.ReactNode}) {
-  return <div className="relative aspect-[4/3] w-full sm:aspect-[5/4]">{children}</div>;
 }
 
 function OverviewBackLink({localeIsRTL, label}: {localeIsRTL: boolean; label: string}) {

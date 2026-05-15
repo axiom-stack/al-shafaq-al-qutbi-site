@@ -607,8 +607,14 @@ function ServicesSkeleton({locale}: {locale: Locale}) {
     <>
       <PublicNavbarSkeleton locale={locale} />
       <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
-        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-20 pt-10 sm:px-6 lg:px-8">
-          <ServicesHeroSkeleton localeIsRTL={localeIsRTL} />
+        <section className="relative flex min-h-[520px] items-center overflow-hidden bg-alfs-deep-blue px-4 pb-20 pt-10 sm:min-h-[600px] sm:px-6 lg:min-h-[720px] lg:px-8">
+          <SkeletonBlock
+            aria-hidden
+            className="absolute inset-0 min-h-full bg-alfs-royal-blue/35"
+          />
+          <div className="relative z-20 mx-auto w-full max-w-[1280px]">
+            <ServicesHeroSkeleton localeIsRTL={localeIsRTL} />
+          </div>
         </section>
         <section className="relative z-10 mx-auto -mt-9 mb-12 max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -688,16 +694,13 @@ function AirFreightSkeleton({locale}: {locale: Locale}) {
     <>
       <PublicNavbarSkeleton locale={locale} />
       <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
-        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-          <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
-            <AirFreightHeroTextSkeleton localeIsRTL={localeIsRTL} />
-            <div
-              className={`lg:col-span-5 ${
-                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
-              }`}
-            >
-              <SkeletonBlock className="aspect-[4/3] w-full max-w-[480px] rounded-2xl sm:aspect-[5/4]" />
-            </div>
+        <section className="relative flex min-h-[520px] items-center overflow-hidden bg-alfs-deep-blue px-4 py-12 sm:min-h-[600px] sm:px-6 lg:min-h-[640px] lg:px-8 lg:py-16">
+          <SkeletonBlock
+            aria-hidden
+            className="absolute inset-0 min-h-full bg-alfs-royal-blue/35"
+          />
+          <div className="relative z-20 mx-auto w-full max-w-[1280px]">
+            <ServiceDetailHeroTextSkeleton localeIsRTL={localeIsRTL} />
           </div>
         </section>
 
@@ -772,23 +775,34 @@ function AirFreightSkeleton({locale}: {locale: Locale}) {
   );
 }
 
-function AirFreightHeroTextSkeleton({localeIsRTL}: {localeIsRTL: boolean}) {
+function ServiceDetailHeroTextSkeleton({localeIsRTL}: {localeIsRTL: boolean}) {
   return (
-    <div className={`lg:col-span-7 ${localeIsRTL ? "text-right" : "text-left"}`}>
+    <div className={`max-w-[760px] ${localeIsRTL ? "mr-auto text-right" : "text-left"}`}>
       <SkeletonBlock className="h-3.5 w-32 rounded-full bg-alfs-orange/50" />
-      <SkeletonBlock className="mt-3 h-16 w-full max-w-[620px] rounded-[1.5rem] bg-white/12 sm:h-20" />
+      <SkeletonBlock className="mt-3 h-16 w-full max-w-[640px] rounded-[1.5rem] bg-white/12 sm:h-20 lg:h-24" />
       <SkeletonText
         className="mt-5 max-w-[580px]"
         lineClassName="h-4 rounded-full bg-white/12"
         lines={3}
         lastLineWidth="72%"
       />
-      <AirFreightHeroCtasSkeleton />
+      <ServiceDetailHeroChipsSkeleton />
+      <ServiceDetailHeroCtasSkeleton />
     </div>
   );
 }
 
-function AirFreightHeroCtasSkeleton() {
+function ServiceDetailHeroChipsSkeleton() {
+  return (
+    <div className="mt-7 flex flex-wrap gap-2">
+      {Array.from({length: 5}, (_, index) => (
+        <SkeletonBlock key={index} className="h-8 w-24 rounded-full bg-white/14" />
+      ))}
+    </div>
+  );
+}
+
+function ServiceDetailHeroCtasSkeleton() {
   return (
     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
       <SkeletonBlock className="h-11 w-40 rounded-md bg-white/16" />

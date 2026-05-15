@@ -35,7 +35,7 @@ export function resolveQuoteHref(pathname: string | null, onHomePage: boolean) {
   }
 
   if (normalizeContactPath(pathname) === siteRoutes.contact) {
-    return "#inquiry-form";
+    return `${siteRoutes.contact}#inquiry-form`;
   }
 
   return contactInquiryHref;

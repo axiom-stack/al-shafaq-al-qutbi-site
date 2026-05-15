@@ -4,6 +4,7 @@ import type {ComponentProps, ReactNode} from "react";
 import Image from "next/image";
 import {getLocale, getTranslations} from "next-intl/server";
 
+import {AnchorNavLink} from "@/components/public/AnchorNavLink";
 import {CoreServiceCard} from "@/components/services/CoreServiceCard";
 import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkeleton";
 import {PublicFooter} from "@/components/public/PublicFooter";
@@ -266,7 +267,7 @@ function QuickActionsGrid({
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
       {quickActions.map((action) => (
-        <a
+        <AnchorNavLink
           key={action.title}
           href={action.href}
           className="group flex flex-col items-center rounded-xl border border-outline-variant bg-surface px-6 py-8 text-center shadow-[0_8px_30px_rgba(26,47,122,0.12)] transition-transform duration-300 hover:-translate-y-1"
@@ -276,7 +277,7 @@ function QuickActionsGrid({
           </span>
           <h2 className="mt-4 text-[1.05rem] font-bold text-alfs-navy">{action.title}</h2>
           <p className="mt-1 text-sm text-on-surface-variant">{action.description}</p>
-        </a>
+        </AnchorNavLink>
       ))}
     </div>
   );

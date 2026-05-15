@@ -56,7 +56,7 @@
         "title": "تتبع الشحنة",
         "description": "تحديثات فورية للحالة",
         "icon": "search",
-        "href": "#track"
+        "href": "/#track"
       },
       "quote": {
         "title": "طلب عرض سعر",

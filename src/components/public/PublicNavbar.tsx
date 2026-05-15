@@ -8,8 +8,9 @@ import {FiMenu, FiX} from "react-icons/fi";
 
 import {usePathname} from "@/i18n/navigation";
 import {isRTL, type Locale} from "@/i18n/routing";
-import {resolveQuoteHref, siteRoutes} from "@/lib/site-routes";
+import {resolveQuoteHref, siteAnchors, siteRoutes} from "@/lib/site-routes";
 
+import {AnchorNavLink} from "./AnchorNavLink";
 import {LocaleSwitch} from "./LocaleSwitch";
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicLogo} from "./PublicLogo";
@@ -27,23 +28,20 @@ type PublicNavbarProps = {
   currentPage?: "home" | "about" | "services" | "contact";
 };
 
-function getNavHref(
-  itemType: (typeof navItems)[number]["type"],
-  pathname: string,
-) {
+function getNavHref(itemType: (typeof navItems)[number]["type"]) {
   switch (itemType) {
     case "home":
-      return pathname === "/" ? "#top" : "/";
+      return "/";
     case "services":
-      return pathname === "/services" ? "#top" : "/services";
+      return "/services";
     case "coverage":
-      return pathname === "/" ? "#coverage" : "/#coverage";
+      return siteAnchors.coverage;
     case "whyAlfs":
-      return pathname === "/" ? "#whyAlfs" : "/#whyAlfs";
+      return siteAnchors.whyAlfs;
     case "about":
-      return pathname === "/about" ? "#top" : "/about";
+      return "/about";
     case "contact":
-      return pathname === "/contact" ? "#top" : siteRoutes.contact;
+      return siteRoutes.contact;
   }
 }
 
@@ -61,18 +59,10 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
     className: string,
     onClick?: () => void,
   ) {
-    if (href.startsWith("#")) {
-      return (
-        <a href={href} className={className} onClick={onClick}>
-          {label}
-        </a>
-      );
-    }
-
     return (
-      <PageTransitionLink href={href} className={className} onClick={onClick}>
+      <AnchorNavLink href={href} className={className} onClick={onClick}>
         {label}
-      </PageTransitionLink>
+      </AnchorNavLink>
     );
   }
 
@@ -85,12 +75,9 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
 
         <nav className="hidden items-center gap-5 lg:flex">
           {navItems.map((item) => (
-            <span
-              key={item.key}
-              className="contents"
-            >
+            <span key={item.key} className="contents">
               {renderNavLink(
-                getNavHref(item.type, pathname),
+                getNavHref(item.type),
                 t(`links.${item.key}`),
                 `text-[12px] font-medium transition-colors ${
                   item.key === currentPage
@@ -134,15 +121,16 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
       </div>
 
       {menuOpen ? (
-        <div className={`border-t border-outline-variant bg-white px-4 py-4 lg:hidden ${localeIsRTL ? "text-right" : "text-left"}`}>
+        <div
+          className={`border-t border-outline-variant bg-white px-4 py-4 lg:hidden ${
+            localeIsRTL ? "text-right" : "text-left"
+          }`}
+        >
           <nav className="flex flex-col gap-4">
             {navItems.map((item) => (
-              <span
-                key={item.key}
-                className="contents"
-              >
+              <span key={item.key} className="contents">
                 {renderNavLink(
-                  getNavHref(item.type, pathname),
+                  getNavHref(item.type),
                   t(`links.${item.key}`),
                   `text-sm font-medium ${
                     item.key === currentPage ? "text-alfs-orange" : "text-on-surface-variant"

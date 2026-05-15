@@ -56,7 +56,7 @@
         "title": "Track Shipment",
         "description": "Real-time status updates",
         "icon": "search",
-        "href": "#track"
+        "href": "/#track"
       },
       "quote": {
         "title": "Request Quote",

@@ -7,6 +7,7 @@ import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkel
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
+import {AnchorNavLink} from "@/components/public/AnchorNavLink";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
 import {contactInquiryHref, serviceRoutes} from "@/lib/site-routes";
@@ -185,11 +186,11 @@ export default async function HomePage() {
 
         <section
           id="track"
-          className="relative z-10 -mt-9 mb-12 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 -mt-9 mb-12 scroll-mt-24 px-4 sm:px-6 lg:px-8"
         >
           <div className="mx-auto grid w-full max-w-[1360px] gap-2.5 md:grid-cols-2 lg:grid-cols-12">
             {quickActions.map((action) => (
-              <a
+              <AnchorNavLink
                 key={action.title}
                 href={action.href}
                 className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-5 py-6 text-center shadow-[0_8px_24px_rgba(26,47,122,0.12)] transition-transform hover:-translate-y-1 md:col-span-1 lg:col-span-3"
@@ -206,12 +207,12 @@ export default async function HomePage() {
                 <p className="mt-1.5 text-xs leading-5 text-on-surface-variant">
                   {action.description}
                 </p>
-              </a>
+              </AnchorNavLink>
             ))}
           </div>
         </section>
 
-        <section id="whyAlfs" className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <section id="whyAlfs" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
             <div id="about" className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
               <h2 className="relative text-[2.05rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
@@ -324,7 +325,7 @@ export default async function HomePage() {
 
         <section
           id="coverage"
-          className="relative overflow-hidden bg-alfs-deep-blue px-4 pt-12 pb-12 text-white sm:px-6 sm:pt-14 sm:pb-16 lg:px-8 lg:py-20"
+          className="relative scroll-mt-24 overflow-hidden bg-alfs-deep-blue px-4 pt-12 pb-12 text-white sm:px-6 sm:pt-14 sm:pb-16 lg:px-8 lg:py-20"
         >
           <div className="absolute inset-0 opacity-42">
             <Image
