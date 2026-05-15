@@ -4,9 +4,9 @@ import {ServiceDetailPage} from "@/components/services/ServiceDetailPage";
 import {generateServiceMetadata} from "@/lib/service-page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return generateServiceMetadata("air-freight");
+  return generateServiceMetadata("customs-clearance");
 }
 
-export default function AirFreightPage() {
-  return <ServiceDetailPage slug="air-freight" />;
+export default function CustomsClearancePage() {
+  return <ServiceDetailPage slug="customs-clearance" />;
 }

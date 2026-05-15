@@ -412,19 +412,25 @@
       "cards": {
         "seaFreight": {
           "title": "Sea Freight",
-          "badges": ["FCL / LCL"],
+          "badges": [
+            "FCL / LCL"
+          ],
           "description": "Global connections delivered with trust.",
           "imageAlt": "Sea freight service illustration"
         },
         "landFreight": {
           "title": "Land Freight",
-          "badges": ["FTL / LTL"],
+          "badges": [
+            "FTL / LTL"
+          ],
           "description": "Regional reach and reliable delivery.",
           "imageAlt": "Land freight service illustration"
         },
         "airFreight": {
           "title": "Air Freight",
-          "badges": ["Express"],
+          "badges": [
+            "Express"
+          ],
           "description": "Fast solutions for urgent cargo.",
           "imageAlt": "Air freight service illustration"
         },
@@ -440,7 +446,10 @@
         },
         "customsClearance": {
           "title": "Customs Clearance",
-          "badges": ["Documentation", "Compliance"],
+          "badges": [
+            "Documentation",
+            "Compliance"
+          ],
           "description": "Customs clearance support aligned with local and international regulations to help ensure fast procedures and smooth transport operations.",
           "imageAlt": "Customs clearance service illustration"
         }
@@ -532,117 +541,997 @@
       }
     }
   },
-  "AirFreightPage": {
-    "meta": {
-      "title": "Air Freight Services | ALFS Logistics",
-      "description": "Fast, reliable international air cargo for time-sensitive business shipments — express air freight, customs coordination, and airport-to-door delivery."
-    },
-    "hero": {
-      "kicker": "Express Air Logistics",
-      "heading": "Air Freight Services",
-      "subtitle": "Fast, reliable, and efficient air cargo solutions for time-sensitive shipments.",
-      "imageAlt": "Air freight cargo aircraft illustration",
-      "badgeExpress": "Express Cargo",
-      "badgeGlobal": "Global Network",
-      "primaryCta": "Request a Quote",
-      "secondaryCta": "Contact Us"
-    },
-    "overview": {
-      "heading": "International air freight built for business speed",
-      "description": "ALFS provides international air freight solutions for businesses that need speed, reliability, and shipment visibility. From urgent commercial cargo to coordinated import and export movements, we manage your air shipments with precision and clear communication at every stage.",
-      "backToServices": "Back to all services"
-    },
-    "handle": {
-      "heading": "What We Handle",
-      "description": "Comprehensive air cargo support for commercial and time-critical shipments.",
-      "items": {
-        "express": {
-          "title": "Express air cargo",
-          "description": "Priority handling for shipments that cannot wait."
-        },
-        "commercial": {
-          "title": "Commercial shipments",
-          "description": "Reliable air transport for business goods and trade cargo."
-        },
-        "timeSensitive": {
-          "title": "Time-sensitive deliveries",
-          "description": "Tight timelines managed with proactive coordination."
-        },
-        "importExport": {
-          "title": "Import/export coordination",
-          "description": "End-to-end support for cross-border air movements."
-        },
-        "airportToDoor": {
-          "title": "Airport-to-door delivery",
-          "description": "Seamless handoff from arrival to final destination."
-        },
-        "documentation": {
-          "title": "Documentation support",
-          "description": "Accurate paperwork to keep cargo moving without delays."
-        }
-      }
-    },
-    "benefits": {
-      "heading": "Why Choose Our Air Freight",
-      "description": "Business-focused air logistics with the reliability your supply chain demands.",
-      "items": {
-        "fasterDelivery": {
-          "title": "Faster delivery times",
-          "description": "Accelerated transit for urgent and high-priority cargo."
-        },
-        "globalNetwork": {
-          "title": "Global air network",
-          "description": "Connections across key international trade lanes."
-        },
-        "secureHandling": {
-          "title": "Secure cargo handling",
-          "description": "Careful handling for valuable and sensitive shipments."
-        },
-        "customsCoordination": {
-          "title": "Customs coordination",
-          "description": "Aligned clearance support to reduce border delays."
-        },
-        "flexibleOptions": {
-          "title": "Flexible shipment options",
-          "description": "Solutions tailored to cargo type, timeline, and budget."
-        },
-        "businessSupport": {
-          "title": "Business-focused logistics support",
-          "description": "Dedicated coordination from quote to delivery follow-up."
-        }
-      }
-    },
-    "process": {
-      "heading": "How It Works",
-      "steps": {
-        "quote": {
-          "title": "Request a quote",
-          "description": "Share shipment details and receive a tailored air freight proposal."
-        },
-        "assessment": {
-          "title": "Shipment assessment",
-          "description": "We review cargo requirements, routing, and timing needs."
-        },
-        "coordination": {
-          "title": "Air freight coordination",
-          "description": "Booking, documentation, and airport handling are managed for you."
-        },
-        "delivery": {
-          "title": "Delivery and follow-up",
-          "description": "Track progress through arrival and final delivery confirmation."
-        }
-      }
-    },
-    "cta": {
-      "heading": "Need fast international shipping?",
-      "description": "Speak with our air freight team for a reliable solution tailored to your timeline and cargo requirements.",
-      "primaryAction": "Request a Quote"
-    }
-  },
   "NotFound": {
     "kicker": "Not found",
     "title": "We could not find that page.",
     "description": "The requested route does not exist. Use the button below to return to the localized homepage.",
     "action": "Go home"
+  },
+  "SeaFreightPage": {
+    "meta": {
+      "title": "Sea Freight Services | LCL & FCL Shipping | ALFS",
+      "description": "Flexible LCL and FCL sea freight for international cargo. ALFS coordinates containerized, bulk, partial, oversized, and sensitive shipments with monitoring and status updates."
+    },
+    "hero": {
+      "eyebrow": "SEA FREIGHT SERVICES",
+      "headline": "Reliable LCL and FCL shipping for international cargo.",
+      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including Less than Container Load and Full Container Load options, with careful monitoring and shipment updates at every stage.",
+      "imageAlt": "Sea freight container ship carrying international cargo",
+      "chips": {
+        "lcl": "LCL Shipping",
+        "fcl": "FCL Shipping",
+        "bulk": "Bulk Cargo",
+        "partial": "Partial Containers",
+        "oversized": "Oversized Cargo",
+        "sensitive": "Sensitive Cargo"
+      },
+      "primaryCta": "Request Sea Freight Quote",
+      "secondaryCta": "Explore Process"
+    },
+    "overview": {
+      "heading": "Sea freight designed for cost-efficient international movement.",
+      "paragraphOne": "Sea Freight is the right choice for businesses moving containerized, bulk, partial, oversized, or sensitive cargo across international trade routes. ALFS provides flexible LCL and FCL options designed to match shipment size, destination, and operational requirements.",
+      "paragraphTwo": "With continuous monitoring and shipment status updates, ALFS helps clients move goods with transparency, efficiency, and confidence from origin to destination.",
+      "backToServices": "Back to all services"
+    },
+    "whenToChoose": {
+      "heading": "When sea freight is the right choice.",
+      "items": {
+        "fullContainer": {
+          "title": "Full Container Shipments",
+          "description": "For large shipments that require a dedicated container and efficient international movement."
+        },
+        "partialContainer": {
+          "title": "Partial Container Shipments",
+          "description": "For cargo that does not require a full container but still needs reliable sea transport."
+        },
+        "bulk": {
+          "title": "Bulk Cargo",
+          "description": "For larger volumes of goods that require organized containerized movement."
+        },
+        "oversized": {
+          "title": "Oversized Cargo",
+          "description": "For cargo that requires additional planning because of size, shape, or handling requirements."
+        },
+        "sensitive": {
+          "title": "Sensitive Cargo",
+          "description": "For shipments that need careful coordination and monitoring through the freight process."
+        },
+        "costFocused": {
+          "title": "Cost-Focused International Trade",
+          "description": "For businesses prioritizing efficient international shipping over urgent delivery timelines."
+        }
+      }
+    },
+    "capabilities": {
+      "heading": "Core Capabilities",
+      "items": {
+        "lcl": {
+          "title": "LCL Shipping",
+          "description": "Less than Container Load options for smaller shipments that do not require a full container."
+        },
+        "fcl": {
+          "title": "FCL Shipping",
+          "description": "Full Container Load options for larger shipments requiring dedicated container capacity."
+        },
+        "bulkPartial": {
+          "title": "Bulk & Partial Container Movement",
+          "description": "Flexible options for different cargo volumes and business needs."
+        },
+        "monitoring": {
+          "title": "Shipment Monitoring",
+          "description": "Continuous monitoring and status updates to improve visibility."
+        },
+        "specialized": {
+          "title": "Specialized Cargo Support",
+          "description": "Planning support for oversized or sensitive cargo requirements."
+        }
+      }
+    },
+    "useCases": {
+      "heading": "Use Cases / Cargo Types",
+      "items": {
+        "bulk": "Bulk goods",
+        "partial": "Partial container loads",
+        "full": "Full container loads",
+        "oversized": "Oversized cargo",
+        "sensitive": "Sensitive cargo",
+        "trade": "International trade shipments"
+      }
+    },
+    "process": {
+      "heading": "Service Process",
+      "steps": {
+        "shareDetails": {
+          "title": "Share Shipment Details",
+          "description": "Origin, destination, cargo type, volume, container needs, and timeline."
+        },
+        "chooseLclFcl": {
+          "title": "Choose LCL or FCL",
+          "description": "Assess whether the shipment requires partial or full container movement."
+        },
+        "planRoute": {
+          "title": "Plan Sea Route",
+          "description": "Coordinate suitable sea freight movement based on destination and shipment requirements."
+        },
+        "prepare": {
+          "title": "Prepare Cargo & Documentation",
+          "description": "Support required shipping information and cargo readiness."
+        },
+        "monitor": {
+          "title": "Monitor Movement",
+          "description": "Provide shipment monitoring and status updates during movement."
+        },
+        "arrival": {
+          "title": "Arrival Coordination",
+          "description": "Support destination coordination and delivery visibility."
+        }
+      }
+    },
+    "whyAlfs": {
+      "heading": "Why Choose ALFS",
+      "items": {
+        "flexible": "Flexible LCL and FCL options",
+        "monitoring": "Monitoring and shipment status updates",
+        "cargoTypes": "Support for different cargo types",
+        "coordination": "Efficient international freight coordination"
+      }
+    },
+    "related": {
+      "heading": "Related Services",
+      "explore": "Explore",
+      "items": {
+        "consolidation": {
+          "title": "Cargo Consolidation"
+        },
+        "warehousing": {
+          "title": "Warehousing & Secure Storage"
+        },
+        "landFreight": {
+          "title": "Land Freight"
+        },
+        "customs": {
+          "title": "Customs Clearance"
+        }
+      }
+    },
+    "quoteForm": {
+      "title": "Request a Sea Freight Quote",
+      "subheading": "Tell ALFS what you need to ship by sea. The team will review your cargo type, route, container needs, and timeline.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "cargoDetails": "Shipment Details",
+        "submit": "Submit Request"
+      }
+    },
+    "cta": {
+      "heading": "Move international cargo with confidence.",
+      "description": "From LCL and FCL shipments to oversized or sensitive cargo, ALFS helps businesses coordinate sea freight with flexibility, clarity, and professional execution.",
+      "primaryAction": "Request Sea Freight Quote"
+    }
+  },
+  "LandFreightPage": {
+    "meta": {
+      "title": "Land Freight Services | FTL, LTL & Regional Transport | ALFS",
+      "description": "Local and regional road freight including FTL, LTL, flatbed, and temperature-controlled transport across Jordan, Palestine, Syria, Lebanon, and GCC routes."
+    },
+    "hero": {
+      "eyebrow": "LAND FREIGHT SERVICES",
+      "headline": "Local and regional road transport built for speed, safety, and flexibility.",
+      "subheadline": "ALFS provides comprehensive land transportation solutions for local and regional cargo movement, including FTL, LTL, flatbed, and temperature-controlled transport.",
+      "imageAlt": "Land freight truck transporting regional cargo",
+      "chips": {
+        "ftl": "FTL",
+        "ltl": "LTL",
+        "flatbed": "Flatbed Trucks",
+        "temperature": "Temperature-Controlled",
+        "regional": "Regional Transport",
+        "crossBorder": "Cross-Border Support"
+      },
+      "primaryCta": "Request Land Freight Quote",
+      "secondaryCta": "Discuss Regional Route"
+    },
+    "overview": {
+      "heading": "Land freight designed for regional movement and flexible cargo needs.",
+      "paragraphOne": "Land Freight supports businesses moving cargo across local and regional routes with a focus on speed, safety, and flexible cargo management. ALFS helps coordinate the right road transport option based on shipment size, cargo type, destination, and handling needs.",
+      "paragraphTwo": "Whether the shipment requires a full truckload, partial load, flatbed transport, or temperature-controlled handling, ALFS supports practical road freight solutions for different business requirements.",
+      "backToServices": "Back to all services"
+    },
+    "whenToChoose": {
+      "heading": "When land freight is the right choice.",
+      "items": {
+        "fullTruckload": {
+          "title": "Full Truckload Cargo",
+          "description": "For large shipments that require efficient full-truck transportation."
+        },
+        "partial": {
+          "title": "Partial Shipments",
+          "description": "For smaller cargo loads that need precise consignment management."
+        },
+        "oversized": {
+          "title": "Oversized or Specially Shaped Cargo",
+          "description": "For goods that require flatbed or specialized road transport."
+        },
+        "temperature": {
+          "title": "Temperature-Sensitive Goods",
+          "description": "For food, pharmaceuticals, or goods requiring controlled conditions."
+        },
+        "local": {
+          "title": "Local Cargo Movement",
+          "description": "For shipments moving within local markets or nearby regions."
+        },
+        "regional": {
+          "title": "Regional Trade Routes",
+          "description": "For cargo moving between Jordan, Palestine, Syria, Lebanon, and GCC countries."
+        }
+      }
+    },
+    "capabilities": {
+      "heading": "Core Capabilities",
+      "items": {
+        "ftl": {
+          "title": "FTL Transport",
+          "description": "Efficient transportation for large, full shipments."
+        },
+        "ltl": {
+          "title": "LTL Transport",
+          "description": "Ideal for smaller or partial shipments with precise management for each consignment."
+        },
+        "flatbed": {
+          "title": "Flatbed Trucks",
+          "description": "Safe and reliable transport for oversized or specially shaped cargo."
+        },
+        "temperature": {
+          "title": "Temperature-Controlled Transport",
+          "description": "Secure handling for goods such as food and pharmaceuticals."
+        },
+        "regional": {
+          "title": "Regional Road Coordination",
+          "description": "Support for cargo movement across local and regional routes."
+        }
+      }
+    },
+    "useCases": {
+      "heading": "Use Cases / Cargo Types",
+      "items": {
+        "ftl": "Full truckload shipments",
+        "ltl": "Less than truckload shipments",
+        "oversized": "Oversized cargo",
+        "shaped": "Specially shaped cargo",
+        "food": "Food products",
+        "pharma": "Pharmaceuticals",
+        "regional": "Regional road freight"
+      }
+    },
+    "process": {
+      "heading": "Service Process",
+      "steps": {
+        "shareDetails": {
+          "title": "Share Route & Cargo Details",
+          "description": "Origin, destination, cargo type, volume, weight, and timeline."
+        },
+        "selectType": {
+          "title": "Select Transport Type",
+          "description": "Choose FTL, LTL, flatbed, or temperature-controlled transport."
+        },
+        "planRoute": {
+          "title": "Plan Regional Route",
+          "description": "Coordinate suitable road freight movement based on route and cargo needs."
+        },
+        "prepare": {
+          "title": "Prepare Cargo",
+          "description": "Support loading requirements and movement readiness."
+        },
+        "monitor": {
+          "title": "Monitor Movement",
+          "description": "Provide shipment visibility and status updates."
+        },
+        "delivery": {
+          "title": "Delivery Coordination",
+          "description": "Support smooth delivery and final handoff."
+        }
+      }
+    },
+    "whyAlfs": {
+      "heading": "Why Choose ALFS",
+      "items": {
+        "flexible": "Flexible road freight options",
+        "transportTypes": "Support for FTL, LTL, flatbed, and temperature-controlled cargo",
+        "regional": "Regional route understanding",
+        "communication": "Clear shipment communication"
+      }
+    },
+    "related": {
+      "heading": "Related Services",
+      "explore": "Explore",
+      "items": {
+        "warehousing": {
+          "title": "Warehousing & Secure Storage"
+        },
+        "consolidation": {
+          "title": "Cargo Consolidation"
+        },
+        "seaFreight": {
+          "title": "Sea Freight"
+        },
+        "customs": {
+          "title": "Customs Clearance"
+        }
+      }
+    },
+    "quoteForm": {
+      "title": "Request a Land Freight Quote",
+      "subheading": "Tell ALFS about your road shipment. The team will review your cargo, route, transport type, and timeline.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "cargoDetails": "Shipment Details",
+        "submit": "Submit Request"
+      }
+    },
+    "cta": {
+      "heading": "Move regional cargo with confidence.",
+      "description": "From full truckloads to temperature-controlled goods, ALFS helps businesses coordinate land freight with safety, flexibility, and clear communication.",
+      "primaryAction": "Request Land Freight Quote"
+    }
+  },
+  "AirFreightPage": {
+    "meta": {
+      "title": "Air Freight Services | Fast International Cargo | ALFS",
+      "description": "Worldwide air cargo for time-sensitive and delicate shipments. ALFS provides schedule-focused handling, tracking, and status updates from origin to arrival."
+    },
+    "hero": {
+      "eyebrow": "AIR FREIGHT SERVICES",
+      "headline": "Fast, reliable air cargo for urgent and delicate shipments.",
+      "subheadline": "ALFS supports worldwide delivery of goods with strict schedule discipline, careful cargo handling, and shipment tracking that keeps clients informed from origin to arrival.",
+      "imageAlt": "Air freight cargo aircraft loading international shipments",
+      "chips": {
+        "timeSensitive": "Time-Sensitive Cargo",
+        "delicate": "Delicate Shipments",
+        "small": "Small Consignments",
+        "large": "Large Consignments",
+        "updates": "Real-Time Updates"
+      },
+      "primaryCta": "Request Air Freight Quote",
+      "secondaryCta": "Track Shipment"
+    },
+    "overview": {
+      "heading": "Air freight designed for speed, precision, and shipment clarity.",
+      "paragraphOne": "Air Freight is the right choice when timing, safety, and reliable coordination matter most. ALFS provides fast and reliable worldwide delivery of goods with strict adherence to schedules and precise shipment tracking to help ensure safe and on-time arrival.",
+      "paragraphTwo": "From small consignments to larger urgent shipments, ALFS supports customized air freight solutions for time-sensitive and delicate cargo while keeping clients informed with tracking and status updates.",
+      "backToServices": "Back to all services"
+    },
+    "whenToChoose": {
+      "heading": "When air freight is the right choice.",
+      "items": {
+        "timeSensitive": {
+          "title": "Time-Sensitive Goods",
+          "description": "For shipments that need faster movement and schedule-focused coordination."
+        },
+        "highValue": {
+          "title": "High-Value Cargo",
+          "description": "For cargo where reliability, visibility, and careful handling are essential."
+        },
+        "delicate": {
+          "title": "Delicate Shipments",
+          "description": "For goods that require careful planning and handling."
+        },
+        "small": {
+          "title": "Small Consignments",
+          "description": "For compact shipments that need fast international movement."
+        },
+        "largeUrgent": {
+          "title": "Large Urgent Consignments",
+          "description": "For larger cargo that cannot wait for slower freight options."
+        },
+        "global": {
+          "title": "Global Delivery Needs",
+          "description": "For international cargo movement requiring reliable coordination and updates."
+        }
+      }
+    },
+    "capabilities": {
+      "heading": "Core Capabilities",
+      "items": {
+        "handling": {
+          "title": "Efficient Cargo Handling",
+          "description": "Efficient handling of both small and large consignments."
+        },
+        "timeSensitive": {
+          "title": "Time-Sensitive Solutions",
+          "description": "Customized solutions for shipments that need faster movement."
+        },
+        "delicate": {
+          "title": "Delicate Cargo Support",
+          "description": "Careful coordination for cargo requiring extra attention."
+        },
+        "updates": {
+          "title": "Real-Time Updates",
+          "description": "Tracking and status updates that improve visibility."
+        },
+        "schedule": {
+          "title": "Schedule Discipline",
+          "description": "Strict attention to delivery schedules and transport coordination."
+        }
+      }
+    },
+    "useCases": {
+      "heading": "Use Cases / Cargo Types",
+      "items": {
+        "documents": "Documents / small consignments",
+        "delicate": "Delicate cargo",
+        "urgent": "Urgent business shipments",
+        "large": "Large consignments",
+        "priority": "High-priority cargo",
+        "timeSensitive": "Time-sensitive goods"
+      }
+    },
+    "process": {
+      "heading": "Service Process",
+      "steps": {
+        "shareDetails": {
+          "title": "Share Shipment Details",
+          "description": "Origin, destination, cargo type, dimensions, weight, and preferred timeline."
+        },
+        "assess": {
+          "title": "Assess Urgency & Handling Needs",
+          "description": "Review whether the shipment is time-sensitive, delicate, small, or large."
+        },
+        "planRoute": {
+          "title": "Plan Air Freight Route",
+          "description": "Coordinate suitable air freight movement based on route, timing, and cargo needs."
+        },
+        "documentation": {
+          "title": "Prepare Documentation",
+          "description": "Support required shipment information and documentation."
+        },
+        "move": {
+          "title": "Move & Monitor Cargo",
+          "description": "Coordinate movement while providing tracking and status updates."
+        },
+        "arrival": {
+          "title": "Arrival & Delivery Coordination",
+          "description": "Support final arrival coordination and delivery visibility."
+        }
+      }
+    },
+    "whyAlfs": {
+      "heading": "Why Choose ALFS",
+      "items": {
+        "schedule": "Schedule-focused execution",
+        "flexible": "Flexible shipment support",
+        "communication": "Clear communication",
+        "handling": "Professional handling"
+      }
+    },
+    "related": {
+      "heading": "Related Services",
+      "explore": "Explore",
+      "items": {
+        "seaFreight": {
+          "title": "Sea Freight"
+        },
+        "landFreight": {
+          "title": "Land Freight"
+        },
+        "warehousing": {
+          "title": "Warehousing & Secure Storage"
+        },
+        "consolidation": {
+          "title": "Cargo Consolidation"
+        }
+      }
+    },
+    "quoteForm": {
+      "title": "Request an Air Freight Quote",
+      "subheading": "Tell ALFS what you need to move. The team will review your cargo, route, and timeline to coordinate the right air freight solution.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "cargoDetails": "Shipment Details",
+        "submit": "Submit Request"
+      }
+    },
+    "cta": {
+      "heading": "Move urgent cargo with confidence.",
+      "description": "From time-sensitive shipments to delicate cargo, ALFS helps businesses coordinate air freight with speed, clarity, and professional execution.",
+      "primaryAction": "Request Air Freight Quote"
+    }
+  },
+  "CargoConsolidationPage": {
+    "meta": {
+      "title": "Cargo Consolidation Services | Grouped Shipping | ALFS",
+      "description": "Combine cargo and containers to reduce costs and simplify shipment management. ALFS supports grouping, container consolidation, and supply chain coordination."
+    },
+    "hero": {
+      "eyebrow": "CARGO CONSOLIDATION SERVICES",
+      "headline": "Smarter cargo grouping for more efficient shipping.",
+      "subheadline": "ALFS helps businesses combine cargo and containers to reduce costs, improve transportation efficiency, and simplify shipment management.",
+      "imageAlt": "Cargo consolidation with grouped containers and organized shipments",
+      "chips": {
+        "grouping": "Cargo Grouping",
+        "container": "Container Consolidation",
+        "cost": "Cost Efficiency",
+        "organization": "Shipment Organization",
+        "supplyChain": "Supply Chain Support"
+      },
+      "primaryCta": "Request Consolidation Support",
+      "secondaryCta": "Explore Process"
+    },
+    "overview": {
+      "heading": "Cargo consolidation designed to reduce complexity and improve efficiency.",
+      "paragraphOne": "Cargo Consolidation helps businesses combine shipments, cargo, or containers in a more organized and cost-efficient way. ALFS supports consolidation services that reduce transportation costs, improve shipment planning, and make cargo movement easier to manage.",
+      "paragraphTwo": "This service is especially useful for businesses with partial loads, multiple cargo groups, or shipments that need better organization before transport.",
+      "backToServices": "Back to all services"
+    },
+    "whenToChoose": {
+      "heading": "When cargo consolidation is the right choice.",
+      "items": {
+        "multiple": {
+          "title": "Multiple Smaller Shipments",
+          "description": "For businesses that need to combine smaller cargo groups into one organized movement."
+        },
+        "partial": {
+          "title": "Partial Container Loads",
+          "description": "For shipments that do not require a full container but need efficient handling."
+        },
+        "cost": {
+          "title": "Cost Reduction Needs",
+          "description": "For businesses looking to improve transport efficiency and reduce unnecessary costs."
+        },
+        "multiOrigin": {
+          "title": "Multi-Origin Cargo",
+          "description": "For shipments collected from multiple suppliers or locations."
+        },
+        "inventory": {
+          "title": "Inventory Preparation",
+          "description": "For cargo that needs grouping before warehousing or transport."
+        },
+        "planning": {
+          "title": "End-to-End Shipment Planning",
+          "description": "For businesses that need better coordination across cargo movement stages."
+        }
+      }
+    },
+    "capabilities": {
+      "heading": "Core Capabilities",
+      "items": {
+        "grouping": {
+          "title": "Cargo Grouping",
+          "description": "Combining cargo into organized shipment units."
+        },
+        "container": {
+          "title": "Container Consolidation",
+          "description": "Grouping containerized cargo for improved efficiency."
+        },
+        "cost": {
+          "title": "Cost Efficiency",
+          "description": "Reducing unnecessary movement and improving transport planning."
+        },
+        "organization": {
+          "title": "Shipment Organization",
+          "description": "Making cargo easier to track, store, and move."
+        },
+        "supplyChain": {
+          "title": "Supply Chain Support",
+          "description": "Helping businesses manage cargo before final transport."
+        }
+      }
+    },
+    "useCases": {
+      "heading": "Use Cases / Cargo Types",
+      "items": {
+        "partial": "Partial shipments",
+        "supplier": "Supplier cargo grouping",
+        "container": "Container consolidation",
+        "warehouse": "Warehouse preparation",
+        "planning": "Cost-efficient freight planning",
+        "multiStage": "Multi-stage shipments"
+      }
+    },
+    "process": {
+      "heading": "Service Process",
+      "steps": {
+        "shareDetails": {
+          "title": "Share Cargo Details",
+          "description": "Provide cargo type, quantity, volume, origin, and destination."
+        },
+        "assess": {
+          "title": "Assess Consolidation Needs",
+          "description": "Review which cargo can be grouped for better movement."
+        },
+        "planGrouping": {
+          "title": "Plan Grouping Strategy",
+          "description": "Coordinate cargo grouping, container needs, and movement timing."
+        },
+        "prepare": {
+          "title": "Prepare Cargo",
+          "description": "Organize cargo for storage, loading, or onward transport."
+        },
+        "move": {
+          "title": "Move Consolidated Shipment",
+          "description": "Coordinate transport through the selected freight channel."
+        },
+        "track": {
+          "title": "Track & Close",
+          "description": "Provide updates and support shipment completion."
+        }
+      }
+    },
+    "whyAlfs": {
+      "heading": "Why Choose ALFS",
+      "items": {
+        "organization": "Better cargo organization",
+        "efficiency": "Improved transportation efficiency",
+        "cost": "Cost-focused shipment planning",
+        "partial": "Support for partial and grouped cargo"
+      }
+    },
+    "related": {
+      "heading": "Related Services",
+      "explore": "Explore",
+      "items": {
+        "seaFreight": {
+          "title": "Sea Freight"
+        },
+        "landFreight": {
+          "title": "Land Freight"
+        },
+        "warehousing": {
+          "title": "Warehousing & Secure Storage"
+        },
+        "customs": {
+          "title": "Customs Clearance"
+        }
+      }
+    },
+    "quoteForm": {
+      "title": "Request Cargo Consolidation Support",
+      "subheading": "Tell ALFS what cargo you need to group or consolidate. The team will review volume, route, timing, and storage or transport requirements.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "cargoDetails": "Shipment Details",
+        "submit": "Submit Request"
+      }
+    },
+    "cta": {
+      "heading": "Group cargo smarter. Move it more efficiently.",
+      "description": "ALFS helps businesses simplify shipment management through organized consolidation, clear coordination, and efficient cargo movement.",
+      "primaryAction": "Request Consolidation Support"
+    }
+  },
+  "WarehousingPage": {
+    "meta": {
+      "title": "Warehousing & Secure Storage | Inventory Control | ALFS",
+      "description": "Secure storage, warehouse management, goods protection, and inventory control. ALFS helps businesses store and organize cargo before transport or distribution."
+    },
+    "hero": {
+      "eyebrow": "WAREHOUSING & SECURE STORAGE",
+      "headline": "Secure storage and organized warehouse management.",
+      "subheadline": "ALFS supports secure storage, warehouse management, goods protection, and inventory control to help clients manage cargo with confidence.",
+      "imageAlt": "Secure warehouse storage with organized inventory management",
+      "chips": {
+        "secure": "Secure Storage",
+        "management": "Warehouse Management",
+        "inventory": "Inventory Control",
+        "protection": "Goods Protection",
+        "flexible": "Flexible Storage Support"
+      },
+      "primaryCta": "Request Warehousing Support",
+      "secondaryCta": "Speak to ALFS"
+    },
+    "overview": {
+      "heading": "Warehousing built around protection, organization, and inventory clarity.",
+      "paragraphOne": "Warehousing and secure storage support businesses that need safe storage spaces, organized cargo handling, and accurate inventory control. ALFS helps protect goods while improving the visibility and structure of stored cargo.",
+      "paragraphTwo": "This service supports clients that need temporary storage, inventory organization, cargo preparation, or secure handling before further transport.",
+      "backToServices": "Back to all services"
+    },
+    "whenToChoose": {
+      "heading": "When warehousing is the right choice.",
+      "items": {
+        "waiting": {
+          "title": "Cargo Waiting for Transport",
+          "description": "For goods that need secure storage before sea, land, or air movement."
+        },
+        "inventory": {
+          "title": "Inventory Control Needs",
+          "description": "For businesses that need better organization and stock visibility."
+        },
+        "protection": {
+          "title": "Goods Protection",
+          "description": "For cargo that requires safe storage conditions and careful handling."
+        },
+        "consolidation": {
+          "title": "Consolidation Preparation",
+          "description": "For goods that need to be grouped before onward shipping."
+        },
+        "distribution": {
+          "title": "Regional Distribution Support",
+          "description": "For businesses staging cargo before delivery or regional transport."
+        },
+        "flexible": {
+          "title": "Flexible Storage Requirements",
+          "description": "For clients needing adaptable storage support based on shipment timing."
+        }
+      }
+    },
+    "capabilities": {
+      "heading": "Core Capabilities",
+      "items": {
+        "secure": {
+          "title": "Secure Storage Spaces",
+          "description": "Storage support designed to protect goods."
+        },
+        "management": {
+          "title": "Warehouse Management",
+          "description": "Organized warehouse processes for stored cargo."
+        },
+        "inventory": {
+          "title": "Inventory Control",
+          "description": "Support for accurate cargo and stock visibility."
+        },
+        "protection": {
+          "title": "Goods Protection",
+          "description": "Careful handling and storage practices to reduce operational risk."
+        },
+        "flexible": {
+          "title": "Flexible Storage Solutions",
+          "description": "Adaptable support based on cargo type, volume, and timeline."
+        }
+      }
+    },
+    "useCases": {
+      "heading": "Use Cases / Cargo Types",
+      "items": {
+        "temporary": "Temporary cargo storage",
+        "inventory": "Inventory control",
+        "preShipment": "Pre-shipment storage",
+        "staging": "Cargo staging",
+        "consolidation": "Consolidation preparation",
+        "protection": "Goods protection"
+      }
+    },
+    "process": {
+      "heading": "How It Works",
+      "steps": {
+        "shareRequirements": {
+          "title": "Share Storage Requirements",
+          "description": "Cargo type, volume, duration, handling needs, and location."
+        },
+        "assess": {
+          "title": "Assess Storage Needs",
+          "description": "Review protection, organization, and inventory requirements."
+        },
+        "receive": {
+          "title": "Receive & Store Cargo",
+          "description": "Coordinate secure receiving and storage."
+        },
+        "manage": {
+          "title": "Manage Inventory",
+          "description": "Support organized tracking and inventory visibility."
+        },
+        "prepare": {
+          "title": "Prepare for Transport",
+          "description": "Coordinate loading, consolidation, or onward movement."
+        },
+        "release": {
+          "title": "Release Cargo",
+          "description": "Support smooth release and final handoff."
+        }
+      }
+    },
+    "whyAlfs": {
+      "heading": "Why Choose ALFS",
+      "items": {
+        "secure": "Secure storage support",
+        "management": "Organized warehouse management",
+        "inventory": "Inventory clarity",
+        "protection": "Protection-focused handling"
+      }
+    },
+    "related": {
+      "heading": "Related Services",
+      "explore": "Explore",
+      "items": {
+        "consolidation": {
+          "title": "Cargo Consolidation"
+        },
+        "landFreight": {
+          "title": "Land Freight"
+        },
+        "seaFreight": {
+          "title": "Sea Freight"
+        },
+        "customs": {
+          "title": "Customs Clearance"
+        }
+      }
+    },
+    "quoteForm": {
+      "title": "Request Warehousing Support",
+      "subheading": "Tell ALFS what you need to store. The team will review cargo type, volume, storage duration, and handling requirements.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "cargoDetails": "Shipment Details",
+        "submit": "Submit Request"
+      }
+    },
+    "cta": {
+      "heading": "Store your cargo with confidence.",
+      "description": "ALFS helps businesses protect, organize, and manage stored cargo through secure warehousing and professional inventory support.",
+      "primaryAction": "Request Warehousing Support"
+    }
+  },
+  "CustomsClearancePage": {
+    "meta": {
+      "title": "Customs Clearance Services | Import & Export Support | ALFS",
+      "description": "Fast, compliant customs clearance aligned with local and international regulations. ALFS supports documentation, cross-border cargo, and smoother import-export procedures."
+    },
+    "hero": {
+      "eyebrow": "CUSTOMS CLEARANCE SERVICES",
+      "headline": "Fast, compliant customs support for smoother cargo movement.",
+      "subheadline": "ALFS supports customs clearance in compliance with local and international regulations, helping clients move cargo through required procedures with clarity and efficiency.",
+      "imageAlt": "Customs clearance documentation and international cargo procedures",
+      "chips": {
+        "documentation": "Documentation Support",
+        "compliance": "Compliance",
+        "faster": "Faster Procedures",
+        "smooth": "Smooth Operations",
+        "regulations": "Local & International Regulations"
+      },
+      "primaryCta": "Request Clearance Support",
+      "secondaryCta": "Speak to ALFS"
+    },
+    "overview": {
+      "heading": "Customs clearance designed for smoother transport operations.",
+      "paragraphOne": "Customs Clearance helps businesses manage the procedures, documentation, and compliance requirements involved in local and international transport. ALFS supports clearance services aligned with relevant regulations to help ensure faster procedures and smoother movement across transport stages.",
+      "paragraphTwo": "This service is especially important for clients moving cargo across borders or through regulated import/export procedures where documentation accuracy and operational clarity matter.",
+      "backToServices": "Back to all services"
+    },
+    "whenToChoose": {
+      "heading": "When customs clearance support is the right choice.",
+      "items": {
+        "importExport": {
+          "title": "Import / Export Shipments",
+          "description": "For cargo moving through local or international customs procedures."
+        },
+        "crossBorder": {
+          "title": "Cross-Border Cargo",
+          "description": "For shipments moving between countries or regional trade routes."
+        },
+        "documentation": {
+          "title": "Documentation-Heavy Shipments",
+          "description": "For cargo requiring accurate paperwork and compliance support."
+        },
+        "regulated": {
+          "title": "Regulated Goods",
+          "description": "For shipments that require additional procedural attention."
+        },
+        "timeSensitive": {
+          "title": "Time-Sensitive Clearance",
+          "description": "For cargo that needs smoother and faster procedure handling."
+        },
+        "complete": {
+          "title": "Complete Logistics Support",
+          "description": "For clients who want transport and clearance coordinated together."
+        }
+      }
+    },
+    "capabilities": {
+      "heading": "Core Capabilities",
+      "items": {
+        "documentation": {
+          "title": "Documentation Support",
+          "description": "Support with shipment and clearance documentation requirements."
+        },
+        "compliance": {
+          "title": "Regulatory Compliance",
+          "description": "Clearance services aligned with local and international regulations."
+        },
+        "faster": {
+          "title": "Faster Procedures",
+          "description": "Operational support to help keep procedures moving smoothly."
+        },
+        "coordination": {
+          "title": "Transport Stage Coordination",
+          "description": "Clearance support across relevant stages of cargo movement."
+        },
+        "crossBorder": {
+          "title": "Cross-Border Support",
+          "description": "Assistance for local, regional, and international cargo movement."
+        }
+      }
+    },
+    "useCases": {
+      "heading": "Use Cases / Cargo Types",
+      "items": {
+        "import": "Import shipments",
+        "export": "Export shipments",
+        "crossBorder": "Cross-border cargo",
+        "documentation": "Documentation support",
+        "regulated": "Regulated cargo",
+        "endToEnd": "End-to-end logistics support"
+      }
+    },
+    "process": {
+      "heading": "Service Process",
+      "steps": {
+        "shareInfo": {
+          "title": "Share Shipment Information",
+          "description": "Provide cargo type, origin, destination, documents, and transport method."
+        },
+        "review": {
+          "title": "Review Requirements",
+          "description": "Identify required customs and documentation steps."
+        },
+        "prepare": {
+          "title": "Prepare Documentation",
+          "description": "Support accurate information and clearance paperwork."
+        },
+        "coordinate": {
+          "title": "Coordinate Clearance",
+          "description": "Help move the cargo through required procedures."
+        },
+        "monitor": {
+          "title": "Monitor Progress",
+          "description": "Provide updates and visibility during clearance stages."
+        },
+        "complete": {
+          "title": "Complete Movement",
+          "description": "Support smooth transition to delivery or onward transport."
+        }
+      }
+    },
+    "whyAlfs": {
+      "heading": "Why Choose ALFS",
+      "items": {
+        "documentation": "Documentation clarity",
+        "compliance": "Compliance-focused support",
+        "movement": "Smoother cargo movement",
+        "coordination": "Coordination across transport stages"
+      }
+    },
+    "related": {
+      "heading": "Related Services",
+      "explore": "Explore",
+      "items": {
+        "seaFreight": {
+          "title": "Sea Freight"
+        },
+        "landFreight": {
+          "title": "Land Freight"
+        },
+        "airFreight": {
+          "title": "Air Freight"
+        },
+        "warehousing": {
+          "title": "Warehousing & Secure Storage"
+        }
+      }
+    },
+    "quoteForm": {
+      "title": "Request Customs Clearance Support",
+      "subheading": "Tell ALFS about your shipment and documentation needs. The team will review the cargo, route, and clearance requirements.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "cargoDetails": "Shipment Details",
+        "submit": "Submit Request"
+      }
+    },
+    "cta": {
+      "heading": "Clear cargo movement with confidence.",
+      "description": "ALFS helps businesses navigate customs procedures with clarity, compliance support, and professional coordination.",
+      "primaryAction": "Request Clearance Support"
+    }
   }
 }

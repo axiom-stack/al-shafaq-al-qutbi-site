@@ -1,7 +1,7 @@
 import {isRTL, type Locale} from "@/i18n/routing";
 
 import {SkeletonBlock, SkeletonCircle, SkeletonText} from "./SkeletonPrimitives";
-import {isAboutPath, isAirFreightPath, isServicesPath, normalizeSkeletonPath} from "./resolveSkeleton";
+import {isAboutPath, isServiceDetailPath, isServicesPath, normalizeSkeletonPath} from "./resolveSkeleton";
 
 function PublicNavbarSkeleton({locale}: {locale: Locale}) {
   const localeIsRTL = isRTL(locale);
@@ -823,7 +823,7 @@ export function PageSkeleton({locale, pathname}: {locale: Locale; pathname: stri
     return <AboutSkeleton locale={locale} />;
   }
 
-  if (isAirFreightPath(normalizedPath)) {
+  if (isServiceDetailPath(normalizedPath)) {
     return <AirFreightSkeleton locale={locale} />;
   }
 

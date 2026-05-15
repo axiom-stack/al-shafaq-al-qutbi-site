@@ -17,6 +17,21 @@ export function isServicesPath(pathname: string) {
   return normalizeSkeletonPath(pathname) === "/services";
 }
 
+const serviceDetailPaths = [
+  "/services/sea-freight",
+  "/services/land-freight",
+  "/services/air-freight",
+  "/services/cargo-consolidation",
+  "/services/warehousing",
+  "/services/customs-clearance",
+] as const;
+
+export function isServiceDetailPath(pathname: string) {
+  return serviceDetailPaths.includes(
+    normalizeSkeletonPath(pathname) as (typeof serviceDetailPaths)[number],
+  );
+}
+
 export function isAirFreightPath(pathname: string) {
-  return normalizeSkeletonPath(pathname) === "/services/air-freight";
+  return isServiceDetailPath(pathname);
 }

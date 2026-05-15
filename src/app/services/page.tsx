@@ -41,15 +41,15 @@ const coreServiceConfig: Record<
   (typeof coreServiceKeys)[number],
   {icon: IconName; image: string; href: string}
 > = {
-  seaFreight: {icon: "ship", image: serviceImages.seaFreight, href: "#sea-freight"},
-  landFreight: {icon: "truck", image: serviceImages.landFreight, href: "#land-freight"},
+  seaFreight: {icon: "ship", image: serviceImages.seaFreight, href: "/services/sea-freight"},
+  landFreight: {icon: "truck", image: serviceImages.landFreight, href: "/services/land-freight"},
   airFreight: {icon: "plane", image: serviceImages.airFreight, href: "/services/air-freight"},
-  consolidation: {icon: "box", image: serviceImages.consolidation, href: "#cargo-consolidation"},
-  warehousing: {icon: "warehouse", image: serviceImages.warehousing, href: "#warehousing"},
+  consolidation: {icon: "box", image: serviceImages.consolidation, href: "/services/cargo-consolidation"},
+  warehousing: {icon: "warehouse", image: serviceImages.warehousing, href: "/services/warehousing"},
   customsClearance: {
     icon: "customs",
     image: serviceImages.customsClearance,
-    href: "#customs-clearance",
+    href: "/services/customs-clearance",
   },
 };
 
