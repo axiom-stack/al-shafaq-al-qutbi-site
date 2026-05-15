@@ -62,19 +62,19 @@
         "title": "Request Quote",
         "description": "Fast & accurate pricing",
         "icon": "quote",
-        "href": "#final-cta"
+        "href": "/contact#inquiry-form"
       },
       "services": {
         "title": "Explore Services",
         "description": "Comprehensive solutions",
         "icon": "services",
-        "href": "#services"
+        "href": "/services"
       },
       "contact": {
         "title": "Contact ALFS",
         "description": "24/7 expert support",
         "icon": "support",
-        "href": "#contact"
+        "href": "/contact"
       }
     },
     "about": {
@@ -171,7 +171,9 @@
           "landFreight": "Land Freight",
           "seaFreight": "Sea Freight",
           "airFreight": "Air Freight",
-          "warehousing": "Warehousing"
+          "consolidation": "Cargo Consolidation",
+          "warehousing": "Warehousing",
+          "customsClearance": "Customs Clearance"
         }
       },
       "company": {
@@ -315,9 +317,101 @@
       "heading": "Ready to plan your next shipment?",
       "description": "Connect with our logistics experts to develop a tailored freight strategy for your business.",
       "primaryAction": "Get a Quote",
-      "secondaryAction": "Contact Our Team",
-      "email": "info@aurora-lfs.com",
-      "phone": "00962791010199 / 00962796495566"
+      "secondaryAction": "Contact Our Team"
+    },
+    "whatsAppLabel": "Open WhatsApp contact shortcut"
+  },
+  "ContactPage": {
+    "meta": {
+      "title": "Contact ALFS Logistics | Get a Quote",
+      "description": "Reach ALFS logistics experts in Amman and Hebron. Request a quote, track shipments, or speak with our team by email, phone, or WhatsApp."
+    },
+    "hero": {
+      "kicker": "Contact ALFS",
+      "heading": "Speak with our logistics team.",
+      "description": "Whether you need a freight quote, shipment update, or operational support, our team is ready to help you move cargo across borders with clarity and confidence.",
+      "primaryAction": "Send a Message",
+      "secondaryAction": "Call Our Team",
+      "imageAlt": "ALFS logistics team contact hero",
+      "panel": {
+        "title": "How we support you",
+        "description": "Professional coordination from inquiry to delivery."
+      }
+    },
+    "channels": {
+      "heading": "Reach us directly",
+      "description": "Choose the channel that works best for your shipment or inquiry.",
+      "items": {
+        "email": {
+          "title": "Email",
+          "description": "Share shipment details, documents, or general inquiries."
+        },
+        "phone": {
+          "title": "Phone",
+          "description": "Speak with our operations team during business hours."
+        },
+        "whatsapp": {
+          "title": "WhatsApp",
+          "description": "Quick messages for updates and coordination.",
+          "action": "Chat on WhatsApp"
+        }
+      }
+    },
+    "form": {
+      "heading": "Send us an inquiry",
+      "description": "Tell us about your shipment or logistics need. Our team will review your message and respond as soon as possible.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "subject": "Subject",
+        "subjectPlaceholder": "Select a topic",
+        "subjects": {
+          "quote": "Request a Quote",
+          "tracking": "Shipment Tracking",
+          "general": "General Inquiry"
+        },
+        "message": "Message",
+        "submit": "Send Message"
+      }
+    },
+    "offices": {
+      "heading": "Our offices",
+      "description": "Visit or contact our regional teams in Jordan and Palestine.",
+      "servicesLink": "Explore our services",
+      "locations": {
+        "amman": {
+          "title": "Amman Office"
+        },
+        "hebron": {
+          "title": "Hebron Office"
+        }
+      }
+    },
+    "support": {
+      "items": {
+        "response": {
+          "title": "Timely responses",
+          "description": "We aim to respond to inquiries promptly during business hours."
+        },
+        "coverage": {
+          "title": "Regional coverage",
+          "description": "Support across Jordan, Palestine, and connected trade routes."
+        },
+        "expertise": {
+          "title": "Freight expertise",
+          "description": "Sea, land, air, warehousing, and customs coordination."
+        }
+      }
+    },
+    "hours": {
+      "title": "Business hours",
+      "value": "Sunday – Thursday: 9:00 AM – 5:00 PM (Jordan time)\nFriday – Saturday: Closed"
+    },
+    "cta": {
+      "heading": "Ready to start your shipment?",
+      "description": "Share your cargo details and our team will help you plan the right logistics solution.",
+      "action": "Send Inquiry"
     },
     "whatsAppLabel": "Open WhatsApp contact shortcut"
   },
@@ -353,7 +447,7 @@
         "title": "Request Quote",
         "description": "Get pricing tailored to your needs.",
         "icon": "quote",
-        "href": "/#final-cta"
+        "href": "/contact#inquiry-form"
       },
       "track": {
         "title": "Track Shipment",
@@ -371,7 +465,7 @@
         "title": "Contact ALFS",
         "description": "Speak with our logistics experts.",
         "icon": "support",
-        "href": "/#contact"
+        "href": "/contact"
       }
     },
     "overview": {

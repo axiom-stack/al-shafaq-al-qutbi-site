@@ -62,19 +62,19 @@
         "title": "طلب عرض سعر",
         "description": "تسعير سريع ودقيق",
         "icon": "quote",
-        "href": "#final-cta"
+        "href": "/contact#inquiry-form"
       },
       "services": {
         "title": "استكشف الخدمات",
         "description": "حلول شاملة",
         "icon": "services",
-        "href": "#services"
+        "href": "/services"
       },
       "contact": {
         "title": "التواصل مع ALFS",
         "description": "دعم خبراء على مدار الساعة",
         "icon": "support",
-        "href": "#contact"
+        "href": "/contact"
       }
     },
     "about": {
@@ -171,7 +171,9 @@
           "landFreight": "الشحن البري",
           "seaFreight": "الشحن البحري",
           "airFreight": "الشحن الجوي",
-          "warehousing": "التخزين"
+          "consolidation": "تجميع الشحنات",
+          "warehousing": "التخزين",
+          "customsClearance": "التخليص الجمركي"
         }
       },
       "company": {
@@ -315,9 +317,101 @@
       "heading": "جاهزون للتخطيط لشحنتكم القادمة؟",
       "description": "تواصلوا مع خبرائنا اللوجستيين لتطوير استراتيجية شحن مخصصة لأعمالكم.",
       "primaryAction": "اطلب عرض سعر",
-      "secondaryAction": "تواصل مع فريقنا",
-      "email": "info@aurora-lfs.com",
-      "phone": "00962791010199 / 00962796495566"
+      "secondaryAction": "تواصل مع فريقنا"
+    },
+    "whatsAppLabel": "فتح اختصار التواصل عبر واتساب"
+  },
+  "ContactPage": {
+    "meta": {
+      "title": "اتصل بـ ALFS للخدمات اللوجستية | اطلب عرض سعر",
+      "description": "تواصل مع خبراء ALFS في عمان والخليل. اطلب عرض سعر، تتبع شحنة، أو تحدث مع فريقنا عبر البريد أو الهاتف أو واتساب."
+    },
+    "hero": {
+      "kicker": "اتصل بـ ALFS",
+      "heading": "تحدث مع فريقنا اللوجستي.",
+      "description": "سواء كنت بحاجة إلى عرض سعر للشحن، أو تحديث عن شحنة، أو دعم تشغيلي، فريقنا جاهز لمساعدتك في نقل البضائع عبر الحدود بوضوح وثقة.",
+      "primaryAction": "أرسل رسالة",
+      "secondaryAction": "اتصل بفريقنا",
+      "imageAlt": "صورة تواصل مع فريق ALFS اللوجستي",
+      "panel": {
+        "title": "كيف ندعمكم",
+        "description": "تنسيق احترافي من الاستفسار حتى التسليم."
+      }
+    },
+    "channels": {
+      "heading": "تواصل معنا مباشرة",
+      "description": "اختر القناة الأنسب لاستفسارك أو شحنتك.",
+      "items": {
+        "email": {
+          "title": "البريد الإلكتروني",
+          "description": "شارك تفاصيل الشحنة أو المستندات أو الاستفسارات العامة."
+        },
+        "phone": {
+          "title": "الهاتف",
+          "description": "تحدث مع فريق العمليات خلال ساعات العمل."
+        },
+        "whatsapp": {
+          "title": "واتساب",
+          "description": "رسائل سريعة للتحديثات والتنسيق.",
+          "action": "تواصل عبر واتساب"
+        }
+      }
+    },
+    "form": {
+      "heading": "أرسل استفسارك",
+      "description": "أخبرنا عن شحنتك أو احتياجك اللوجستي. سيراجع فريقنا رسالتك ويرد في أقرب وقت ممكن.",
+      "fields": {
+        "name": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "subject": "الموضوع",
+        "subjectPlaceholder": "اختر الموضوع",
+        "subjects": {
+          "quote": "طلب عرض سعر",
+          "tracking": "تتبع شحنة",
+          "general": "استفسار عام"
+        },
+        "message": "الرسالة",
+        "submit": "إرسال الرسالة"
+      }
+    },
+    "offices": {
+      "heading": "مكاتبنا",
+      "description": "تواصل مع فرقنا الإقليمية في الأردن وفلسطين.",
+      "servicesLink": "استكشف خدماتنا",
+      "locations": {
+        "amman": {
+          "title": "مكتب عمان"
+        },
+        "hebron": {
+          "title": "مكتب الخليل"
+        }
+      }
+    },
+    "support": {
+      "items": {
+        "response": {
+          "title": "ردود في الوقت المناسب",
+          "description": "نسعى للرد على الاستفسارات بسرعة خلال ساعات العمل."
+        },
+        "coverage": {
+          "title": "تغطية إقليمية",
+          "description": "دعم عبر الأردن وفلسطين ومسارات التجارة المرتبطة."
+        },
+        "expertise": {
+          "title": "خبرة في الشحن",
+          "description": "شحن بحري وبري وجوي، تخزين، وتخليص جمركي."
+        }
+      }
+    },
+    "hours": {
+      "title": "ساعات العمل",
+      "value": "الأحد – الخميس: 9:00 صباحًا – 5:00 مساءً (توقيت الأردن)\nالجمعة – السبت: مغلق"
+    },
+    "cta": {
+      "heading": "جاهزون لبدء شحنتك؟",
+      "description": "شارك تفاصيل شحنتك وسيساعدك فريقنا في التخطيط للحل اللوجستي المناسب.",
+      "action": "أرسل استفسارًا"
     },
     "whatsAppLabel": "فتح اختصار التواصل عبر واتساب"
   },
@@ -353,7 +447,7 @@
         "title": "اطلب عرض سعر",
         "description": "أسعار مصممة حسب احتياجاتك.",
         "icon": "quote",
-        "href": "/#final-cta"
+        "href": "/contact#inquiry-form"
       },
       "track": {
         "title": "تتبع الشحنة",
@@ -371,7 +465,7 @@
         "title": "تواصل مع ALFS",
         "description": "تحدث مع خبرائنا اللوجستيين.",
         "icon": "support",
-        "href": "/#contact"
+        "href": "/contact"
       }
     },
     "overview": {

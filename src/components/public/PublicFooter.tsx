@@ -2,12 +2,20 @@ import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
 import {isRTL, type Locale} from "@/i18n/routing";
+import {primaryPhoneTel, serviceRoutes} from "@/lib/site-routes";
 
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
 import {PublicLogo} from "./PublicLogo";
 
-const serviceKeys = ["landFreight", "seaFreight", "airFreight", "warehousing"] as const;
+const serviceKeys = [
+  "seaFreight",
+  "landFreight",
+  "airFreight",
+  "consolidation",
+  "warehousing",
+  "customsClearance",
+] as const;
 const companyKeys = ["aboutUs", "ourNetwork", "careers", "contactUs"] as const;
 
 export function PublicFooter() {
@@ -16,24 +24,28 @@ export function PublicFooter() {
   const localeIsRTL = isRTL(locale);
   const copyrightYear = new Date().getFullYear();
   const locationKeys = ["amman", "hebron"] as const;
-  const contactKeys = ["email", "phone"] as const;
-
   const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
-    landFreight: "/services/land-freight",
-    seaFreight: "/services/sea-freight",
-    airFreight: "/services/air-freight",
-    warehousing: "/services/warehousing",
+    seaFreight: serviceRoutes.seaFreight,
+    landFreight: serviceRoutes.landFreight,
+    airFreight: serviceRoutes.airFreight,
+    consolidation: serviceRoutes.consolidation,
+    warehousing: serviceRoutes.warehousing,
+    customsClearance: serviceRoutes.customsClearance,
   };
 
   const companyLinks: Record<(typeof companyKeys)[number], string> = {
     aboutUs: "/about",
     ourNetwork: "/#coverage",
     careers: "/#whyAlfs",
-    contactUs: "/#contact",
+    contactUs: "/contact",
   };
 
   const linkListClass =
     "space-y-2 text-[0.8125rem] leading-snug text-white/75 sm:text-sm sm:leading-normal";
+
+  const email = t("contact.email");
+  const phone = t("contact.phone");
+  const tel = primaryPhoneTel(phone);
 
   return (
     <footer id="contact" className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
@@ -104,15 +116,18 @@ export function PublicFooter() {
                   <span className="min-w-0 whitespace-pre-line">{t(`contact.locations.${key}`)}</span>
                 </li>
               ))}
-              {contactKeys.map((key) => (
-                <li key={key} className="flex items-center gap-2.5 sm:gap-3">
-                  <PublicIcon
-                    name={key === "email" ? "mail" : "phone"}
-                    className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]"
-                  />
-                  <span className="min-w-0 break-words">{t(`contact.${key}`)}</span>
-                </li>
-              ))}
+              <li className="flex items-center gap-2.5 sm:gap-3">
+                <PublicIcon name="mail" className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]" />
+                <a href={`mailto:${email}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
+                  {email}
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5 sm:gap-3">
+                <PublicIcon name="phone" className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]" />
+                <a href={`tel:${tel}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
+                  {phone}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -3,11 +3,13 @@ import type {Metadata} from "next";
 import Image from "next/image";
 import {getLocale, getTranslations} from "next-intl/server";
 
+import {PublicContactDetails, getPublicContactInfo} from "@/components/public/PublicContactDetails";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
+import {contactInquiryHref, serviceRoutes, siteAnchors, siteRoutes} from "@/lib/site-routes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("AboutPage");
@@ -31,10 +33,20 @@ const serviceChipKeys = [
   "tracking",
 ] as const;
 
+const aboutServiceChipRoutes: Record<(typeof serviceChipKeys)[number], string> = {
+  seaFreight: serviceRoutes.seaFreight,
+  landTransport: serviceRoutes.landFreight,
+  airFreight: serviceRoutes.airFreight,
+  warehousing: serviceRoutes.warehousing,
+  customs: serviceRoutes.customsClearance,
+  tracking: siteAnchors.track,
+};
+
 export default async function AboutPage() {
   const locale = (await getLocale()) as Locale;
   const localeIsRTL = isRTL(locale);
   const t = await getTranslations("AboutPage");
+  const contact = await getPublicContactInfo();
 
   const introCards = introCardKeys.map((key) => ({
     title: t(`snapshot.cards.${key}.title`),
@@ -77,7 +89,9 @@ export default async function AboutPage() {
   }));
 
   const serviceChips = serviceChipKeys.map((key) => ({
+    key,
     label: t(`hero.support.services.${key}`),
+    href: aboutServiceChipRoutes[key],
     icon:
       key === "seaFreight"
         ? "ship"
@@ -134,12 +148,12 @@ export default async function AboutPage() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="#final-cta"
+                <PageTransitionLink
+                  href={contactInquiryHref}
                   className="inline-flex min-h-11 items-center justify-center rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber"
                 >
                   {t("hero.primaryAction")}
-                </a>
+                </PageTransitionLink>
                 <PageTransitionLink
                   href="/services"
                   className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
@@ -160,7 +174,11 @@ export default async function AboutPage() {
                 </h2>
                 <div className="mt-5 space-y-3">
                   {serviceChips.map((item) => (
-                    <div key={item.label} className="flex items-center gap-3 text-sm font-medium">
+                    <PageTransitionLink
+                      key={item.key}
+                      href={item.href}
+                      className="flex items-center gap-3 text-sm font-medium transition-colors hover:text-alfs-orange"
+                    >
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/12 text-alfs-orange">
                         <PublicIcon
                           name={item.icon as Parameters<typeof PublicIcon>[0]["name"]}
@@ -168,7 +186,7 @@ export default async function AboutPage() {
                         />
                       </span>
                       <span>{item.label}</span>
-                    </div>
+                    </PageTransitionLink>
                   ))}
                 </div>
               </div>
@@ -419,36 +437,32 @@ export default async function AboutPage() {
               {t("cta.description")}
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <a
-                href="#contact"
+              <PageTransitionLink
+                href={contactInquiryHref}
                 className="inline-flex min-h-11 items-center justify-center rounded-md bg-alfs-orange px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber"
               >
                 {t("cta.primaryAction")}
-              </a>
-              <a
-                href="#contact"
+              </PageTransitionLink>
+              <PageTransitionLink
+                href={siteRoutes.contact}
                 className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/75 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
                 {t("cta.secondaryAction")}
-              </a>
+              </PageTransitionLink>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 border-t border-white/16 pt-6 text-sm text-white/86">
-              <div className="flex items-center gap-2">
-                <PublicIcon name="mail" className="h-4 w-4 text-alfs-orange" />
-                <span>{t("cta.email")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <PublicIcon name="phone" className="h-4 w-4 text-alfs-orange" />
-                <span>{t("cta.phone")}</span>
-              </div>
-            </div>
+            <PublicContactDetails
+              className="mt-8 border-t border-white/16 pt-6"
+              variant="dark"
+            />
           </div>
         </section>
       </main>
 
       <a
-        href="#contact"
+        href={contact.whatsApp}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label={t("whatsAppLabel")}
         className={`fixed bottom-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-transform hover:scale-105 hover:bg-[#1da851] sm:bottom-6 ${
           localeIsRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"

@@ -2,6 +2,7 @@ import type {ComponentProps} from "react";
 
 import type {PublicIcon} from "@/components/public/PublicIcon";
 import {serviceImages} from "@/lib/service-images";
+import {siteAnchors} from "@/lib/site-routes";
 
 export type ServiceSlug =
   | "sea-freight"
@@ -353,7 +354,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
       seaFreight: "ship",
       customs: "customs",
     },
-    secondaryCtaHref: "/#contact",
+    secondaryCtaHref: siteAnchors.contact,
   },
   "customs-clearance": {
     slug: "customs-clearance",
@@ -416,7 +417,7 @@ export const servicePageConfigs: Record<ServiceSlug, ServicePageConfig> = {
       airFreight: "plane",
       warehousing: "warehouse",
     },
-    secondaryCtaHref: "/#contact",
+    secondaryCtaHref: siteAnchors.contact,
   },
 };
 

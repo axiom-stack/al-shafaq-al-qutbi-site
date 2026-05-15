@@ -13,6 +13,10 @@ export function isAboutPath(pathname: string) {
   return normalizeSkeletonPath(pathname) === "/about";
 }
 
+export function isContactPath(pathname: string) {
+  return normalizeSkeletonPath(pathname) === "/contact";
+}
+
 export function isServicesPath(pathname: string) {
   return normalizeSkeletonPath(pathname) === "/services";
 }

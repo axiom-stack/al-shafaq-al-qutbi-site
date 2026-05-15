@@ -12,6 +12,7 @@ import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
 import {serviceImages} from "@/lib/service-images";
+import {serviceQuoteHref, serviceRoutes, siteAnchors} from "@/lib/site-routes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ServicesPage");
@@ -117,10 +118,10 @@ export default async function ServicesPage() {
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.kicker")}
               </p>
-              <h1 className="mt-2 max-w-[760px] text-[2.2rem] leading-[1.08] font-bold tracking-[-0.04em] text-off-white sm:text-[3rem] lg:text-[4rem]">
+              <h1 className="mt-2 w-full max-w-[760px] text-[2.2rem] leading-[1.08] font-bold tracking-[-0.04em] text-off-white sm:text-[3rem] lg:text-[4rem]">
                 {t("hero.heading")}
               </h1>
-              <p className="mt-5 max-w-2xl text-[0.98rem] leading-7 text-off-white/90 sm:text-[1.05rem]">
+              <p className="mt-5 w-full max-w-[670px] text-[0.98rem] leading-7 text-off-white/90 sm:text-[1.05rem]">
                 {t("hero.description")}
               </p>
               <div className={`mt-7 flex flex-row flex-wrap gap-2 ${localeIsRTL ? "justify-end" : ""}`}>
@@ -388,7 +389,7 @@ function CoreServicesSection({
           {heading}
         </h2>
         <span className="mx-auto mt-4 block h-[3px] w-[50px] rounded-full bg-alfs-orange" />
-        <p className="mx-auto mt-5 max-w-3xl text-[1rem] leading-7 text-on-surface-variant">{description}</p>
+        <p className="mx-auto mt-5 w-full max-w-[760px] text-[1rem] leading-7 text-on-surface-variant">{description}</p>
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-6">
@@ -633,18 +634,18 @@ function SeaFreightSection({
             />
           </div>
           <div className={`mt-8 flex flex-wrap gap-4 ${localeIsRTL ? "justify-end" : ""}`}>
-            <a
-              href="/#final-cta"
+            <PageTransitionLink
+              href={serviceQuoteHref(serviceRoutes.seaFreight)}
               className="rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber"
             >
               {t("seaFreight.primaryCta")}
-            </a>
-            <a
-              href="/#coverage"
+            </PageTransitionLink>
+            <PageTransitionLink
+              href={siteAnchors.coverage}
               className="rounded-md border-2 border-alfs-navy px-6 py-2.5 text-sm font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white"
             >
               {t("seaFreight.secondaryCta")}
-            </a>
+            </PageTransitionLink>
           </div>
         </>
       }
@@ -695,14 +696,14 @@ function LandFreightSection({
               </li>
             ))}
           </ul>
-          <a
-            href="/#final-cta"
+          <PageTransitionLink
+            href={serviceQuoteHref(serviceRoutes.landFreight)}
             className={`mt-8 inline-flex rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber ${
               localeIsRTL ? "float-left" : ""
             }`}
           >
             {t("landFreight.cta")}
-          </a>
+          </PageTransitionLink>
         </>
       }
     />
@@ -771,18 +772,18 @@ function AirFreightSection({
             />
           </div>
           <div className={`mt-8 flex flex-wrap gap-4 ${localeIsRTL ? "justify-end" : ""}`}>
-            <a
-              href="/#final-cta"
+            <PageTransitionLink
+              href={serviceQuoteHref(serviceRoutes.airFreight)}
               className="rounded-md bg-alfs-orange px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-alfs-amber"
             >
               {t("airFreight.primaryCta")}
-            </a>
-            <a
-              href="/#coverage"
+            </PageTransitionLink>
+            <PageTransitionLink
+              href={siteAnchors.coverage}
               className="rounded-md border-2 border-white px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-alfs-navy"
             >
               {t("airFreight.secondaryCta")}
-            </a>
+            </PageTransitionLink>
           </div>
         </>
       }
@@ -916,14 +917,14 @@ function WarehousingSection({
               </li>
             ))}
           </ul>
-          <a
-            href="/#contact"
+          <PageTransitionLink
+            href={serviceQuoteHref(serviceRoutes.warehousing)}
             className={`mt-8 inline-flex rounded-md border-2 border-alfs-navy px-6 py-2.5 text-sm font-semibold text-alfs-navy transition-colors hover:bg-alfs-navy hover:text-white ${
               localeIsRTL ? "float-left" : ""
             }`}
           >
             {t("warehousing.cta")}
-          </a>
+          </PageTransitionLink>
         </>
       }
     />
