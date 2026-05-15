@@ -1,7 +1,7 @@
 import {isRTL, type Locale} from "@/i18n/routing";
 
 import {SkeletonBlock, SkeletonCircle, SkeletonText} from "./SkeletonPrimitives";
-import {isAboutPath, normalizeSkeletonPath} from "./resolveSkeleton";
+import {isAboutPath, isAirFreightPath, isServicesPath, normalizeSkeletonPath} from "./resolveSkeleton";
 
 function PublicNavbarSkeleton({locale}: {locale: Locale}) {
   const localeIsRTL = isRTL(locale);
@@ -594,11 +594,241 @@ function AboutSkeleton({locale}: {locale: Locale}) {
   );
 }
 
+function ServicesSkeleton({locale}: {locale: Locale}) {
+  const localeIsRTL = isRTL(locale);
+
+  return (
+    <>
+      <PublicNavbarSkeleton locale={locale} />
+      <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
+        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-20 pt-10 sm:px-6 lg:px-8">
+          <ServicesHeroSkeleton localeIsRTL={localeIsRTL} />
+        </section>
+        <section className="relative z-10 mx-auto -mt-9 mb-12 max-w-[1280px] px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {Array.from({length: 4}, (_, index) => (
+              <div
+                key={index}
+                className="rounded-xl border border-[#e1deec] bg-[#fbf8ff] px-6 py-8 text-center shadow-[0_8px_30px_rgba(26,47,122,0.12)]"
+              >
+                <SkeletonCircle className="mx-auto h-16 w-16 bg-alfs-navy/8" />
+                <SkeletonBlock className="mx-auto mt-4 h-4 w-28 rounded-full" />
+                <SkeletonText className="mx-auto mt-2 max-w-[200px]" lines={2} lastLineWidth="70%" />
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-2">
+            <SkeletonText lines={4} lastLineWidth="68%" />
+            <SkeletonBlock className="h-80 rounded-xl bg-alfs-deep-blue/20" />
+          </div>
+        </section>
+        <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-[1280px]">
+            <SkeletonBlock className="mx-auto h-10 w-64 rounded-full" />
+            <div className="mt-10 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+              {Array.from({length: 6}, (_, index) => (
+                <SkeletonBlock key={index} className="min-h-[220px] rounded-xl" />
+              ))}
+            </div>
+          </div>
+        </section>
+        {Array.from({length: 6}, (_, index) => (
+          <section key={index} className="border-t border-outline-variant/30 px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+            <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-2 lg:items-center">
+              <SkeletonBlock className="h-[380px] rounded-xl sm:h-[500px]" />
+              <SkeletonText lines={5} lastLineWidth="72%" />
+            </div>
+          </section>
+        ))}
+      </main>
+      <PublicFooterSkeleton locale={locale} />
+    </>
+  );
+}
+
+function ServicesHeroSkeleton({localeIsRTL}: {localeIsRTL: boolean}) {
+  return (
+    <div className={`relative mx-auto max-w-[1280px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+      <SkeletonBlock className="h-4 w-40 rounded-full bg-white/14" />
+      <SkeletonBlock className="mt-4 h-16 w-full max-w-[620px] rounded-[1.5rem] bg-white/12 sm:h-20" />
+      <SkeletonText
+        className="mt-5 max-w-2xl"
+        lineClassName="h-4 rounded-full bg-white/12"
+        lines={3}
+        lastLineWidth="76%"
+      />
+      <ServicesHeroSkeletonChips />
+    </div>
+  );
+}
+
+function ServicesHeroSkeletonChips() {
+  return (
+    <div className="mt-7 flex flex-wrap gap-2">
+      {Array.from({length: 5}, (_, index) => (
+        <SkeletonBlock key={index} className="h-8 w-24 rounded-full bg-white/14" />
+      ))}
+    </div>
+  );
+}
+
+function AirFreightSkeleton({locale}: {locale: Locale}) {
+  const localeIsRTL = isRTL(locale);
+  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
+
+  return (
+    <>
+      <PublicNavbarSkeleton locale={locale} />
+      <main className="min-h-screen bg-[#fbf8ff] pt-[56px]">
+        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+          <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-12 lg:items-center">
+            <AirFreightHeroTextSkeleton localeIsRTL={localeIsRTL} />
+            <div
+              className={`lg:col-span-5 ${
+                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
+              }`}
+            >
+              <SkeletonBlock className="aspect-[4/3] w-full max-w-[480px] rounded-2xl sm:aspect-[5/4]" />
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1fr_0.4fr]">
+            <div className={`max-w-[640px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+              <SkeletonBlock className="h-12 w-full max-w-[420px] rounded-[1.25rem]" />
+              <SkeletonBlock
+                className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
+              />
+              <SkeletonText className="mt-6" lines={3} lastLineWidth="70%" />
+            </div>
+            <SkeletonBlock className="h-4 w-36 rounded-full" />
+          </div>
+        </section>
+
+        <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[1280px]">
+            <div className="mx-auto max-w-[760px] text-center">
+              <SkeletonBlock className="mx-auto h-10 w-64 rounded-full" />
+              <SkeletonBlock className="mx-auto mt-4 h-[3px] w-[52px] rounded-full bg-alfs-orange" />
+              <SkeletonText className="mx-auto mt-5 max-w-[520px]" lines={2} lastLineWidth="72%" />
+            </div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({length: 6}, (_, index) => (
+                <article
+                  key={index}
+                  className="rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 shadow-[0_12px_28px_rgba(26,47,122,0.10)]"
+                >
+                  <SkeletonCircle className="h-11 w-11 bg-alfs-orange/10" />
+                  <SkeletonBlock className="mt-4 h-4 w-32 rounded-full" />
+                  <SkeletonText className="mt-2" lines={2} lastLineWidth="76%" />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <AirFreightBenefitsSkeleton
+            localeIsRTL={localeIsRTL}
+            sideHeadingAccentClass={sideHeadingAccentClass}
+          />
+        </section>
+
+        <section className="bg-alfs-deep-blue px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[1280px]">
+            <SkeletonBlock className="mx-auto h-10 w-48 rounded-full bg-white/14" />
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {Array.from({length: 4}, (_, index) => (
+                <SkeletonBlock key={index} className="h-40 rounded-[12px] bg-white/8" />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-alfs-deep-blue px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[760px]">
+            <SkeletonBlock className="mx-auto h-12 w-full max-w-[460px] rounded-[1.25rem] bg-white/14" />
+            <SkeletonText
+              className="mx-auto mt-5 max-w-[520px]"
+              lineClassName="bg-white/12"
+              lines={2}
+              lastLineWidth="72%"
+            />
+            <SkeletonBlock className="mx-auto mt-8 h-11 w-40 rounded-md bg-white/16" />
+          </div>
+        </section>
+      </main>
+      <PublicFooterSkeleton locale={locale} />
+    </>
+  );
+}
+
+function AirFreightHeroTextSkeleton({localeIsRTL}: {localeIsRTL: boolean}) {
+  return (
+    <div className={`lg:col-span-7 ${localeIsRTL ? "text-right" : "text-left"}`}>
+      <SkeletonBlock className="h-3.5 w-32 rounded-full bg-alfs-orange/50" />
+      <SkeletonBlock className="mt-3 h-16 w-full max-w-[620px] rounded-[1.5rem] bg-white/12 sm:h-20" />
+      <SkeletonText
+        className="mt-5 max-w-[580px]"
+        lineClassName="h-4 rounded-full bg-white/12"
+        lines={3}
+        lastLineWidth="72%"
+      />
+      <AirFreightHeroCtasSkeleton />
+    </div>
+  );
+}
+
+function AirFreightHeroCtasSkeleton() {
+  return (
+    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+      <SkeletonBlock className="h-11 w-40 rounded-md bg-white/16" />
+      <SkeletonBlock className="h-11 w-36 rounded-md bg-white/10" />
+    </div>
+  );
+}
+
+function AirFreightBenefitsSkeleton({
+  localeIsRTL,
+  sideHeadingAccentClass,
+}: {
+  localeIsRTL: boolean;
+  sideHeadingAccentClass: string;
+}) {
+  return (
+    <div className="mx-auto max-w-[1280px]">
+      <div className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
+        <SkeletonBlock className="h-12 w-full max-w-[360px] rounded-[1.25rem]" />
+        <SkeletonBlock
+          className={`mt-5 h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
+        />
+        <SkeletonText className="mt-6" lines={2} lastLineWidth="70%" />
+      </div>
+      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {Array.from({length: 6}, (_, index) => (
+          <SkeletonBlock key={index} className="h-24 rounded-[12px]" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function PageSkeleton({locale, pathname}: {locale: Locale; pathname: string}) {
   const normalizedPath = normalizeSkeletonPath(pathname);
 
   if (isAboutPath(normalizedPath)) {
     return <AboutSkeleton locale={locale} />;
+  }
+
+  if (isAirFreightPath(normalizedPath)) {
+    return <AirFreightSkeleton locale={locale} />;
+  }
+
+  if (isServicesPath(normalizedPath)) {
+    return <ServicesSkeleton locale={locale} />;
   }
 
   return <HomeSkeleton locale={locale} />;

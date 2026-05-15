@@ -22,15 +22,18 @@ const navItems = [
 ] as const;
 
 type PublicNavbarProps = {
-  currentPage?: "home" | "about";
+  currentPage?: "home" | "about" | "services";
 };
 
-function getNavHref(currentPage: "home" | "about", itemType: (typeof navItems)[number]["type"]) {
+function getNavHref(
+  currentPage: "home" | "about" | "services",
+  itemType: (typeof navItems)[number]["type"],
+) {
   switch (itemType) {
     case "home":
       return currentPage === "home" ? "#top" : "/";
     case "services":
-      return currentPage === "home" ? "#services" : "/#services";
+      return currentPage === "services" ? "#top" : "/services";
     case "coverage":
       return currentPage === "home" ? "#coverage" : "/#coverage";
     case "whyAlfs":

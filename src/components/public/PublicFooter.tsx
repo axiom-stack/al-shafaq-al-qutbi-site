@@ -19,10 +19,10 @@ export function PublicFooter() {
   const contactKeys = ["email", "phone"] as const;
 
   const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
-    landFreight: "/#services",
-    seaFreight: "/#services",
-    airFreight: "/#services",
-    warehousing: "/#services",
+    landFreight: "/services#land-freight",
+    seaFreight: "/services#sea-freight",
+    airFreight: "/services/air-freight",
+    warehousing: "/services#warehousing",
   };
 
   const companyLinks: Record<(typeof companyKeys)[number], string> = {

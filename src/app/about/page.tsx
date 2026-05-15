@@ -141,7 +141,7 @@ export default async function AboutPage() {
                   {t("hero.primaryAction")}
                 </a>
                 <PageTransitionLink
-                  href="/#services"
+                  href="/services"
                   className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
                   {t("hero.secondaryAction")}

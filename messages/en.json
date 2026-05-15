@@ -321,6 +321,324 @@
     },
     "whatsAppLabel": "Open WhatsApp contact shortcut"
   },
+  "ServicesPage": {
+    "meta": {
+      "title": "Our Services | ALFS Logistics",
+      "description": "Integrated freight solutions across sea, land, and air — sea freight, land freight, air freight, consolidation, warehousing, and customs clearance."
+    },
+    "hero": {
+      "kicker": "ALFS Logistics Services",
+      "heading": "Integrated freight solutions across sea, land, and air.",
+      "description": "Move cargo locally, regionally, and internationally with our comprehensive suite of logistics services designed for efficiency and reliability.",
+      "imageAlt": "Container ship at sea representing ALFS integrated freight services.",
+      "chips": {
+        "sea": "Sea",
+        "land": "Land",
+        "air": "Air",
+        "consolidation": "Consolidation",
+        "warehousing": "Warehousing"
+      },
+      "coverage": {
+        "title": "Service Coverage",
+        "description": "Connecting the Levant, GCC, and global markets.",
+        "regions": {
+          "middleEast": "Middle East & GCC",
+          "asia": "Asia & Far East",
+          "europe": "Europe & Americas"
+        }
+      }
+    },
+    "quickActions": {
+      "quote": {
+        "title": "Request Quote",
+        "description": "Get pricing tailored to your needs.",
+        "icon": "quote",
+        "href": "/#final-cta"
+      },
+      "track": {
+        "title": "Track Shipment",
+        "description": "Real-time updates on your cargo.",
+        "icon": "pin",
+        "href": "/#track"
+      },
+      "compare": {
+        "title": "Compare Services",
+        "description": "Find the right transport mode.",
+        "icon": "flex",
+        "href": "#core-services"
+      },
+      "contact": {
+        "title": "Contact ALFS",
+        "description": "Speak with our logistics experts.",
+        "icon": "support",
+        "href": "/#contact"
+      }
+    },
+    "overview": {
+      "heading": "Comprehensive logistics support for every shipment stage",
+      "description": "At ALFS, we provide end-to-end solutions that streamline your supply chain. From the moment your cargo leaves the origin to its final destination, our integrated services ensure seamless transitions, optimal routing, and complete visibility.",
+      "cta": "Learn About Our Approach",
+      "journey": {
+        "title": "The ALFS Shipment Journey",
+        "steps": {
+          "plan": {
+            "title": "Plan",
+            "description": "Strategic route and service selection."
+          },
+          "consolidate": {
+            "title": "Consolidate",
+            "description": "Grouping cargo for efficiency."
+          },
+          "store": {
+            "title": "Store",
+            "description": "Secure warehousing solutions."
+          },
+          "transport": {
+            "title": "Transport",
+            "description": "Multi-modal execution."
+          },
+          "track": {
+            "title": "Track",
+            "description": "Continuous monitoring until delivery."
+          }
+        }
+      }
+    },
+    "coreServices": {
+      "heading": "Our Core Services",
+      "description": "Discover our specialized logistics solutions tailored to meet the demands of modern global trade.",
+      "explore": "Explore",
+      "exploreCustoms": "Explore Customs Clearance",
+      "cards": {
+        "seaFreight": {
+          "title": "Sea Freight",
+          "badges": ["FCL / LCL"],
+          "description": "Global connections delivered with trust.",
+          "imageAlt": "Sea freight service illustration"
+        },
+        "landFreight": {
+          "title": "Land Freight",
+          "badges": ["FTL / LTL"],
+          "description": "Regional reach and reliable delivery.",
+          "imageAlt": "Land freight service illustration"
+        },
+        "airFreight": {
+          "title": "Air Freight",
+          "badges": ["Express"],
+          "description": "Fast solutions for urgent cargo.",
+          "imageAlt": "Air freight service illustration"
+        },
+        "consolidation": {
+          "title": "Cargo Consolidation",
+          "description": "Smarter grouping. Efficient shipping. Greater value.",
+          "imageAlt": "Cargo consolidation service illustration"
+        },
+        "warehousing": {
+          "title": "Warehousing",
+          "description": "Safe. Organized. Always in good hands.",
+          "imageAlt": "Warehousing and secure storage illustration"
+        },
+        "customsClearance": {
+          "title": "Customs Clearance",
+          "badges": ["Documentation", "Compliance"],
+          "description": "Customs clearance support aligned with local and international regulations to help ensure fast procedures and smooth transport operations.",
+          "imageAlt": "Customs clearance service illustration"
+        }
+      }
+    },
+    "seaFreight": {
+      "kicker": "Ocean Transport",
+      "heading": "Sea Freight",
+      "description": "Global connections delivered with trust. Our sea freight services offer cost-effective and reliable transport for large volumes of cargo across international waters.",
+      "imageAlt": "Sea freight deep dive illustration",
+      "fcl": {
+        "title": "FCL (Full Container Load)",
+        "description": "Exclusive use of a container for large shipments."
+      },
+      "lcl": {
+        "title": "LCL (Less than Container Load)",
+        "description": "Shared container space for smaller loads."
+      },
+      "primaryCta": "Get Sea Quote",
+      "secondaryCta": "View Routes"
+    },
+    "landFreight": {
+      "kicker": "Ground Transport",
+      "heading": "Land Freight",
+      "description": "Regional reach, reliable delivery. We provide comprehensive road transport solutions connecting major commercial hubs across the region.",
+      "imageAlt": "Land freight deep dive illustration",
+      "bullets": {
+        "ftl": "FTL & LTL Services:",
+        "ftlText": "Full and partial truckloads to suit your cargo size.",
+        "equipment": "Specialized Equipment:",
+        "equipmentText": "Flatbeds, temp-controlled, and heavy haulage.",
+        "coverage": "Regional Coverage:",
+        "coverageText": "Regular routes across Palestine, Syria, Lebanon, and GCC."
+      },
+      "cta": "Get Land Quote"
+    },
+    "airFreight": {
+      "kicker": "Express Transit",
+      "heading": "Air Freight",
+      "description": "When time is critical, our air freight solutions deliver. Ideal for urgent, high-value, or delicate cargo requiring rapid global connections.",
+      "imageAlt": "Air freight deep dive illustration",
+      "urgent": {
+        "title": "Urgent Cargo",
+        "description": "Expedited handling for time-sensitive shipments."
+      },
+      "delicate": {
+        "title": "Delicate & High-Value",
+        "description": "Secure handling protocols for fragile goods."
+      },
+      "primaryCta": "Get Air Quote",
+      "secondaryCta": "Flight Schedules"
+    },
+    "consolidation": {
+      "kicker": "Cost Efficiency",
+      "heading": "Cargo Consolidation",
+      "description": "Smarter grouping. Efficient shipping. Greater value. Optimize your logistics spend by combining smaller shipments into cost-effective larger loads.",
+      "imageAlt": "Cargo consolidation deep dive illustration",
+      "cost": {
+        "title": "Cost Reduction",
+        "description": "Pay only for the space you use, significantly reducing shipping costs for smaller volumes."
+      },
+      "network": {
+        "title": "Network Efficiency",
+        "description": "Leverage our regional hubs to group cargo destined for similar locations."
+      }
+    },
+    "warehousing": {
+      "kicker": "Secure Storage",
+      "heading": "Warehousing",
+      "description": "Safe. Organized. Always in good hands. Our secure facilities provide flexible storage and comprehensive inventory management solutions.",
+      "imageAlt": "Warehousing deep dive illustration",
+      "features": {
+        "monitoring": "24/7 Monitored Secure Storage",
+        "inventory": "Advanced Inventory Control",
+        "crossDock": "Cross-docking & Distribution"
+      },
+      "cta": "Explore Facilities"
+    },
+    "customsClearance": {
+      "kicker": "CUSTOMS CLEARANCE",
+      "heading": "Fast, compliant customs support for smoother cargo movement",
+      "description": "ALFS offers customs clearance services in compliance with local and international regulations, helping ensure faster procedures and smoother operations across all stages of transport.",
+      "imageAlt": "Customs clearance deep dive illustration",
+      "features": {
+        "documentation": "Documentation support",
+        "compliance": "Compliance with regulations",
+        "faster": "Faster procedures",
+        "smooth": "Smooth operations"
+      }
+    }
+  },
+  "AirFreightPage": {
+    "meta": {
+      "title": "Air Freight Services | ALFS Logistics",
+      "description": "Fast, reliable international air cargo for time-sensitive business shipments — express air freight, customs coordination, and airport-to-door delivery."
+    },
+    "hero": {
+      "kicker": "Express Air Logistics",
+      "heading": "Air Freight Services",
+      "subtitle": "Fast, reliable, and efficient air cargo solutions for time-sensitive shipments.",
+      "imageAlt": "Air freight cargo aircraft illustration",
+      "badgeExpress": "Express Cargo",
+      "badgeGlobal": "Global Network",
+      "primaryCta": "Request a Quote",
+      "secondaryCta": "Contact Us"
+    },
+    "overview": {
+      "heading": "International air freight built for business speed",
+      "description": "ALFS provides international air freight solutions for businesses that need speed, reliability, and shipment visibility. From urgent commercial cargo to coordinated import and export movements, we manage your air shipments with precision and clear communication at every stage.",
+      "backToServices": "Back to all services"
+    },
+    "handle": {
+      "heading": "What We Handle",
+      "description": "Comprehensive air cargo support for commercial and time-critical shipments.",
+      "items": {
+        "express": {
+          "title": "Express air cargo",
+          "description": "Priority handling for shipments that cannot wait."
+        },
+        "commercial": {
+          "title": "Commercial shipments",
+          "description": "Reliable air transport for business goods and trade cargo."
+        },
+        "timeSensitive": {
+          "title": "Time-sensitive deliveries",
+          "description": "Tight timelines managed with proactive coordination."
+        },
+        "importExport": {
+          "title": "Import/export coordination",
+          "description": "End-to-end support for cross-border air movements."
+        },
+        "airportToDoor": {
+          "title": "Airport-to-door delivery",
+          "description": "Seamless handoff from arrival to final destination."
+        },
+        "documentation": {
+          "title": "Documentation support",
+          "description": "Accurate paperwork to keep cargo moving without delays."
+        }
+      }
+    },
+    "benefits": {
+      "heading": "Why Choose Our Air Freight",
+      "description": "Business-focused air logistics with the reliability your supply chain demands.",
+      "items": {
+        "fasterDelivery": {
+          "title": "Faster delivery times",
+          "description": "Accelerated transit for urgent and high-priority cargo."
+        },
+        "globalNetwork": {
+          "title": "Global air network",
+          "description": "Connections across key international trade lanes."
+        },
+        "secureHandling": {
+          "title": "Secure cargo handling",
+          "description": "Careful handling for valuable and sensitive shipments."
+        },
+        "customsCoordination": {
+          "title": "Customs coordination",
+          "description": "Aligned clearance support to reduce border delays."
+        },
+        "flexibleOptions": {
+          "title": "Flexible shipment options",
+          "description": "Solutions tailored to cargo type, timeline, and budget."
+        },
+        "businessSupport": {
+          "title": "Business-focused logistics support",
+          "description": "Dedicated coordination from quote to delivery follow-up."
+        }
+      }
+    },
+    "process": {
+      "heading": "How It Works",
+      "steps": {
+        "quote": {
+          "title": "Request a quote",
+          "description": "Share shipment details and receive a tailored air freight proposal."
+        },
+        "assessment": {
+          "title": "Shipment assessment",
+          "description": "We review cargo requirements, routing, and timing needs."
+        },
+        "coordination": {
+          "title": "Air freight coordination",
+          "description": "Booking, documentation, and airport handling are managed for you."
+        },
+        "delivery": {
+          "title": "Delivery and follow-up",
+          "description": "Track progress through arrival and final delivery confirmation."
+        }
+      }
+    },
+    "cta": {
+      "heading": "Need fast international shipping?",
+      "description": "Speak with our air freight team for a reliable solution tailored to your timeline and cargo requirements.",
+      "primaryAction": "Request a Quote"
+    }
+  },
   "NotFound": {
     "kicker": "Not found",
     "title": "We could not find that page.",
