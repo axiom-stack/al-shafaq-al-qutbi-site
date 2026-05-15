@@ -28,22 +28,22 @@ type PublicNavbarProps = {
 };
 
 function getNavHref(
-  currentPage: "home" | "about" | "services" | "contact",
   itemType: (typeof navItems)[number]["type"],
+  pathname: string,
 ) {
   switch (itemType) {
     case "home":
-      return currentPage === "home" ? "#top" : "/";
+      return pathname === "/" ? "#top" : "/";
     case "services":
-      return currentPage === "services" ? "#top" : "/services";
+      return pathname === "/services" ? "#top" : "/services";
     case "coverage":
-      return currentPage === "home" ? "#coverage" : "/#coverage";
+      return pathname === "/" ? "#coverage" : "/#coverage";
     case "whyAlfs":
-      return currentPage === "home" ? "#whyAlfs" : "/#whyAlfs";
+      return pathname === "/" ? "#whyAlfs" : "/#whyAlfs";
     case "about":
-      return "/about";
+      return pathname === "/about" ? "#top" : "/about";
     case "contact":
-      return currentPage === "contact" ? "#top" : siteRoutes.contact;
+      return pathname === "/contact" ? "#top" : siteRoutes.contact;
   }
 }
 
@@ -90,7 +90,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
               className="contents"
             >
               {renderNavLink(
-                getNavHref(currentPage, item.type),
+                getNavHref(item.type, pathname),
                 t(`links.${item.key}`),
                 `text-[12px] font-medium transition-colors ${
                   item.key === currentPage
@@ -142,7 +142,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
                 className="contents"
               >
                 {renderNavLink(
-                  getNavHref(currentPage, item.type),
+                  getNavHref(item.type, pathname),
                   t(`links.${item.key}`),
                   `text-sm font-medium ${
                     item.key === currentPage ? "text-alfs-orange" : "text-on-surface-variant"
