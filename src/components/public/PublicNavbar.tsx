@@ -19,7 +19,6 @@ const navItems = [
   {key: "home", type: "home"},
   {key: "services", type: "services"},
   {key: "coverage", type: "coverage"},
-  {key: "whyAlfs", type: "whyAlfs"},
   {key: "about", type: "about"},
   {key: "contact", type: "contact"},
 ] as const;
@@ -36,8 +35,6 @@ function getNavHref(itemType: (typeof navItems)[number]["type"]) {
       return "/services";
     case "coverage":
       return siteAnchors.coverage;
-    case "whyAlfs":
-      return siteAnchors.whyAlfs;
     case "about":
       return "/about";
     case "contact":
@@ -76,7 +73,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    const sectionIds = ["top", "services", "coverage", "whyAlfs", "contact"];
+    const sectionIds = ["top", "services", "coverage", "contact"];
     sectionIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);

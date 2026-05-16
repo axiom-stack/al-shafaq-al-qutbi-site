@@ -120,7 +120,7 @@ export default async function ServicesPage() {
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.kicker")}
               </p>
-              <h1 className="mt-2 w-full max-w-[760px] text-[2.2rem] leading-[1.08] font-bold tracking-[-0.04em] text-off-white sm:text-[3rem] lg:text-[4rem]">
+              <h1 className="mt-2 w-full max-w-[760px] text-[2.2rem] leading-[1.2] font-bold tracking-[-0.04em] text-off-white sm:text-[3rem] lg:text-[4rem]">
                 {t("hero.heading")}
               </h1>
               <p className="mt-5 w-full max-w-[670px] text-[0.98rem] leading-7 text-off-white/90 sm:text-[1.05rem]">

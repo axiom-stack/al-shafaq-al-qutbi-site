@@ -133,7 +133,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
                   <OverviewBackLink localeIsRTL={localeIsRTL} label={t("overview.backToServices")} />
                 </div>
               )}
-              <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("overview.heading")}
               </h2>
               <span
@@ -168,7 +168,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-[1280px]">
             <div className="max-w-[560px] text-start">
-              <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("capabilities.heading")}
               </h2>
               <span
@@ -187,7 +187,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
         <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-[1280px]">
             <div className="max-w-[560px] text-start">
-              <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("useCases.heading")}
               </h2>
               <span
@@ -237,7 +237,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-[1280px]">
             <div className="max-w-[560px] text-start">
-              <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("whyAlfs.heading")}
               </h2>
               <span
@@ -308,7 +308,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
           <DotPattern />
           <CtaGlow className={ctaGlowSideClass} />
           <div className="relative mx-auto max-w-[760px]">
-            <h2 className="text-[2rem] leading-[1.1] font-bold tracking-[-0.04em] text-white sm:text-[2.5rem]">
+            <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-white sm:text-[2.5rem]">
               {t("cta.heading")}
             </h2>
             <p className="mx-auto mt-5 max-w-[580px] text-[0.98rem] leading-7 text-white/84">
