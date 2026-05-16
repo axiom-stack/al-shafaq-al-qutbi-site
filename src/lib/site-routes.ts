@@ -49,9 +49,14 @@ function normalizeContactPath(pathname: string | null) {
   return withoutQuery || "";
 }
 
-export function primaryPhoneTel(phoneLabel: string) {
-  const primary = phoneLabel.split("/")[0]?.trim() ?? phoneLabel;
-  return primary.replace(/[^\d+]/g, "");
+export function parsePhoneNumbers(phoneLabel: string) {
+  return phoneLabel.split("/").map((part) => {
+    const label = part.trim();
+    return {
+      label,
+      tel: label.replace(/[^\d+]/g, ""),
+    };
+  });
 }
 
 export function whatsAppHref(phoneLabel: string) {

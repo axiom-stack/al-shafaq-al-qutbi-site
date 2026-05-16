@@ -112,7 +112,7 @@
     "services": {
       "seaFreight": {
         "title": "Sea Freight",
-        "description": "FCL and LCL shipments globally, with specialized handling at the Port of Aqaba.",
+        "description": "FOB and LCL shipments globally, with specialized handling at the Port of Aqaba.",
         "icon": "ship"
       },
       "landFreight": {
@@ -503,7 +503,7 @@
         "seaFreight": {
           "title": "Sea Freight",
           "badges": [
-            "FCL / LCL"
+            "FOB / LCL"
           ],
           "description": "Global connections delivered with trust.",
           "imageAlt": "Sea freight service illustration"
@@ -551,7 +551,7 @@
       "description": "Global connections delivered with trust. Our sea freight services offer cost-effective and reliable transport for large volumes of cargo across international waters.",
       "imageAlt": "Sea freight deep dive illustration",
       "fcl": {
-        "title": "FCL (Full Container Load)",
+        "title": "FOB",
         "description": "Exclusive use of a container for large shipments."
       },
       "lcl": {
@@ -639,17 +639,17 @@
   },
   "SeaFreightPage": {
     "meta": {
-      "title": "Sea Freight Services | LCL & FCL Shipping | ALFS",
-      "description": "Flexible LCL and FCL sea freight for international cargo. ALFS coordinates containerized, bulk, partial, oversized, and sensitive shipments with monitoring and status updates."
+      "title": "Sea Freight Services | LCL & FOB Shipping | ALFS",
+      "description": "Flexible LCL and FOB sea freight for international cargo. ALFS coordinates containerized, bulk, partial, oversized, and sensitive shipments with monitoring and status updates."
     },
     "hero": {
       "eyebrow": "SEA FREIGHT SERVICES",
-      "headline": "Reliable LCL and FCL shipping for international cargo.",
-      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including Less than Container Load and Full Container Load options, with careful monitoring and shipment updates at every stage.",
+      "headline": "Reliable LCL and FOB shipping for international cargo.",
+      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including Less than Container Load and FOB options, with careful monitoring and shipment updates at every stage.",
       "imageAlt": "Sea freight container ship carrying international cargo",
       "chips": {
         "lcl": "LCL Shipping",
-        "fcl": "FCL Shipping",
+        "fcl": "FOB Shipping",
         "bulk": "Bulk Cargo",
         "partial": "Partial Containers",
         "oversized": "Oversized Cargo",
@@ -660,7 +660,7 @@
     },
     "overview": {
       "heading": "Sea freight designed for cost-efficient international movement.",
-      "paragraphOne": "Sea Freight is the right choice for businesses moving containerized, bulk, partial, oversized, or sensitive cargo across international trade routes. ALFS provides flexible LCL and FCL options designed to match shipment size, destination, and operational requirements.",
+      "paragraphOne": "Sea Freight is the right choice for businesses moving containerized, bulk, partial, oversized, or sensitive cargo across international trade routes. ALFS provides flexible LCL and FOB options designed to match shipment size, destination, and operational requirements.",
       "paragraphTwo": "With continuous monitoring and shipment status updates, ALFS helps clients move goods with transparency, efficiency, and confidence from origin to destination.",
       "backToServices": "Back to all services"
     },
@@ -701,8 +701,8 @@
           "description": "Less than Container Load options for smaller shipments that do not require a full container."
         },
         "fcl": {
-          "title": "FCL Shipping",
-          "description": "Full Container Load options for larger shipments requiring dedicated container capacity."
+          "title": "FOB Shipping",
+          "description": "FOB options for larger shipments requiring dedicated container capacity."
         },
         "bulkPartial": {
           "title": "Bulk & Partial Container Movement",
@@ -715,6 +715,10 @@
         "specialized": {
           "title": "Specialized Cargo Support",
           "description": "Planning support for oversized or sensitive cargo requirements."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -737,7 +741,7 @@
           "description": "Origin, destination, cargo type, volume, container needs, and timeline."
         },
         "chooseLclFcl": {
-          "title": "Choose LCL or FCL",
+          "title": "Choose LCL or FOB",
           "description": "Assess whether the shipment requires partial or full container movement."
         },
         "planRoute": {
@@ -761,7 +765,7 @@
     "whyAlfs": {
       "heading": "Why Choose ALFS",
       "items": {
-        "flexible": "Flexible LCL and FCL options",
+        "flexible": "Flexible LCL and FOB options",
         "monitoring": "Monitoring and shipment status updates",
         "cargoTypes": "Support for different cargo types",
         "coordination": "Efficient international freight coordination"
@@ -798,7 +802,7 @@
     },
     "cta": {
       "heading": "Move international cargo with confidence.",
-      "description": "From LCL and FCL shipments to oversized or sensitive cargo, ALFS helps businesses coordinate sea freight with flexibility, clarity, and professional execution.",
+      "description": "From LCL and FOB shipments to oversized or sensitive cargo, ALFS helps businesses coordinate sea freight with flexibility, clarity, and professional execution.",
       "primaryAction": "Request Sea Freight Quote"
     }
   },
@@ -880,6 +884,10 @@
         "regional": {
           "title": "Regional Road Coordination",
           "description": "Support for cargo movement across local and regional routes."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1045,6 +1053,10 @@
         "schedule": {
           "title": "Schedule Discipline",
           "description": "Strict attention to delivery schedules and transport coordination."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1209,6 +1221,10 @@
         "supplyChain": {
           "title": "Supply Chain Support",
           "description": "Helping businesses manage cargo before final transport."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1373,6 +1389,10 @@
         "flexible": {
           "title": "Flexible Storage Solutions",
           "description": "Adaptable support based on cargo type, volume, and timeline."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1537,6 +1557,10 @@
         "crossBorder": {
           "title": "Cross-Border Support",
           "description": "Assistance for local, regional, and international cargo movement."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },

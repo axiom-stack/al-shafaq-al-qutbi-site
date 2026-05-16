@@ -11,6 +11,7 @@ import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {getPublicContactInfo} from "@/components/public/PublicContactDetails";
 import {isRTL, type Locale} from "@/i18n/routing";
+import {parsePhoneNumbers} from "@/lib/site-routes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ContactPage");
@@ -47,7 +48,7 @@ export default async function ContactPage() {
       key === "email"
         ? `mailto:${contact.email}`
         : key === "phone"
-          ? `tel:${contact.tel}`
+          ? `tel:${parsePhoneNumbers(contact.phone)[0].tel}`
           : contact.whatsApp;
 
     return {
@@ -58,6 +59,7 @@ export default async function ContactPage() {
       href,
       external: key === "whatsapp",
       icon,
+      phoneNumbers: key === "phone" ? parsePhoneNumbers(contact.phone) : null,
     };
   });
 
@@ -114,7 +116,7 @@ export default async function ContactPage() {
                   {t("hero.primaryAction")}
                 </a>
                 <a
-                  href={`tel:${contact.tel}`}
+                  href={`tel:${parsePhoneNumbers(contact.phone)[0].tel}`}
                   className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
                   {t("hero.secondaryAction")}
@@ -172,13 +174,9 @@ export default async function ContactPage() {
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               {channels.map((channel) => (
-                <a
+                <div
                   key={channel.key}
-                  href={channel.href}
-                  {...(channel.external
-                    ? {target: "_blank", rel: "noopener noreferrer"}
-                    : {})}
-                  className={`group rounded-2xl border border-outline-variant/20 bg-white p-6 shadow-[0_4px_16px_rgba(26,47,122,0.08)] transition-shadow hover:shadow-[0_8px_24px_rgba(26,47,122,0.14)] ${localeIsRTL ? "text-right" : "text-left"}`}
+                  className={`group rounded-2xl border border-outline-variant/20 bg-white p-6 shadow-[0_4px_16px_rgba(26,47,122,0.08)] transition-shadow hover:shadow-[0_8px_24px_rgba(26,47_122,0.14)] ${localeIsRTL ? "text-right" : "text-left"}`}
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-alfs-orange/10 text-alfs-orange transition-colors group-hover:bg-alfs-orange group-hover:text-white">
                     <PublicIcon
@@ -188,8 +186,29 @@ export default async function ContactPage() {
                   </span>
                   <h3 className="mt-5 text-[1.05rem] font-bold text-alfs-navy">{channel.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-on-surface-variant">{channel.description}</p>
-                  <p className="mt-4 text-sm font-semibold text-alfs-orange">{channel.value}</p>
-                </a>
+                  {channel.key === "phone" && channel.phoneNumbers ? (
+                    <div className="mt-4 flex flex-wrap gap-x-2 gap-y-1">
+                      {channel.phoneNumbers.map((num, idx) => (
+                        <span key={num.tel} className="inline-flex items-center">
+                          <a href={`tel:${num.tel}`} className="text-sm font-semibold text-alfs-orange hover:text-alfs-amber transition-colors">
+                            {num.label}
+                          </a>
+                          {idx < channel.phoneNumbers.length - 1 && <span className="ms-2 text-on-surface-variant/40">/</span>}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <a
+                      href={channel.href}
+                      {...(channel.external
+                        ? {target: "_blank", rel: "noopener noreferrer"}
+                        : {})}
+                      className="mt-4 block text-sm font-semibold text-alfs-orange hover:text-alfs-amber transition-colors"
+                    >
+                      {channel.value}
+                    </a>
+                  )}
+                </div>
               ))}
             </div>
           </div>

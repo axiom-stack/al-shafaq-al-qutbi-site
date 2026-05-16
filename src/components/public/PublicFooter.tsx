@@ -2,7 +2,7 @@ import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
 import {isRTL, type Locale} from "@/i18n/routing";
-import {primaryPhoneTel, serviceRoutes, siteRoutes} from "@/lib/site-routes";
+import {parsePhoneNumbers, serviceRoutes, siteRoutes} from "@/lib/site-routes";
 
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
@@ -45,7 +45,7 @@ export function PublicFooter() {
 
   const email = t("contact.email");
   const phone = t("contact.phone");
-  const tel = primaryPhoneTel(phone);
+  const phoneNumbers = parsePhoneNumbers(phone);
 
   return (
     <footer id="contact" className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
@@ -121,9 +121,16 @@ export function PublicFooter() {
               </li>
               <li className="flex items-center gap-2.5 sm:gap-3">
                 <PublicIcon name="phone" className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]" />
-                <a href={`tel:${tel}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
-                  {phone}
-                </a>
+                <div className="flex flex-wrap gap-x-2 gap-y-1">
+                  {phoneNumbers.map((num, idx) => (
+                    <span key={num.tel} className="inline-flex items-center">
+                      <a href={`tel:${num.tel}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
+                        {num.label}
+                      </a>
+                      {idx < phoneNumbers.length - 1 && <span className="ms-2 text-white/40">/</span>}
+                    </span>
+                  ))}
+                </div>
               </li>
             </ul>
           </div>

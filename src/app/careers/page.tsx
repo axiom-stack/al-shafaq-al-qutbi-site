@@ -52,7 +52,7 @@ export default async function CareersPage() {
         <section className="relative overflow-hidden bg-alfs-deep-blue">
           <div className="absolute inset-0">
             <Image
-              src="/images/about/about-hero.png"
+              src="/images/careers/careers-hero.png"
               alt={t("hero.imageAlt")}
               fill
               priority
