@@ -188,12 +188,12 @@ export default async function ContactPage() {
                   <p className="mt-2 text-sm leading-6 text-on-surface-variant">{channel.description}</p>
                   {channel.key === "phone" && channel.phoneNumbers ? (
                     <div className="mt-4 flex flex-wrap gap-x-2 gap-y-1">
-                      {channel.phoneNumbers.map((num, idx) => (
+                      {channel.phoneNumbers.map((num, idx, arr) => (
                         <span key={num.tel} className="inline-flex items-center">
                           <a href={`tel:${num.tel}`} className="text-sm font-semibold text-alfs-orange hover:text-alfs-amber transition-colors">
                             {num.label}
                           </a>
-                          {idx < channel.phoneNumbers.length - 1 && <span className="ms-2 text-on-surface-variant/40">/</span>}
+                          {idx < arr.length - 1 && <span className="ms-2 text-on-surface-variant/40">/</span>}
                         </span>
                       ))}
                     </div>
