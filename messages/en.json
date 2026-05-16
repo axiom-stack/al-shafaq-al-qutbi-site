@@ -503,7 +503,8 @@
         "seaFreight": {
           "title": "Sea Freight",
           "badges": [
-            "FOB / LCL"
+            "FOB",
+            "LCL"
           ],
           "description": "Global connections delivered with trust.",
           "imageAlt": "Sea freight service illustration"
@@ -511,7 +512,8 @@
         "landFreight": {
           "title": "Land Freight",
           "badges": [
-            "FTL / LTL"
+            "FTL",
+            "LTL"
           ],
           "description": "Regional reach and reliable delivery.",
           "imageAlt": "Land freight service illustration"
@@ -555,7 +557,7 @@
         "description": "Exclusive use of a container for large shipments."
       },
       "lcl": {
-        "title": "LCL (Less than Container Load)",
+        "title": "LCL",
         "description": "Shared container space for smaller loads."
       },
       "primaryCta": "Get Sea Quote",
@@ -645,11 +647,11 @@
     "hero": {
       "eyebrow": "SEA FREIGHT SERVICES",
       "headline": "Reliable LCL and FOB shipping for international cargo.",
-      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including Less than Container Load and FOB options, with careful monitoring and shipment updates at every stage.",
+      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including LCL and FOB options, with careful monitoring and shipment updates at every stage.",
       "imageAlt": "Sea freight container ship carrying international cargo",
       "chips": {
-        "lcl": "LCL Shipping",
-        "fcl": "FOB Shipping",
+        "lcl": "LCL",
+        "fcl": "FOB",
         "bulk": "Bulk Cargo",
         "partial": "Partial Containers",
         "oversized": "Oversized Cargo",
@@ -668,12 +670,12 @@
       "heading": "When sea freight is the right choice.",
       "items": {
         "fullContainer": {
-          "title": "Full Container Shipments",
+          "title": "FOB Shipments",
           "description": "For large shipments that require a dedicated container and efficient international movement."
         },
         "partialContainer": {
-          "title": "Partial Container Shipments",
-          "description": "For cargo that does not require a full container but still needs reliable sea transport."
+          "title": "LCL Shipments",
+          "description": "For cargo that does not require FOB but still needs reliable sea transport."
         },
         "bulk": {
           "title": "Bulk Cargo",
@@ -697,11 +699,11 @@
       "heading": "Core Capabilities",
       "items": {
         "lcl": {
-          "title": "LCL Shipping",
-          "description": "Less than Container Load options for smaller shipments that do not require a full container."
+          "title": "LCL",
+          "description": "LCL options for smaller shipments that do not require FOB."
         },
         "fcl": {
-          "title": "FOB Shipping",
+          "title": "FOB",
           "description": "FOB options for larger shipments requiring dedicated container capacity."
         },
         "bulkPartial": {
@@ -726,8 +728,8 @@
       "heading": "Use Cases / Cargo Types",
       "items": {
         "bulk": "Bulk goods",
-        "partial": "Partial container loads",
-        "full": "Full container loads",
+        "partial": "LCL loads",
+        "full": "FOB loads",
         "oversized": "Oversized cargo",
         "sensitive": "Sensitive cargo",
         "trade": "International trade shipments"
@@ -742,7 +744,7 @@
         },
         "chooseLclFcl": {
           "title": "Choose LCL or FOB",
-          "description": "Assess whether the shipment requires partial or full container movement."
+          "description": "Assess whether the shipment requires LCL or FOB movement."
         },
         "planRoute": {
           "title": "Plan Sea Route",
@@ -830,19 +832,19 @@
     "overview": {
       "heading": "Land freight designed for regional movement and flexible cargo needs.",
       "paragraphOne": "Land Freight supports businesses moving cargo across local and regional routes with a focus on speed, safety, and flexible cargo management. ALFS helps coordinate the right road transport option based on shipment size, cargo type, destination, and handling needs.",
-      "paragraphTwo": "Whether the shipment requires a full truckload, partial load, flatbed transport, or temperature-controlled handling, ALFS supports practical road freight solutions for different business requirements.",
+      "paragraphTwo": "Whether the shipment requires FTL, LTL, flatbed transport, or temperature-controlled handling, ALFS supports practical road freight solutions for different business requirements.",
       "backToServices": "Back to all services"
     },
     "whenToChoose": {
       "heading": "When land freight is the right choice.",
       "items": {
         "fullTruckload": {
-          "title": "Full Truckload Cargo",
-          "description": "For large shipments that require efficient full-truck transportation."
+          "title": "FTL Cargo",
+          "description": "For large shipments that require efficient FTL movement."
         },
         "partial": {
-          "title": "Partial Shipments",
-          "description": "For smaller cargo loads that need precise consignment management."
+          "title": "LTL Shipments",
+          "description": "For smaller cargo loads that need precise LTL management."
         },
         "oversized": {
           "title": "Oversized or Specially Shaped Cargo",
@@ -894,8 +896,8 @@
     "useCases": {
       "heading": "Use Cases / Cargo Types",
       "items": {
-        "ftl": "Full truckload shipments",
-        "ltl": "Less than truckload shipments",
+        "ftl": "FTL shipments",
+        "ltl": "LTL shipments",
         "oversized": "Oversized cargo",
         "shaped": "Specially shaped cargo",
         "food": "Food products",
@@ -1179,7 +1181,7 @@
         },
         "partial": {
           "title": "Partial Container Loads",
-          "description": "For shipments that do not require a full container but need efficient handling."
+          "description": "For shipments that do not require FOB but need efficient handling."
         },
         "cost": {
           "title": "Cost Reduction Needs",
