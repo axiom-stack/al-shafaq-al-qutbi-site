@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
@@ -19,13 +19,13 @@ const navItems = [
   {key: "home", type: "home"},
   {key: "services", type: "services"},
   {key: "coverage", type: "coverage"},
-  {key: "whyAlfs", type: "whyAlfs"},
   {key: "about", type: "about"},
+  {key: "careers", type: "careers"},
   {key: "contact", type: "contact"},
 ] as const;
 
 type PublicNavbarProps = {
-  currentPage?: "home" | "about" | "services" | "contact";
+  currentPage?: "home" | "about" | "services" | "careers" | "contact";
 };
 
 function getNavHref(itemType: (typeof navItems)[number]["type"]) {
@@ -36,10 +36,10 @@ function getNavHref(itemType: (typeof navItems)[number]["type"]) {
       return "/services";
     case "coverage":
       return siteAnchors.coverage;
-    case "whyAlfs":
-      return siteAnchors.whyAlfs;
     case "about":
       return "/about";
+    case "careers":
+      return siteRoutes.careers;
     case "contact":
       return siteRoutes.contact;
   }
@@ -51,7 +51,52 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
   const localeIsRTL = isRTL(locale);
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Only run intersection observer on home page to track sections
+    if (currentPage !== "home") {
+      setActiveSection(null);
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-100px 0px -70% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    const sectionIds = ["top", "services", "coverage", "contact"];
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [currentPage, pathname]);
+
   const quoteHref = resolveQuoteHref(pathname, currentPage === "home");
+
+  const isItemActive = (itemKey: string) => {
+    if (currentPage === "home") {
+      if (activeSection) {
+        const effectiveActiveSection = activeSection === "top" ? "home" : activeSection;
+        return itemKey === effectiveActiveSection;
+      }
+      return itemKey === "home";
+    }
+    return itemKey === currentPage;
+  };
 
   function renderNavLink(
     href: string,
@@ -80,7 +125,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
                 getNavHref(item.type),
                 t(`links.${item.key}`),
                 `text-[12px] font-medium transition-colors ${
-                  item.key === currentPage
+                  isItemActive(item.key)
                     ? "border-b border-alfs-orange pb-0.5 text-alfs-orange"
                     : "text-[#3a3d4e] hover:text-alfs-orange"
                 }`,
@@ -133,7 +178,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
                   getNavHref(item.type),
                   t(`links.${item.key}`),
                   `text-sm font-medium ${
-                    item.key === currentPage ? "text-alfs-orange" : "text-on-surface-variant"
+                    isItemActive(item.key) ? "text-alfs-orange" : "text-on-surface-variant"
                   }`,
                   () => setMenuOpen(false),
                 )}

@@ -6,6 +6,7 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkeleton";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
+import {PublicMap} from "@/components/public/PublicMap";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {AnchorNavLink} from "@/components/public/AnchorNavLink";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
@@ -30,12 +31,21 @@ const serviceKeys = [
   "warehousing",
   "consolidation",
 ] as const;
-const heroChipKeys = ["seaFreight", "landFreight", "airFreight", "customs"] as const;
+const heroChipKeys = [
+  "seaFreight",
+  "landFreight",
+  "airFreight",
+  "warehousing",
+  "consolidation",
+  "customs",
+] as const;
 
 const heroChipRoutes: Record<(typeof heroChipKeys)[number], string> = {
   seaFreight: serviceRoutes.seaFreight,
   landFreight: serviceRoutes.landFreight,
   airFreight: serviceRoutes.airFreight,
+  warehousing: serviceRoutes.warehousing,
+  consolidation: serviceRoutes.consolidation,
   customs: serviceRoutes.customsClearance,
 };
 
@@ -102,7 +112,7 @@ export default async function HomePage() {
 
           <div className="relative mx-auto grid w-full max-w-[1360px] gap-10 lg:grid-cols-12 lg:items-center">
             <div className={`lg:col-span-8 lg:py-10 ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h1 className="max-w-[760px] text-[2.7rem] leading-[1.1] font-bold tracking-[-0.045em] text-white sm:text-[3.75rem] lg:text-[4.25rem]">
+              <h1 className="max-w-[760px] text-[2.7rem] leading-[1.2] font-bold tracking-[-0.045em] text-white sm:text-[3.75rem] lg:text-[4.25rem]">
                 {t("hero.heading")}
               </h1>
               <p className="mt-5 max-w-[670px] text-[1.08rem] leading-8 text-white/84 sm:text-[1.14rem]">
@@ -140,7 +150,11 @@ export default async function HomePage() {
                             ? "truck"
                             : chip.href === serviceRoutes.airFreight
                               ? "plane"
-                              : "customs"
+                              : chip.href === serviceRoutes.warehousing
+                                ? "warehouse"
+                                : chip.href === serviceRoutes.consolidation
+                                  ? "box"
+                                  : "customs"
                       }
                       className="h-3.5 w-3.5"
                     />
@@ -215,7 +229,7 @@ export default async function HomePage() {
         <section id="whyAlfs" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
             <div id="about" className={`max-w-[560px] ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h2 className="relative text-[2.05rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
+              <h2 className="relative text-[2.05rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
                 {t("about.heading")}
                 <span
                   className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`}
@@ -346,7 +360,7 @@ export default async function HomePage() {
 
           <div className="relative mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className={`lg:col-span-5 ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h2 className="text-[1.7rem] leading-[1.12] font-bold tracking-[-0.04em] sm:text-[2.15rem] sm:leading-[1.1]">
+              <h2 className="text-[1.7rem] leading-[1.12] font-bold tracking-[-0.04em] sm:text-[2.15rem] sm:leading-[1.2]">
                 {t("regionalCoverage.heading")}
                 <span
                   className={`mt-3 block h-[3px] w-11 rounded-full bg-alfs-orange sm:mt-4 sm:w-[52px] ${sideHeadingAccentClass}`}
@@ -415,6 +429,8 @@ export default async function HomePage() {
             </PageTransitionLink>
           </div>
         </section>
+
+        <PublicMap />
       </main>
       <PublicFooter />
     </>

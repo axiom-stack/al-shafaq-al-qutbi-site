@@ -2,7 +2,7 @@ import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
 import {isRTL, type Locale} from "@/i18n/routing";
-import {primaryPhoneTel, serviceRoutes} from "@/lib/site-routes";
+import {parsePhoneNumbers, serviceRoutes, siteRoutes} from "@/lib/site-routes";
 
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
@@ -23,7 +23,7 @@ export function PublicFooter() {
   const locale = useLocale() as Locale;
   const localeIsRTL = isRTL(locale);
   const copyrightYear = new Date().getFullYear();
-  const locationKeys = ["amman", "hebron"] as const;
+  const locationKeys = ["amman"] as const;
   const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
     seaFreight: serviceRoutes.seaFreight,
     landFreight: serviceRoutes.landFreight,
@@ -36,7 +36,7 @@ export function PublicFooter() {
   const companyLinks: Record<(typeof companyKeys)[number], string> = {
     aboutUs: "/about",
     ourNetwork: "/#coverage",
-    careers: "/#whyAlfs",
+    careers: siteRoutes.careers,
     contactUs: "/contact",
   };
 
@@ -45,7 +45,7 @@ export function PublicFooter() {
 
   const email = t("contact.email");
   const phone = t("contact.phone");
-  const tel = primaryPhoneTel(phone);
+  const phoneNumbers = parsePhoneNumbers(phone);
 
   return (
     <footer id="contact" className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
@@ -61,9 +61,6 @@ export function PublicFooter() {
             <div className="inline-flex rounded-md bg-white px-2 py-2">
               <PublicLogo />
             </div>
-            <p className="w-full min-w-0 text-sm leading-relaxed text-white/76 sm:leading-7">
-              {t("description")}
-            </p>
           </div>
 
           <div className="min-w-0 [grid-area:services]">
@@ -124,9 +121,16 @@ export function PublicFooter() {
               </li>
               <li className="flex items-center gap-2.5 sm:gap-3">
                 <PublicIcon name="phone" className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]" />
-                <a href={`tel:${tel}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
-                  {phone}
-                </a>
+                <div className="flex flex-wrap gap-x-2 gap-y-1">
+                  {phoneNumbers.map((num, idx) => (
+                    <span key={num.tel} className="inline-flex items-center">
+                      <a href={`tel:${num.tel}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
+                        {num.label}
+                      </a>
+                      {idx < phoneNumbers.length - 1 && <span className="ms-2 text-white/40">/</span>}
+                    </span>
+                  ))}
+                </div>
               </li>
             </ul>
           </div>

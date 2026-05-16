@@ -12,6 +12,7 @@ export type ServiceRouteKey = keyof typeof serviceRoutes;
 
 export const siteRoutes = {
   contact: "/contact",
+  careers: "/careers",
 } as const;
 
 export const contactInquiryHref = `${siteRoutes.contact}#inquiry-form`;
@@ -48,12 +49,18 @@ function normalizeContactPath(pathname: string | null) {
   return withoutQuery || "";
 }
 
-export function primaryPhoneTel(phoneLabel: string) {
-  const primary = phoneLabel.split("/")[0]?.trim() ?? phoneLabel;
-  return primary.replace(/[^\d+]/g, "");
+export function parsePhoneNumbers(phoneLabel: string) {
+  return phoneLabel.split("/").map((part) => {
+    const label = part.trim();
+    return {
+      label,
+      tel: label.replace(/[^\d+]/g, ""),
+    };
+  });
 }
 
 export function whatsAppHref(phoneLabel: string) {
-  const digits = primaryPhoneTel(phoneLabel).replace(/^00/, "");
-  return `https://wa.me/${digits}`;
+  // Always use the specified primary WhatsApp number
+  const whatsappNumber = "962791010199";
+  return `https://wa.me/${whatsappNumber}`;
 }

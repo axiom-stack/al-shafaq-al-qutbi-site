@@ -6,6 +6,7 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {PublicContactDetails, getPublicContactInfo} from "@/components/public/PublicContactDetails";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
+import {PublicMap} from "@/components/public/PublicMap";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
@@ -23,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const introCardKeys = ["integratedFreight", "operationalClarity", "flexibleHandling"] as const;
 const valueKeys = ["accuracy", "speed", "flexibility", "tracking"] as const;
 const teamPointKeys = ["professionalism", "support", "training"] as const;
-const officeKeys = ["amman", "hebron"] as const;
+const officeKeys = ["amman"] as const;
 const serviceChipKeys = [
   "seaFreight",
   "landTransport",
@@ -140,7 +141,7 @@ export default async function AboutPage() {
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
                 {t("hero.kicker")}
               </p>
-              <h1 className="mt-3 max-w-[620px] text-[2.4rem] leading-[1.02] font-bold tracking-[-0.05em] text-white sm:text-[3.4rem] lg:text-[4rem]">
+              <h1 className="mt-3 max-w-[620px] text-[2.4rem] leading-[1.2] font-bold tracking-[-0.05em] text-white sm:text-[3.4rem] lg:text-[4rem]">
                 {t("hero.heading")}
               </h1>
               <p className="mt-5 max-w-[610px] text-[0.98rem] leading-7 text-white/88 sm:text-[1.02rem]">
@@ -197,7 +198,7 @@ export default async function AboutPage() {
         <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div className={`max-w-[510px] ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h2 className="text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("snapshot.heading")}
               </h2>
               <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
@@ -313,7 +314,7 @@ export default async function AboutPage() {
             </div>
 
             <div className={localeIsRTL ? "order-2 text-right lg:order-1" : "order-1 text-left lg:order-2"}>
-              <h2 className="max-w-[520px] text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="max-w-[520px] text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("team.heading")}
               </h2>
               <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
@@ -346,7 +347,7 @@ export default async function AboutPage() {
         <section className="overflow-hidden bg-[#f7f5fb] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div className={localeIsRTL ? "text-right" : "text-left"}>
-              <h2 className="max-w-[520px] text-[2rem] leading-[1.08] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
+              <h2 className="max-w-[520px] text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
                 {t("coverage.heading")}
               </h2>
               <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
@@ -438,7 +439,7 @@ export default async function AboutPage() {
           />
           <div className={`absolute inset-y-0 w-1/2 ${ctaGlowSideClass}`} />
           <div className="relative mx-auto max-w-[760px]">
-            <h2 className="text-[2rem] leading-[1.1] font-bold tracking-[-0.04em] text-white sm:text-[2.6rem]">
+            <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-white sm:text-[2.6rem]">
               {t("cta.heading")}
             </h2>
             <p className="mx-auto mt-5 max-w-[580px] text-[0.98rem] leading-7 text-white/84">
@@ -465,19 +466,9 @@ export default async function AboutPage() {
             />
           </div>
         </section>
-      </main>
 
-      <a
-        href={contact.whatsApp}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t("whatsAppLabel")}
-        className={`fixed bottom-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-transform hover:scale-105 hover:bg-[#1da851] sm:bottom-6 ${
-          localeIsRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"
-        }`}
-      >
-        <PublicIcon name="whatsapp" className="h-6 w-6" />
-      </a>
+        <PublicMap />
+      </main>
 
       <PublicFooter />
     </>

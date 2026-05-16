@@ -15,6 +15,7 @@
         "coverage": "Coverage",
         "whyAlfs": "Why ALFS",
         "about": "About",
+        "careers": "Careers",
         "contact": "Contact"
       },
       "trackShipment": "Track Shipment",
@@ -33,7 +34,9 @@
         "seaFreight": "Sea Freight",
         "landFreight": "Land Freight",
         "airFreight": "Air Freight",
-        "customs": "Customs"
+        "warehousing": "Warehousing",
+        "consolidation": "Consolidation",
+        "customs": "Customs Clearance"
       },
       "support": {
         "title": "Shipment Support",
@@ -109,7 +112,7 @@
     "services": {
       "seaFreight": {
         "title": "Sea Freight",
-        "description": "FCL and LCL shipments globally, with specialized handling at the Port of Aqaba.",
+        "description": "FOB and LCL shipments globally, with specialized handling at the Port of Aqaba.",
         "icon": "ship"
       },
       "landFreight": {
@@ -188,11 +191,10 @@
       "contact": {
         "title": "Contact",
         "locations": {
-          "amman": "Jordan: Amman - Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor",
-          "hebron": "Palestine: Hebron - Ain Sara"
+          "amman": "Jordan: Amman - Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor"
         },
         "email": "info@aurora-lfs.com",
-        "phone": "00962791010199 / 00962796495566"
+        "phone": "00962791010199 / 00962797621012"
       },
       "copyright": "© {year} ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved."
     }
@@ -212,7 +214,7 @@
       "support": {
         "title": "Integrated Logistics Support",
         "services": {
-          "seaFreight": "Sea Freight Operations",
+          "seaFreight": "Sea Freight",
           "landTransport": "Cross-Border Land Transport",
           "airFreight": "Air Freight Solutions",
           "warehousing": "Secure Warehousing",
@@ -298,10 +300,6 @@
         "amman": {
           "title": "Amman Office",
           "address": "Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor"
-        },
-        "hebron": {
-          "title": "Hebron Office",
-          "address": "Ain Sara\nHebron, Palestine"
         }
       },
       "mapLabels": {
@@ -324,7 +322,7 @@
   "ContactPage": {
     "meta": {
       "title": "Contact ALFS Logistics | Get a Quote",
-      "description": "Reach ALFS logistics experts in Amman and Hebron. Request a quote, track shipments, or speak with our team by email, phone, or WhatsApp."
+      "description": "Reach ALFS logistics experts in Amman. Request a quote, track shipments, or speak with our team by email, phone, or WhatsApp."
     },
     "hero": {
       "kicker": "Contact ALFS",
@@ -382,9 +380,6 @@
       "locations": {
         "amman": {
           "title": "Amman Office"
-        },
-        "hebron": {
-          "title": "Hebron Office"
         }
       }
     },
@@ -430,7 +425,8 @@
         "land": "Land",
         "air": "Air",
         "consolidation": "Consolidation",
-        "warehousing": "Warehousing"
+        "warehousing": "Warehousing",
+        "customs": "Customs Clearance"
       },
       "coverage": {
         "title": "Service Coverage",
@@ -507,7 +503,8 @@
         "seaFreight": {
           "title": "Sea Freight",
           "badges": [
-            "FCL / LCL"
+            "FOB",
+            "LCL"
           ],
           "description": "Global connections delivered with trust.",
           "imageAlt": "Sea freight service illustration"
@@ -515,7 +512,8 @@
         "landFreight": {
           "title": "Land Freight",
           "badges": [
-            "FTL / LTL"
+            "FTL",
+            "LTL"
           ],
           "description": "Regional reach and reliable delivery.",
           "imageAlt": "Land freight service illustration"
@@ -555,11 +553,11 @@
       "description": "Global connections delivered with trust. Our sea freight services offer cost-effective and reliable transport for large volumes of cargo across international waters.",
       "imageAlt": "Sea freight deep dive illustration",
       "fcl": {
-        "title": "FCL (Full Container Load)",
+        "title": "FOB",
         "description": "Exclusive use of a container for large shipments."
       },
       "lcl": {
-        "title": "LCL (Less than Container Load)",
+        "title": "LCL",
         "description": "Shared container space for smaller loads."
       },
       "primaryCta": "Get Sea Quote",
@@ -643,17 +641,17 @@
   },
   "SeaFreightPage": {
     "meta": {
-      "title": "Sea Freight Services | LCL & FCL Shipping | ALFS",
-      "description": "Flexible LCL and FCL sea freight for international cargo. ALFS coordinates containerized, bulk, partial, oversized, and sensitive shipments with monitoring and status updates."
+      "title": "Sea Freight Services | LCL & FOB Shipping | ALFS",
+      "description": "Flexible LCL and FOB sea freight for international cargo. ALFS coordinates containerized, bulk, partial, oversized, and sensitive shipments with monitoring and status updates."
     },
     "hero": {
       "eyebrow": "SEA FREIGHT SERVICES",
-      "headline": "Reliable LCL and FCL shipping for international cargo.",
-      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including Less than Container Load and Full Container Load options, with careful monitoring and shipment updates at every stage.",
+      "headline": "Reliable LCL and FOB shipping for international cargo.",
+      "subheadline": "ALFS transports all types of cargo through flexible sea freight solutions, including LCL and FOB options, with careful monitoring and shipment updates at every stage.",
       "imageAlt": "Sea freight container ship carrying international cargo",
       "chips": {
-        "lcl": "LCL Shipping",
-        "fcl": "FCL Shipping",
+        "lcl": "LCL",
+        "fcl": "FOB",
         "bulk": "Bulk Cargo",
         "partial": "Partial Containers",
         "oversized": "Oversized Cargo",
@@ -664,7 +662,7 @@
     },
     "overview": {
       "heading": "Sea freight designed for cost-efficient international movement.",
-      "paragraphOne": "Sea Freight is the right choice for businesses moving containerized, bulk, partial, oversized, or sensitive cargo across international trade routes. ALFS provides flexible LCL and FCL options designed to match shipment size, destination, and operational requirements.",
+      "paragraphOne": "Sea Freight is the right choice for businesses moving containerized, bulk, partial, oversized, or sensitive cargo across international trade routes. ALFS provides flexible LCL and FOB options designed to match shipment size, destination, and operational requirements.",
       "paragraphTwo": "With continuous monitoring and shipment status updates, ALFS helps clients move goods with transparency, efficiency, and confidence from origin to destination.",
       "backToServices": "Back to all services"
     },
@@ -672,12 +670,12 @@
       "heading": "When sea freight is the right choice.",
       "items": {
         "fullContainer": {
-          "title": "Full Container Shipments",
+          "title": "FOB Shipments",
           "description": "For large shipments that require a dedicated container and efficient international movement."
         },
         "partialContainer": {
-          "title": "Partial Container Shipments",
-          "description": "For cargo that does not require a full container but still needs reliable sea transport."
+          "title": "LCL Shipments",
+          "description": "For cargo that does not require FOB but still needs reliable sea transport."
         },
         "bulk": {
           "title": "Bulk Cargo",
@@ -701,12 +699,12 @@
       "heading": "Core Capabilities",
       "items": {
         "lcl": {
-          "title": "LCL Shipping",
-          "description": "Less than Container Load options for smaller shipments that do not require a full container."
+          "title": "LCL",
+          "description": "LCL options for smaller shipments that do not require FOB."
         },
         "fcl": {
-          "title": "FCL Shipping",
-          "description": "Full Container Load options for larger shipments requiring dedicated container capacity."
+          "title": "FOB",
+          "description": "FOB options for larger shipments requiring dedicated container capacity."
         },
         "bulkPartial": {
           "title": "Bulk & Partial Container Movement",
@@ -719,6 +717,10 @@
         "specialized": {
           "title": "Specialized Cargo Support",
           "description": "Planning support for oversized or sensitive cargo requirements."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -726,8 +728,8 @@
       "heading": "Use Cases / Cargo Types",
       "items": {
         "bulk": "Bulk goods",
-        "partial": "Partial container loads",
-        "full": "Full container loads",
+        "partial": "LCL loads",
+        "full": "FOB loads",
         "oversized": "Oversized cargo",
         "sensitive": "Sensitive cargo",
         "trade": "International trade shipments"
@@ -741,8 +743,8 @@
           "description": "Origin, destination, cargo type, volume, container needs, and timeline."
         },
         "chooseLclFcl": {
-          "title": "Choose LCL or FCL",
-          "description": "Assess whether the shipment requires partial or full container movement."
+          "title": "Choose LCL or FOB",
+          "description": "Assess whether the shipment requires LCL or FOB movement."
         },
         "planRoute": {
           "title": "Plan Sea Route",
@@ -765,7 +767,7 @@
     "whyAlfs": {
       "heading": "Why Choose ALFS",
       "items": {
-        "flexible": "Flexible LCL and FCL options",
+        "flexible": "Flexible LCL and FOB options",
         "monitoring": "Monitoring and shipment status updates",
         "cargoTypes": "Support for different cargo types",
         "coordination": "Efficient international freight coordination"
@@ -802,7 +804,7 @@
     },
     "cta": {
       "heading": "Move international cargo with confidence.",
-      "description": "From LCL and FCL shipments to oversized or sensitive cargo, ALFS helps businesses coordinate sea freight with flexibility, clarity, and professional execution.",
+      "description": "From LCL and FOB shipments to oversized or sensitive cargo, ALFS helps businesses coordinate sea freight with flexibility, clarity, and professional execution.",
       "primaryAction": "Request Sea Freight Quote"
     }
   },
@@ -830,19 +832,19 @@
     "overview": {
       "heading": "Land freight designed for regional movement and flexible cargo needs.",
       "paragraphOne": "Land Freight supports businesses moving cargo across local and regional routes with a focus on speed, safety, and flexible cargo management. ALFS helps coordinate the right road transport option based on shipment size, cargo type, destination, and handling needs.",
-      "paragraphTwo": "Whether the shipment requires a full truckload, partial load, flatbed transport, or temperature-controlled handling, ALFS supports practical road freight solutions for different business requirements.",
+      "paragraphTwo": "Whether the shipment requires FTL, LTL, flatbed transport, or temperature-controlled handling, ALFS supports practical road freight solutions for different business requirements.",
       "backToServices": "Back to all services"
     },
     "whenToChoose": {
       "heading": "When land freight is the right choice.",
       "items": {
         "fullTruckload": {
-          "title": "Full Truckload Cargo",
-          "description": "For large shipments that require efficient full-truck transportation."
+          "title": "FTL Cargo",
+          "description": "For large shipments that require efficient FTL movement."
         },
         "partial": {
-          "title": "Partial Shipments",
-          "description": "For smaller cargo loads that need precise consignment management."
+          "title": "LTL Shipments",
+          "description": "For smaller cargo loads that need precise LTL management."
         },
         "oversized": {
           "title": "Oversized or Specially Shaped Cargo",
@@ -884,14 +886,18 @@
         "regional": {
           "title": "Regional Road Coordination",
           "description": "Support for cargo movement across local and regional routes."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
     "useCases": {
       "heading": "Use Cases / Cargo Types",
       "items": {
-        "ftl": "Full truckload shipments",
-        "ltl": "Less than truckload shipments",
+        "ftl": "FTL shipments",
+        "ltl": "LTL shipments",
         "oversized": "Oversized cargo",
         "shaped": "Specially shaped cargo",
         "food": "Food products",
@@ -1049,6 +1055,10 @@
         "schedule": {
           "title": "Schedule Discipline",
           "description": "Strict attention to delivery schedules and transport coordination."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1171,7 +1181,7 @@
         },
         "partial": {
           "title": "Partial Container Loads",
-          "description": "For shipments that do not require a full container but need efficient handling."
+          "description": "For shipments that do not require FOB but need efficient handling."
         },
         "cost": {
           "title": "Cost Reduction Needs",
@@ -1213,6 +1223,10 @@
         "supplyChain": {
           "title": "Supply Chain Support",
           "description": "Helping businesses manage cargo before final transport."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1377,6 +1391,10 @@
         "flexible": {
           "title": "Flexible Storage Solutions",
           "description": "Adaptable support based on cargo type, volume, and timeline."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1541,6 +1559,10 @@
         "crossBorder": {
           "title": "Cross-Border Support",
           "description": "Assistance for local, regional, and international cargo movement."
+        },
+        "doorToDoor": {
+          "title": "Door-to-Door Service",
+          "description": "Comprehensive logistics management from origin warehouse to final destination."
         }
       }
     },
@@ -1627,5 +1649,107 @@
       "description": "ALFS helps businesses navigate customs procedures with clarity, compliance support, and professional coordination.",
       "primaryAction": "Request Clearance Support"
     }
+  },
+  "CareersPage": {
+    "meta": {
+      "title": "Careers at ALFS Logistics | Join Our Team",
+      "description": "Explore career opportunities at ALFS Logistics. Submit your CV and join a regional freight team focused on sea, land, and air logistics."
+    },
+    "hero": {
+      "kicker": "Careers at ALFS",
+      "heading": "Build your career in regional logistics.",
+      "description": "We are always looking for motivated professionals who value accuracy, teamwork, and operational excellence across freight and supply chain operations.",
+      "primaryAction": "Apply Now",
+      "secondaryAction": "Contact HR",
+      "imageAlt": "ALFS logistics careers hero",
+      "panel": {
+        "title": "Why join ALFS",
+        "description": "Grow with a team that moves cargo across borders with clarity and care."
+      }
+    },
+    "highlights": {
+      "heading": "What we offer",
+      "description": "A professional environment where logistics talent can grow with meaningful responsibility.",
+      "items": {
+        "growth": {
+          "title": "Career growth",
+          "description": "Develop your skills across freight operations, coordination, and customer-facing roles."
+        },
+        "team": {
+          "title": "Collaborative team",
+          "description": "Work alongside experienced logistics professionals in a supportive environment."
+        },
+        "impact": {
+          "title": "Regional impact",
+          "description": "Contribute to freight movement across Jordan, Palestine, and connected trade routes."
+        }
+      }
+    },
+    "form": {
+      "heading": "Submit your application",
+      "description": "Share your details and attach your CV. Our HR team will review your profile and contact you if there is a suitable opportunity.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "position": "Position / Role",
+        "experience": "Experience Level",
+        "experiencePlaceholder": "Select experience",
+        "experienceLevels": {
+          "entry": "Entry level",
+          "oneToThree": "1–3 years",
+          "threeToFive": "3–5 years",
+          "fivePlus": "5+ years"
+        },
+        "linkedin": "LinkedIn Profile",
+        "linkedinPlaceholder": "https://linkedin.com/in/...",
+        "message": "Cover Letter / Message",
+        "cv": "CV / Resume",
+        "cvChoose": "Choose a file",
+        "cvHint": "PDF, DOC, or DOCX — max 10 MB",
+        "submit": "Submit Application"
+      },
+      "success": {
+        "title": "Application received",
+        "description": "Thank you for applying. Our team will review your submission and get back to you when a matching role is available."
+      }
+    },
+    "process": {
+      "heading": "How it works",
+      "description": "A straightforward application process designed to help us understand your background and experience.",
+      "steps": {
+        "apply": {
+          "title": "Submit your application",
+          "description": "Complete the form and upload your CV with relevant details."
+        },
+        "review": {
+          "title": "Profile review",
+          "description": "Our HR team reviews applications and shortlists candidates for open roles."
+        },
+        "interview": {
+          "title": "Interview",
+          "description": "Selected candidates are invited for an interview with the hiring team."
+        },
+        "join": {
+          "title": "Join the team",
+          "description": "Successful candidates receive an offer and onboarding support."
+        }
+      },
+      "note": {
+        "title": "General applications welcome",
+        "description": "If you do not see a specific role listed, you may still apply. We keep promising profiles on file for future opportunities."
+      }
+    },
+    "cta": {
+      "heading": "Ready to take the next step?",
+      "description": "Send your CV today and become part of a logistics team built on professionalism and trust.",
+      "action": "Apply Now"
+    }
+  },
+  "Common": {
+    "map": {
+      "title": "Our Location"
+    },
+    "whatsAppLabel": "Open WhatsApp contact shortcut"
   }
 }
