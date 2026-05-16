@@ -12,6 +12,7 @@ export type ServiceRouteKey = keyof typeof serviceRoutes;
 
 export const siteRoutes = {
   contact: "/contact",
+  careers: "/careers",
 } as const;
 
 export const contactInquiryHref = `${siteRoutes.contact}#inquiry-form`;
@@ -54,6 +55,7 @@ export function primaryPhoneTel(phoneLabel: string) {
 }
 
 export function whatsAppHref(phoneLabel: string) {
-  const digits = primaryPhoneTel(phoneLabel).replace(/^00/, "");
-  return `https://wa.me/${digits}`;
+  // Always use the specified primary WhatsApp number
+  const whatsappNumber = "962791010199";
+  return `https://wa.me/${whatsappNumber}`;
 }

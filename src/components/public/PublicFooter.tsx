@@ -2,7 +2,7 @@ import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 
 import {isRTL, type Locale} from "@/i18n/routing";
-import {primaryPhoneTel, serviceRoutes} from "@/lib/site-routes";
+import {primaryPhoneTel, serviceRoutes, siteRoutes} from "@/lib/site-routes";
 
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
@@ -36,7 +36,7 @@ export function PublicFooter() {
   const companyLinks: Record<(typeof companyKeys)[number], string> = {
     aboutUs: "/about",
     ourNetwork: "/#coverage",
-    careers: "/#whyAlfs",
+    careers: siteRoutes.careers,
     contactUs: "/contact",
   };
 

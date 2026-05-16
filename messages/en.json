@@ -15,6 +15,7 @@
         "coverage": "Coverage",
         "whyAlfs": "Why ALFS",
         "about": "About",
+        "careers": "Careers",
         "contact": "Contact"
       },
       "trackShipment": "Track Shipment",
@@ -1622,5 +1623,107 @@
       "description": "ALFS helps businesses navigate customs procedures with clarity, compliance support, and professional coordination.",
       "primaryAction": "Request Clearance Support"
     }
+  },
+  "CareersPage": {
+    "meta": {
+      "title": "Careers at ALFS Logistics | Join Our Team",
+      "description": "Explore career opportunities at ALFS Logistics. Submit your CV and join a regional freight team focused on sea, land, and air logistics."
+    },
+    "hero": {
+      "kicker": "Careers at ALFS",
+      "heading": "Build your career in regional logistics.",
+      "description": "We are always looking for motivated professionals who value accuracy, teamwork, and operational excellence across freight and supply chain operations.",
+      "primaryAction": "Apply Now",
+      "secondaryAction": "Contact HR",
+      "imageAlt": "ALFS logistics careers hero",
+      "panel": {
+        "title": "Why join ALFS",
+        "description": "Grow with a team that moves cargo across borders with clarity and care."
+      }
+    },
+    "highlights": {
+      "heading": "What we offer",
+      "description": "A professional environment where logistics talent can grow with meaningful responsibility.",
+      "items": {
+        "growth": {
+          "title": "Career growth",
+          "description": "Develop your skills across freight operations, coordination, and customer-facing roles."
+        },
+        "team": {
+          "title": "Collaborative team",
+          "description": "Work alongside experienced logistics professionals in a supportive environment."
+        },
+        "impact": {
+          "title": "Regional impact",
+          "description": "Contribute to freight movement across Jordan, Palestine, and connected trade routes."
+        }
+      }
+    },
+    "form": {
+      "heading": "Submit your application",
+      "description": "Share your details and attach your CV. Our HR team will review your profile and contact you if there is a suitable opportunity.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "position": "Position / Role",
+        "experience": "Experience Level",
+        "experiencePlaceholder": "Select experience",
+        "experienceLevels": {
+          "entry": "Entry level",
+          "oneToThree": "1–3 years",
+          "threeToFive": "3–5 years",
+          "fivePlus": "5+ years"
+        },
+        "linkedin": "LinkedIn Profile",
+        "linkedinPlaceholder": "https://linkedin.com/in/...",
+        "message": "Cover Letter / Message",
+        "cv": "CV / Resume",
+        "cvChoose": "Choose a file",
+        "cvHint": "PDF, DOC, or DOCX — max 10 MB",
+        "submit": "Submit Application"
+      },
+      "success": {
+        "title": "Application received",
+        "description": "Thank you for applying. Our team will review your submission and get back to you when a matching role is available."
+      }
+    },
+    "process": {
+      "heading": "How it works",
+      "description": "A straightforward application process designed to help us understand your background and experience.",
+      "steps": {
+        "apply": {
+          "title": "Submit your application",
+          "description": "Complete the form and upload your CV with relevant details."
+        },
+        "review": {
+          "title": "Profile review",
+          "description": "Our HR team reviews applications and shortlists candidates for open roles."
+        },
+        "interview": {
+          "title": "Interview",
+          "description": "Selected candidates are invited for an interview with the hiring team."
+        },
+        "join": {
+          "title": "Join the team",
+          "description": "Successful candidates receive an offer and onboarding support."
+        }
+      },
+      "note": {
+        "title": "General applications welcome",
+        "description": "If you do not see a specific role listed, you may still apply. We keep promising profiles on file for future opportunities."
+      }
+    },
+    "cta": {
+      "heading": "Ready to take the next step?",
+      "description": "Send your CV today and become part of a logistics team built on professionalism and trust.",
+      "action": "Apply Now"
+    }
+  },
+  "Common": {
+    "map": {
+      "title": "Our Location"
+    },
+    "whatsAppLabel": "Open WhatsApp contact shortcut"
   }
 }

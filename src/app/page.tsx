@@ -6,6 +6,7 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkeleton";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
+import {PublicMap} from "@/components/public/PublicMap";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {AnchorNavLink} from "@/components/public/AnchorNavLink";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
@@ -428,6 +429,8 @@ export default async function HomePage() {
             </PageTransitionLink>
           </div>
         </section>
+
+        <PublicMap />
       </main>
       <PublicFooter />
     </>

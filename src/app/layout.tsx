@@ -5,6 +5,8 @@ import "./globals.css";
 import { getDirection, type Locale } from "@/i18n/routing";
 import { LocaleClientSync } from "@/components/public/LocaleClientSync";
 import { PageTransitionProvider } from "@/components/public/PageTransitionProvider";
+import { FloatingWhatsApp } from "@/components/public/FloatingWhatsApp";
+import { getPublicContactInfo } from "@/components/public/PublicContactDetails";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -25,6 +27,7 @@ export default async function RootLayout({
 }>) {
   const locale = (await getLocale()) as Locale;
   const dir = getDirection(locale);
+  const contact = await getPublicContactInfo();
 
   return (
     <html
@@ -37,6 +40,7 @@ export default async function RootLayout({
           <PageTransitionProvider>
             <LocaleClientSync />
             {children}
+            <FloatingWhatsApp whatsAppHref={contact.whatsApp} />
           </PageTransitionProvider>
         </NextIntlClientProvider>
       </body>

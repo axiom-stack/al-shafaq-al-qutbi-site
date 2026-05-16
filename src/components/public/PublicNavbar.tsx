@@ -20,11 +20,12 @@ const navItems = [
   {key: "services", type: "services"},
   {key: "coverage", type: "coverage"},
   {key: "about", type: "about"},
+  {key: "careers", type: "careers"},
   {key: "contact", type: "contact"},
 ] as const;
 
 type PublicNavbarProps = {
-  currentPage?: "home" | "about" | "services" | "contact";
+  currentPage?: "home" | "about" | "services" | "careers" | "contact";
 };
 
 function getNavHref(itemType: (typeof navItems)[number]["type"]) {
@@ -37,6 +38,8 @@ function getNavHref(itemType: (typeof navItems)[number]["type"]) {
       return siteAnchors.coverage;
     case "about":
       return "/about";
+    case "careers":
+      return siteRoutes.careers;
     case "contact":
       return siteRoutes.contact;
   }

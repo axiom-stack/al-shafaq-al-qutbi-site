@@ -6,6 +6,7 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {PublicContactDetails, getPublicContactInfo} from "@/components/public/PublicContactDetails";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
+import {PublicMap} from "@/components/public/PublicMap";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
 import {PageTransitionLink} from "@/components/public/PageTransitionLink";
 import {isRTL, type Locale} from "@/i18n/routing";
@@ -465,19 +466,9 @@ export default async function AboutPage() {
             />
           </div>
         </section>
-      </main>
 
-      <a
-        href={contact.whatsApp}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t("whatsAppLabel")}
-        className={`fixed bottom-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-transform hover:scale-105 hover:bg-[#1da851] sm:bottom-6 ${
-          localeIsRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"
-        }`}
-      >
-        <PublicIcon name="whatsapp" className="h-6 w-6" />
-      </a>
+        <PublicMap />
+      </main>
 
       <PublicFooter />
     </>
