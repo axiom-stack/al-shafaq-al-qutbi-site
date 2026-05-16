@@ -30,12 +30,21 @@ const serviceKeys = [
   "warehousing",
   "consolidation",
 ] as const;
-const heroChipKeys = ["seaFreight", "landFreight", "airFreight", "customs"] as const;
+const heroChipKeys = [
+  "seaFreight",
+  "landFreight",
+  "airFreight",
+  "warehousing",
+  "consolidation",
+  "customs",
+] as const;
 
 const heroChipRoutes: Record<(typeof heroChipKeys)[number], string> = {
   seaFreight: serviceRoutes.seaFreight,
   landFreight: serviceRoutes.landFreight,
   airFreight: serviceRoutes.airFreight,
+  warehousing: serviceRoutes.warehousing,
+  consolidation: serviceRoutes.consolidation,
   customs: serviceRoutes.customsClearance,
 };
 
@@ -140,7 +149,11 @@ export default async function HomePage() {
                             ? "truck"
                             : chip.href === serviceRoutes.airFreight
                               ? "plane"
-                              : "customs"
+                              : chip.href === serviceRoutes.warehousing
+                                ? "warehouse"
+                                : chip.href === serviceRoutes.consolidation
+                                  ? "box"
+                                  : "customs"
                       }
                       className="h-3.5 w-3.5"
                     />

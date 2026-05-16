@@ -23,7 +23,7 @@ export function PublicFooter() {
   const locale = useLocale() as Locale;
   const localeIsRTL = isRTL(locale);
   const copyrightYear = new Date().getFullYear();
-  const locationKeys = ["amman", "hebron"] as const;
+  const locationKeys = ["amman"] as const;
   const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
     seaFreight: serviceRoutes.seaFreight,
     landFreight: serviceRoutes.landFreight,
@@ -61,9 +61,6 @@ export function PublicFooter() {
             <div className="inline-flex rounded-md bg-white px-2 py-2">
               <PublicLogo />
             </div>
-            <p className="w-full min-w-0 text-sm leading-relaxed text-white/76 sm:leading-7">
-              {t("description")}
-            </p>
           </div>
 
           <div className="min-w-0 [grid-area:services]">

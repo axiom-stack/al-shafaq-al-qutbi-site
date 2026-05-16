@@ -33,7 +33,9 @@
         "seaFreight": "Sea Freight",
         "landFreight": "Land Freight",
         "airFreight": "Air Freight",
-        "customs": "Customs"
+        "warehousing": "Warehousing",
+        "consolidation": "Consolidation",
+        "customs": "Customs Clearance"
       },
       "support": {
         "title": "Shipment Support",
@@ -188,8 +190,7 @@
       "contact": {
         "title": "Contact",
         "locations": {
-          "amman": "Jordan: Amman - Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor",
-          "hebron": "Palestine: Hebron - Ain Sara"
+          "amman": "Jordan: Amman - Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor"
         },
         "email": "info@aurora-lfs.com",
         "phone": "00962791010199 / 00962796495566"
@@ -298,10 +299,6 @@
         "amman": {
           "title": "Amman Office",
           "address": "Al Swaifyeh - Wakalat Street\nAl-Hourani Commercial Complex, No. 8 - 1st Floor"
-        },
-        "hebron": {
-          "title": "Hebron Office",
-          "address": "Ain Sara\nHebron, Palestine"
         }
       },
       "mapLabels": {
@@ -324,7 +321,7 @@
   "ContactPage": {
     "meta": {
       "title": "Contact ALFS Logistics | Get a Quote",
-      "description": "Reach ALFS logistics experts in Amman and Hebron. Request a quote, track shipments, or speak with our team by email, phone, or WhatsApp."
+      "description": "Reach ALFS logistics experts in Amman. Request a quote, track shipments, or speak with our team by email, phone, or WhatsApp."
     },
     "hero": {
       "kicker": "Contact ALFS",
@@ -382,9 +379,6 @@
       "locations": {
         "amman": {
           "title": "Amman Office"
-        },
-        "hebron": {
-          "title": "Hebron Office"
         }
       }
     },
@@ -430,7 +424,8 @@
         "land": "Land",
         "air": "Air",
         "consolidation": "Consolidation",
-        "warehousing": "Warehousing"
+        "warehousing": "Warehousing",
+        "customs": "Customs Clearance"
       },
       "coverage": {
         "title": "Service Coverage",

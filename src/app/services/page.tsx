@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 type IconName = ComponentProps<typeof PublicIcon>["name"];
 
 const quickActionKeys = ["quote", "track", "compare", "contact"] as const;
-const heroChipKeys = ["sea", "land", "air", "consolidation", "warehousing"] as const;
+const heroChipKeys = ["sea", "land", "air", "consolidation", "warehousing", "customs"] as const;
 const coverageRegionKeys = ["middleEast", "asia", "europe"] as const;
 const journeyStepKeys = ["plan", "consolidate", "store", "transport", "track"] as const;
 const coreServiceKeys = [
@@ -69,6 +69,7 @@ const heroChipIcons: Record<(typeof heroChipKeys)[number], IconName> = {
   air: "plane",
   consolidation: "box",
   warehousing: "warehouse",
+  customs: "customs",
 };
 
 export default async function ServicesPage() {

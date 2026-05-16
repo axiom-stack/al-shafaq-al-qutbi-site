@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const introCardKeys = ["integratedFreight", "operationalClarity", "flexibleHandling"] as const;
 const valueKeys = ["accuracy", "speed", "flexibility", "tracking"] as const;
 const teamPointKeys = ["professionalism", "support", "training"] as const;
-const officeKeys = ["amman", "hebron"] as const;
+const officeKeys = ["amman"] as const;
 const serviceChipKeys = [
   "seaFreight",
   "landTransport",

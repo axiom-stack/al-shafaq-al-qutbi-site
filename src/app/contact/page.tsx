@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const channelKeys = ["email", "phone", "whatsapp"] as const;
-const officeKeys = ["amman", "hebron"] as const;
+const officeKeys = ["amman"] as const;
 const supportKeys = ["response", "coverage", "expertise"] as const;
 
 export default async function ContactPage() {
