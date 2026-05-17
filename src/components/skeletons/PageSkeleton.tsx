@@ -58,10 +58,10 @@ function PublicFooterSkeleton({locale}: {locale: Locale}) {
   return (
     <footer className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
       <div
-        className="mx-auto grid max-w-[1280px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr] lg:px-8 text-start"
+        className="mx-auto grid max-w-[1280px] gap-x-6 gap-y-8 px-4 py-10 text-start sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] lg:px-8 lg:py-14"
       >
         <div className="space-y-4">
-          <SkeletonBlock className="h-14 w-40 rounded-xl bg-white/14" />
+          <SkeletonBlock className="h-11 w-[154px] rounded-xl bg-white/14" />
         </div>
 
         {Array.from({length: 2}, (_, columnIndex) => (

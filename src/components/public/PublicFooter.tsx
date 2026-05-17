@@ -1,12 +1,12 @@
 import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
+import Image from "next/image";
 
 import {isRTL, type Locale} from "@/i18n/routing";
 import {parsePhoneNumbers, serviceRoutes, siteRoutes} from "@/lib/site-routes";
 
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
-import {PublicLogo} from "./PublicLogo";
 
 const serviceKeys = [
   "seaFreight",
@@ -20,6 +20,7 @@ const companyKeys = ["aboutUs", "ourNetwork", "careers", "contactUs"] as const;
 
 export function PublicFooter() {
   const t = useTranslations("HomePage.footer");
+  const brandT = useTranslations("HomePage.brand");
   const locale = useLocale() as Locale;
   const localeIsRTL = isRTL(locale);
   const copyrightYear = new Date().getFullYear();
@@ -50,7 +51,7 @@ export function PublicFooter() {
   return (
     <footer id="contact" className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
       <div
-        className={`mx-auto max-w-[1280px] px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14 ${
+        className={`mx-auto max-w-[1280px] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14 ${
           localeIsRTL ? "text-right" : "text-left"
         }`}
       >
@@ -58,9 +59,14 @@ export function PublicFooter() {
           className="grid grid-cols-2 gap-x-6 gap-y-8 [grid-template-areas:'brand_brand'_'services_company'_'contact_contact'] lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-10 lg:[grid-template-areas:'brand_services_company_contact']"
         >
           <div className="min-w-0 [grid-area:brand] space-y-3.5 lg:space-y-4">
-            <div className="inline-flex rounded-md bg-white px-2 py-2">
-              <PublicLogo />
-            </div>
+            <Image
+              src="/images/ALFS_LOGO_WHITE.png"
+              alt={brandT("name")}
+              width={1011}
+              height={271}
+              sizes="(max-width: 640px) 154px, (max-width: 1024px) 170px, 186px"
+              className="block h-auto w-[154px] max-w-full sm:w-[170px] lg:w-[186px]"
+            />
           </div>
 
           <div className="min-w-0 [grid-area:services]">
@@ -138,7 +144,7 @@ export function PublicFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-[1280px] px-5 py-4 text-center text-xs text-white/50 sm:px-6 sm:text-sm lg:px-8">
+        <div className="mx-auto max-w-[1280px] px-4 py-4 text-center text-xs text-white/50 sm:px-6 sm:text-sm lg:px-8">
           {t("copyright", {year: copyrightYear})}
         </div>
       </div>
