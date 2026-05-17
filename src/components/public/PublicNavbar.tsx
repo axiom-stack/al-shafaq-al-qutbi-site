@@ -140,22 +140,18 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
     itemType: (typeof navItems)[number]["type"],
     event: MouseEvent<HTMLAnchorElement>,
   ) {
-    if (currentPage !== "home") {
+    if (itemType === "coverage") {
+      event.preventDefault();
+      navigateToLocation("/", "coverage");
       return;
     }
 
-    if (itemType !== "home" && itemType !== "coverage") {
+    if (itemType !== "home" || currentPage !== "home") {
       return;
     }
 
     event.preventDefault();
-
-    if (itemType === "home") {
-      navigateToLocation("/");
-      return;
-    }
-
-    navigateToLocation("/", "coverage");
+    navigateToLocation("/");
   }
 
   function renderNavLink(
