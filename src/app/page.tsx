@@ -4,6 +4,7 @@ import Image from "next/image";
 import {getLocale, getTranslations} from "next-intl/server";
 
 import {HeroBackdropWithSkeleton} from "@/components/public/HeroBackdropWithSkeleton";
+import {HomePageAnchorScroll} from "@/components/public/HomePageAnchorScroll";
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicIcon} from "@/components/public/PublicIcon";
 import {PublicMap} from "@/components/public/PublicMap";
@@ -103,6 +104,7 @@ export default async function HomePage() {
   return (
     <>
       <PublicNavbar currentPage="home" />
+      <HomePageAnchorScroll />
       <main id="top" className="min-h-screen bg-[#fbf8ff] pt-[56px]">
         <section className="relative overflow-hidden bg-alfs-deep-blue px-4 pb-24 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pt-0">
           <HeroBackdropWithSkeleton
