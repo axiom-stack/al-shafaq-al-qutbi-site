@@ -15,6 +15,7 @@ import {resolveQuoteHref, siteAnchors, siteRoutes} from "@/lib/site-routes";
 import {AnchorNavLink} from "./AnchorNavLink";
 import {LocaleSwitch} from "./LocaleSwitch";
 import {PageTransitionLink} from "./PageTransitionLink";
+import {usePageTransition} from "./PageTransitionProvider";
 import {PublicLogo} from "./PublicLogo";
 
 const navItems = [
@@ -85,6 +86,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
   const localeIsRTL = isRTL(locale);
   const router = useRouter();
   const routerPathname = usePathname();
+  const {beginTransition} = usePageTransition();
   const {pathname: locationPath, hash} = useBrowserLocation(routerPathname);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -116,6 +118,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
       }
 
       setPendingAnchorScroll("coverage");
+      beginTransition({pathname: "/", locale});
       router.push("/", {scroll: false});
       return;
     }
@@ -133,9 +136,9 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
     onClick?: (event: MouseEvent<HTMLAnchorElement>) => void,
   ) {
     return (
-      <a href={getNavHref(itemType)} className={className} onClick={onClick}>
+      <AnchorNavLink href={getNavHref(itemType)} className={className} onClick={onClick}>
         {label}
-      </a>
+      </AnchorNavLink>
     );
   }
 
