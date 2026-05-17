@@ -1,6 +1,25 @@
 "use client";
 
-import {useState, type FormEvent} from "react";
+import {useState} from "react";
+
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Controller, useForm} from "react-hook-form";
+
+import {
+  FieldError,
+  FieldLabel,
+  formInputClassName,
+  FormLegend,
+  SubmissionNotice,
+} from "@/components/forms/FormPrimitives";
+import type {Locale} from "@/i18n/routing";
+import {
+  careersCvMaxBytes,
+  createCareersApplicationSchema,
+  type CareersApplicationInputValues,
+  type CareersApplicationValues,
+  type CareersFormCopy,
+} from "@/lib/forms/contact-submissions";
 
 type CareersApplicationFormProps = {
   heading: string;
@@ -25,42 +44,130 @@ type CareersApplicationFormProps = {
     cvHint: string;
     cvChoose: string;
     submit: string;
-    successTitle: string;
-    successDescription: string;
   };
+  formCopy: CareersFormCopy["form"] & {
+    legend: {
+      required: string;
+      optional: string;
+    };
+    status: {
+      sending: string;
+    };
+    feedback: {
+      successTitle: string;
+      errorTitle: string;
+      errorDescription: string;
+    };
+  };
+  locale: Locale;
   localeIsRTL: boolean;
 };
 
-const inputClassName =
-  "w-full rounded-md border border-outline-variant bg-[#fbf8ff] px-4 py-2.5 text-sm text-on-surface outline-none transition-colors focus:border-alfs-orange focus:ring-2 focus:ring-alfs-orange/20";
+type SubmissionState =
+  | {tone: "success"; message: string}
+  | {tone: "error"; message: string}
+  | null;
 
 export function CareersApplicationForm({
   heading,
   description,
   fields,
+  formCopy,
+  locale,
   localeIsRTL,
 }: CareersApplicationFormProps) {
+  const schema = createCareersApplicationSchema({
+    form: formCopy,
+    fields: {
+      name: fields.name,
+      email: fields.email,
+      phone: fields.phone,
+      message: fields.message,
+      position: fields.position,
+      experience: fields.experience,
+      linkedin: fields.linkedin,
+      cv: fields.cv,
+    },
+  });
   const [cvFileName, setCvFileName] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [submissionState, setSubmissionState] = useState<SubmissionState>(null);
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    resetField,
+    clearErrors,
+    setError,
+    formState: {errors, isSubmitting},
+  } = useForm<CareersApplicationInputValues, unknown, CareersApplicationValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      formType: "careers",
+      locale,
+      name: "",
+      email: "",
+      phone: "",
+      position: "",
+      experience: "",
+      linkedin: "",
+      message: "",
+    },
+  });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-  }
+  async function onSubmit(values: CareersApplicationValues) {
+    setSubmissionState(null);
 
-  if (submitted) {
-    return (
-      <div
-        className={`rounded-[14px] border border-[#ebe8f3] bg-white p-8 shadow-[0_14px_30px_rgba(26,47,122,0.10)] sm:p-10 ${
-          localeIsRTL ? "text-right" : "text-left"
-        }`}
-      >
-        <h2 className="text-[1.65rem] font-bold tracking-[-0.03em] text-alfs-navy">{fields.successTitle}</h2>
-        <p className="mt-3 max-w-[520px] text-[0.96rem] leading-7 text-on-surface-variant">
-          {fields.successDescription}
-        </p>
-      </div>
-    );
+    const formData = new FormData();
+    formData.append("formType", values.formType);
+    formData.append("locale", values.locale);
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("phone", values.phone);
+    formData.append("position", values.position);
+    formData.append("experience", values.experience);
+    formData.append("linkedin", values.linkedin ?? "");
+    formData.append("message", values.message);
+    formData.append("cv", values.cv);
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      body: formData,
+    });
+    const result = (await response.json()) as {
+      success: boolean;
+      message: string;
+      fieldErrors?: Record<string, string>;
+    };
+
+    if (!response.ok || !result.success) {
+      Object.entries(result.fieldErrors ?? {}).forEach(([field, message]) => {
+        setError(field as keyof CareersApplicationInputValues, {type: "server", message});
+      });
+
+      setSubmissionState({
+        tone: "error",
+        message: result.message || formCopy.feedback.errorDescription,
+      });
+      return;
+    }
+
+    setSubmissionState({
+      tone: "success",
+      message: result.message,
+    });
+    setCvFileName(null);
+    reset({
+      formType: "careers",
+      locale,
+      name: "",
+      email: "",
+      phone: "",
+      position: "",
+      experience: "",
+      linkedin: "",
+      message: "",
+    });
   }
 
   return (
@@ -74,70 +181,126 @@ export function CareersApplicationForm({
         id="application-form"
         className="mt-8 space-y-4 rounded-[14px] border border-[#ebe8f3] bg-white p-6 shadow-[0_14px_30px_rgba(26,47,122,0.10)] sm:p-8"
         encType="multipart/form-data"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
       >
+        <FormLegend
+          requiredText={formCopy.legend.required}
+          optionalText={formCopy.legend.optional}
+          localeIsRTL={localeIsRTL}
+        />
+
+        {submissionState ? (
+          <SubmissionNotice
+            tone={submissionState.tone}
+            title={
+              submissionState.tone === "success"
+                ? formCopy.feedback.successTitle
+                : formCopy.feedback.errorTitle
+            }
+            description={submissionState.message}
+          />
+        ) : null}
+
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.name}</span>
-            <input type="text" name="name" required className={inputClassName} />
+            <FieldLabel label={fields.name} required />
+            <input type="text" {...register("name")} disabled={isSubmitting} className={formInputClassName} />
+            <FieldError message={errors.name?.message} />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.email}</span>
-            <input type="email" name="email" required className={inputClassName} />
+            <FieldLabel label={fields.email} required />
+            <input type="email" {...register("email")} disabled={isSubmitting} className={formInputClassName} />
+            <FieldError message={errors.email?.message} />
           </label>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.phone}</span>
-            <input type="tel" name="phone" required className={inputClassName} />
+            <FieldLabel label={fields.phone} required />
+            <input type="tel" {...register("phone")} disabled={isSubmitting} className={formInputClassName} />
+            <FieldError message={errors.phone?.message} />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.position}</span>
-            <input type="text" name="position" required className={inputClassName} />
+            <FieldLabel label={fields.position} required />
+            <input type="text" {...register("position")} disabled={isSubmitting} className={formInputClassName} />
+            <FieldError message={errors.position?.message} />
           </label>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.experience}</span>
-            <select name="experience" required defaultValue="" className={inputClassName}>
-              <option value="" disabled>
-                {fields.experiencePlaceholder}
-              </option>
-              <option value="entry">{fields.experienceLevels.entry}</option>
-              <option value="1-3">{fields.experienceLevels.oneToThree}</option>
-              <option value="3-5">{fields.experienceLevels.threeToFive}</option>
-              <option value="5+">{fields.experienceLevels.fivePlus}</option>
+            <FieldLabel label={fields.experience} required />
+            <select {...register("experience")} disabled={isSubmitting} className={formInputClassName}>
+              <option value="">{fields.experiencePlaceholder}</option>
+              <option value={fields.experienceLevels.entry}>{fields.experienceLevels.entry}</option>
+              <option value={fields.experienceLevels.oneToThree}>{fields.experienceLevels.oneToThree}</option>
+              <option value={fields.experienceLevels.threeToFive}>{fields.experienceLevels.threeToFive}</option>
+              <option value={fields.experienceLevels.fivePlus}>{fields.experienceLevels.fivePlus}</option>
             </select>
+            <FieldError message={errors.experience?.message} />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.linkedin}</span>
+            <FieldLabel label={fields.linkedin} optionalLabel={formCopy.optionalLabel} />
             <input
               type="url"
-              name="linkedin"
+              {...register("linkedin")}
               placeholder={fields.linkedinPlaceholder}
-              className={inputClassName}
+              disabled={isSubmitting}
+              className={formInputClassName}
             />
+            <FieldError message={errors.linkedin?.message} />
           </label>
         </div>
         <label className="block">
-          <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.message}</span>
-          <textarea name="message" rows={5} required className={`${inputClassName} resize-y`} />
+          <FieldLabel label={fields.message} required />
+          <textarea
+            {...register("message")}
+            rows={5}
+            disabled={isSubmitting}
+            className={`${formInputClassName} resize-y`}
+          />
+          <FieldError message={errors.message?.message} />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-sm font-medium text-alfs-navy">{fields.cv}</span>
-          <div
-            className="relative flex min-h-[120px] flex-col items-center justify-center gap-2 rounded-md border border-dashed border-outline-variant bg-[#fbf8ff] px-4 py-6 text-center transition-colors hover:border-alfs-orange/60 focus-within:border-alfs-orange focus-within:ring-2 focus-within:ring-alfs-orange/20"
-          >
-            <input
-              type="file"
+          <FieldLabel label={fields.cv} required />
+          <div className="relative flex min-h-[120px] flex-col items-center justify-center gap-2 rounded-md border border-dashed border-outline-variant bg-[#fbf8ff] px-4 py-6 text-center transition-colors hover:border-alfs-orange/60 focus-within:border-alfs-orange focus-within:ring-2 focus-within:ring-alfs-orange/20">
+            <Controller
               name="cv"
-              required
-              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-              className="absolute inset-0 cursor-pointer opacity-0"
-              onChange={(event) => {
-                const file = event.target.files?.[0];
-                setCvFileName(file?.name ?? null);
-              }}
+              control={control}
+              render={({field}) => (
+                <input
+                  type="file"
+                  name={field.name}
+                  ref={field.ref}
+                  onBlur={field.onBlur}
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+
+                    if (!file) {
+                      setCvFileName(null);
+                      resetField("cv");
+                      return;
+                    }
+
+                    if (file.size > careersCvMaxBytes) {
+                      setCvFileName(null);
+                      event.target.value = "";
+                      resetField("cv");
+                      setError("cv", {
+                        type: "validate",
+                        message: formCopy.validation.fileSize,
+                      });
+                      return;
+                    }
+
+                    setCvFileName(file.name);
+                    clearErrors("cv");
+                    field.onChange(file);
+                  }}
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  disabled={isSubmitting}
+                  className="absolute inset-0 cursor-pointer opacity-0 disabled:cursor-not-allowed"
+                />
+              )}
             />
             <span className="text-sm font-semibold text-alfs-navy">{fields.cvChoose}</span>
             <span className="text-xs text-on-surface-variant">{fields.cvHint}</span>
@@ -145,12 +308,14 @@ export function CareersApplicationForm({
               <span className="mt-1 max-w-full truncate text-xs font-medium text-alfs-orange">{cvFileName}</span>
             ) : null}
           </div>
+          <FieldError message={errors.cv?.message} />
         </label>
         <button
           type="submit"
-          className="w-full rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber sm:w-auto"
+          disabled={isSubmitting}
+          className="w-full rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber disabled:cursor-not-allowed disabled:bg-alfs-orange/70 sm:w-auto"
         >
-          {fields.submit}
+          {isSubmitting ? formCopy.status.sending : fields.submit}
         </button>
       </form>
     </div>

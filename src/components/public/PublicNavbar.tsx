@@ -1,13 +1,14 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {useLocale} from "next-intl";
-import {useTranslations} from "next-intl";
+import type {MouseEvent} from "react";
+import {useLocale, useTranslations} from "next-intl";
 
 import {FiMenu, FiX} from "react-icons/fi";
 
 import {usePathname} from "@/i18n/navigation";
 import {isRTL, type Locale} from "@/i18n/routing";
+import {navigateToLocation} from "@/lib/anchor-navigation";
 import {resolveQuoteHref, siteAnchors, siteRoutes} from "@/lib/site-routes";
 
 import {AnchorNavLink} from "./AnchorNavLink";
@@ -31,7 +32,7 @@ type PublicNavbarProps = {
 function getNavHref(itemType: (typeof navItems)[number]["type"]) {
   switch (itemType) {
     case "home":
-      return "/";
+      return siteAnchors.top;
     case "services":
       return "/services";
     case "coverage":
@@ -45,64 +46,123 @@ function getNavHref(itemType: (typeof navItems)[number]["type"]) {
   }
 }
 
+function getActiveNavItem(
+  pathname: string,
+  hash: string,
+  currentPage: PublicNavbarProps["currentPage"],
+) {
+  const normalizedPath = pathname.split("?")[0] || "/";
+
+  if (normalizedPath === "/") {
+    switch (hash) {
+      case "#services":
+        return "services";
+      case "#coverage":
+        return "coverage";
+      case "#contact":
+        return "contact";
+      case "#top":
+      case "":
+        return "home";
+      default:
+        return "home";
+    }
+  }
+
+  if (normalizedPath === "/services" || /^\/services\/[^/]+$/.test(normalizedPath)) {
+    return "services";
+  }
+
+  if (normalizedPath === "/about") {
+    return "about";
+  }
+
+  if (normalizedPath === "/careers") {
+    return "careers";
+  }
+
+  if (normalizedPath === "/contact") {
+    return "contact";
+  }
+
+  return currentPage ?? "home";
+}
+
+function normalizeHash(hash: string) {
+  if (!hash) {
+    return "";
+  }
+
+  const fragment = hash.startsWith("#") ? hash.slice(1).split("#")[0] : hash.split("#")[0];
+
+  return fragment ? `#${fragment}` : "";
+}
+
 export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
   const t = useTranslations("HomePage.navbar");
   const locale = useLocale() as Locale;
   const localeIsRTL = isRTL(locale);
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [hash, setHash] = useState(() => (typeof window !== "undefined" ? window.location.hash : ""));
 
   useEffect(() => {
-    // Only run intersection observer on home page to track sections
+    const syncHash = () => {
+      const nextHash = normalizeHash(window.location.hash);
+
+      if (nextHash !== window.location.hash) {
+        window.history.replaceState(null, "", `${window.location.pathname}${nextHash}`);
+      }
+
+      setHash(nextHash);
+    };
+
+    syncHash();
+    window.addEventListener("popstate", syncHash);
+    window.addEventListener("hashchange", syncHash);
+    window.addEventListener("locationchange", syncHash);
+
+    return () => {
+      window.removeEventListener("popstate", syncHash);
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("locationchange", syncHash);
+    };
+  }, [pathname]);
+
+  const quoteHref = resolveQuoteHref(pathname, currentPage === "home");
+  const activeItem = getActiveNavItem(pathname, hash, currentPage);
+
+  function isItemActive(itemKey: string) {
+    return itemKey === activeItem;
+  }
+
+  function handlePrimaryNavClick(
+    itemType: (typeof navItems)[number]["type"],
+    event: MouseEvent<HTMLAnchorElement>,
+  ) {
     if (currentPage !== "home") {
-      setActiveSection(null);
       return;
     }
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-100px 0px -70% 0px",
-      threshold: 0,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    const sectionIds = ["top", "services", "coverage", "contact"];
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, [currentPage, pathname]);
-
-  const quoteHref = resolveQuoteHref(pathname, currentPage === "home");
-
-  const isItemActive = (itemKey: string) => {
-    if (currentPage === "home") {
-      if (activeSection) {
-        const effectiveActiveSection = activeSection === "top" ? "home" : activeSection;
-        return itemKey === effectiveActiveSection;
-      }
-      return itemKey === "home";
+    if (itemType !== "home" && itemType !== "coverage") {
+      return;
     }
-    return itemKey === currentPage;
-  };
+
+    event.preventDefault();
+
+    if (itemType === "home") {
+      navigateToLocation("/");
+      return;
+    }
+
+    navigateToLocation("/", "coverage");
+  }
 
   function renderNavLink(
     href: string,
     label: string,
     className: string,
-    onClick?: () => void,
+    onClick?: (event: MouseEvent<HTMLAnchorElement>) => void,
   ) {
     return (
       <AnchorNavLink href={href} className={className} onClick={onClick}>
@@ -129,6 +189,7 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
                     ? "border-b border-alfs-orange pb-0.5 text-alfs-orange"
                     : "text-[#3a3d4e] hover:text-alfs-orange"
                 }`,
+                (event) => handlePrimaryNavClick(item.type, event),
               )}
             </span>
           ))}
@@ -180,7 +241,10 @@ export function PublicNavbar({currentPage = "home"}: PublicNavbarProps) {
                   `text-sm font-medium ${
                     isItemActive(item.key) ? "text-alfs-orange" : "text-on-surface-variant"
                   }`,
-                  () => setMenuOpen(false),
+                  (event) => {
+                    setMenuOpen(false);
+                    handlePrimaryNavClick(item.type, event);
+                  },
                 )}
               </span>
             ))}

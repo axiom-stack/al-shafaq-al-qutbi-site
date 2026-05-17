@@ -22,6 +22,7 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
   const locale = (await getLocale()) as Locale;
   const localeIsRTL = isRTL(locale);
   const t = await getTranslations(config.translationNamespace);
+  const formT = await getTranslations("Common.forms");
 
   const sideHeadingAccentClass = "me-auto ms-0";
   const heroOverlayClass = localeIsRTL
@@ -296,7 +297,38 @@ export async function ServiceDetailPage({slug}: ServiceDetailPageProps) {
           <ServiceQuoteForm
             title={t("quoteForm.title")}
             subheading={t("quoteForm.subheading")}
+            formCopy={{
+              requiredLabel: formT("requiredLabel"),
+              optionalLabel: formT("optionalLabel"),
+              submissionSucceeded: formT("submissionSucceeded"),
+              submissionFailed: formT("submissionFailed"),
+              validation: {
+                required: formT("validation.required"),
+                email: formT("validation.email"),
+                phone: formT("validation.phone"),
+                select: formT("validation.select"),
+                messageMin: formT("validation.messageMin"),
+                cargoDetailsMin: formT("validation.cargoDetailsMin"),
+                linkedin: formT("validation.linkedin"),
+                fileRequired: formT("validation.fileRequired"),
+                fileType: formT("validation.fileType"),
+                fileSize: formT("validation.fileSize"),
+              },
+              legend: {
+                required: formT("legend.required"),
+                optional: formT("legend.optional"),
+              },
+              status: {
+                sending: formT("status.sending"),
+              },
+              feedback: {
+                successTitle: formT("feedback.successTitle"),
+                errorTitle: formT("feedback.errorTitle"),
+                errorDescription: formT("feedback.errorDescription"),
+              },
+            }}
             fields={quoteFields}
+            locale={locale}
             localeIsRTL={localeIsRTL}
           />
         </section>
