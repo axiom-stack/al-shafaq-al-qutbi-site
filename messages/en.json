@@ -1747,6 +1747,43 @@
     }
   },
   "Common": {
+    "forms": {
+      "requiredLabel": "Required",
+      "optionalLabel": "Optional",
+      "legend": {
+        "required": "* Required fields",
+        "optional": "Optional fields are marked clearly."
+      },
+      "status": {
+        "sending": "Sending..."
+      },
+      "feedback": {
+        "successTitle": "Message sent successfully",
+        "errorTitle": "We couldn't send your message",
+        "errorDescription": "Please review the form and try again, or contact us directly by phone or email."
+      },
+      "submissionSucceeded": "Your form has been submitted successfully.",
+      "submissionFailed": "We couldn't send your form right now. Please check the fields and try again.",
+      "labels": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "message": "Message",
+        "cargoDetails": "Shipment Details"
+      },
+      "validation": {
+        "required": "This field is required.",
+        "email": "Enter a valid email address.",
+        "phone": "Enter a valid phone number.",
+        "select": "Please select an option.",
+        "messageMin": "Please enter at least 10 characters.",
+        "cargoDetailsMin": "Please share at least 10 characters about your shipment.",
+        "linkedin": "Enter a valid LinkedIn URL starting with http:// or https://.",
+        "fileRequired": "Please upload your CV or resume.",
+        "fileType": "Upload a PDF, DOC, or DOCX file.",
+        "fileSize": "The file must be 10 MB or smaller."
+      }
+    },
     "map": {
       "title": "Our Location"
     },

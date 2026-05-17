@@ -27,6 +27,7 @@ export default async function CareersPage() {
   const locale = (await getLocale()) as Locale;
   const localeIsRTL = isRTL(locale);
   const t = await getTranslations("CareersPage");
+  const formT = await getTranslations("Common.forms");
 
   const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
   const heroOverlayClass = localeIsRTL
@@ -163,6 +164,36 @@ export default async function CareersPage() {
             <CareersApplicationForm
               heading={t("form.heading")}
               description={t("form.description")}
+              formCopy={{
+                requiredLabel: formT("requiredLabel"),
+                optionalLabel: formT("optionalLabel"),
+                submissionSucceeded: formT("submissionSucceeded"),
+                submissionFailed: formT("submissionFailed"),
+                validation: {
+                  required: formT("validation.required"),
+                  email: formT("validation.email"),
+                  phone: formT("validation.phone"),
+                  select: formT("validation.select"),
+                  messageMin: formT("validation.messageMin"),
+                  cargoDetailsMin: formT("validation.cargoDetailsMin"),
+                  linkedin: formT("validation.linkedin"),
+                  fileRequired: formT("validation.fileRequired"),
+                  fileType: formT("validation.fileType"),
+                  fileSize: formT("validation.fileSize"),
+                },
+                legend: {
+                  required: formT("legend.required"),
+                  optional: formT("legend.optional"),
+                },
+                status: {
+                  sending: formT("status.sending"),
+                },
+                feedback: {
+                  successTitle: formT("feedback.successTitle"),
+                  errorTitle: formT("feedback.errorTitle"),
+                  errorDescription: formT("feedback.errorDescription"),
+                },
+              }}
               fields={{
                 name: t("form.fields.name"),
                 email: t("form.fields.email"),
@@ -183,9 +214,8 @@ export default async function CareersPage() {
                 cvHint: t("form.fields.cvHint"),
                 cvChoose: t("form.fields.cvChoose"),
                 submit: t("form.fields.submit"),
-                successTitle: t("form.success.title"),
-                successDescription: t("form.success.description"),
               }}
+              locale={locale}
               localeIsRTL={localeIsRTL}
             />
 

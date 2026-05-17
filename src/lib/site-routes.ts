@@ -18,6 +18,7 @@ export const siteRoutes = {
 export const contactInquiryHref = `${siteRoutes.contact}#inquiry-form`;
 
 export const siteAnchors = {
+  top: "/",
   contact: "/contact",
   coverage: "/#coverage",
   whyAlfs: "/#whyAlfs",
