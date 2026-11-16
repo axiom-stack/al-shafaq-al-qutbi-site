@@ -1,11 +1,13 @@
 import type {Metadata} from "next";
 
-import {getLocale, getTranslations} from "next-intl/server";
+import {getTranslations} from "next-intl/server";
 
 import {PublicFooter} from "@/components/public/PublicFooter";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
-import {Link as IntlLink} from "@/i18n/navigation";
-import {isRTL, type Locale} from "@/i18n/routing";
+import {ArrowLink, ButtonLink} from "@/components/ui/Button";
+import {serviceRoutes} from "@/lib/site-routes";
+
+const serviceKeys = ["seaFreight", "landFreight", "airFreight", "consolidation", "warehousing", "customsClearance"] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("NotFound");
@@ -21,37 +23,41 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function NotFound() {
-  const locale = (await getLocale()) as Locale;
-  const localeIsRTL = isRTL(locale);
   const t = await getTranslations("NotFound");
+  const navT = await getTranslations("HomePage.navbar");
+  const footerT = await getTranslations("HomePage.footer");
 
   return (
     <>
       <PublicNavbar />
-      <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-surface px-4 py-24 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,61,168,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(244,121,32,0.14),transparent_24%),radial-gradient(circle_at_bottom,rgba(13,31,92,0.08),transparent_40%)]" />
-        <div className="relative w-full max-w-3xl">
-          <div className="brand-card overflow-hidden">
-            <div className="bg-alfs-deep-blue px-6 py-10 text-center text-white sm:px-10 sm:py-14">
-              <p className="brand-kicker text-white/80">{t("kicker")}</p>
-              <div className="mt-4 text-[4rem] font-bold leading-none tracking-[-0.08em] text-alfs-orange sm:text-[5.5rem]">
-                404
-              </div>
-              <h1 className="mt-4 text-2xl font-bold tracking-[-0.04em] text-white sm:text-3xl">
-                {t("title")}
-              </h1>
-              <p
-                className={`mx-auto mt-4 w-full max-w-[576px] text-base leading-7 text-white/82 sm:text-lg ${
-                  localeIsRTL ? "text-right" : "text-center"
-                }`}
-              >
-                {t("description")}
-              </p>
-              <IntlLink href="/" className="brand-button mt-8">
+      <main id="main" className="bg-paper pt-[var(--header-h)]">
+        <div className="shell grid min-h-[70svh] items-center gap-12 py-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-20 lg:py-20">
+          <div>
+            <p className="t-display text-navy-900" aria-hidden>
+              404
+            </p>
+            <h1 className="t-h2 mt-4 text-navy-900">{t("title")}</h1>
+            <p className="t-lead mt-4 max-w-xl text-ink-soft">{t("description")}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/" size="lg">
                 {t("action")}
-              </IntlLink>
+              </ButtonLink>
+              <ButtonLink href="/contact" variant="secondary" size="lg">
+                {navT("links.contact")}
+              </ButtonLink>
             </div>
-            <div className="h-1 bg-alfs-orange" />
+          </div>
+          <div>
+            <h2 className="t-h3 text-navy-900">{footerT("services.title")}</h2>
+            <ul className="mt-4 border-b border-line">
+              {serviceKeys.map((key) => (
+                <li key={key} className="border-t border-line">
+                  <ArrowLink href={serviceRoutes[key]} className="min-h-12 w-full justify-between">
+                    {footerT(`services.links.${key}`)}
+                  </ArrowLink>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </main>

@@ -21,6 +21,10 @@ export function isCareersPath(pathname: string) {
   return normalizeSkeletonPath(pathname) === "/careers";
 }
 
+export function isCoveragePath(pathname: string) {
+  return normalizeSkeletonPath(pathname) === "/coverage";
+}
+
 export function isServicesPath(pathname: string) {
   return normalizeSkeletonPath(pathname) === "/services";
 }

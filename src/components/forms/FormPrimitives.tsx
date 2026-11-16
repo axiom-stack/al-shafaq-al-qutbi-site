@@ -1,62 +1,75 @@
 import type {ReactNode} from "react";
 
-export const formInputClassName =
-  "w-full rounded-md border border-outline-variant bg-[#fbf8ff] px-4 py-2.5 text-sm text-on-surface outline-none transition-colors focus:border-alfs-orange focus:ring-2 focus:ring-alfs-orange/20 disabled:cursor-not-allowed disabled:opacity-70";
+import {PublicIcon} from "@/components/public/PublicIcon";
 
-type FormLegendProps = {
-  requiredText: string;
-  optionalText: string;
-  localeIsRTL: boolean;
+/** Shared class for inputs, selects and textareas. Defined in globals.css. */
+export const formInputClassName = "field-control";
+
+/** Accessibility wiring for a control: id, invalid state and the error it is described by. */
+export function fieldProps(id: string, error?: string, hintId?: string) {
+  const describedBy = [error ? `${id}-error` : null, hintId ?? null].filter(Boolean).join(" ");
+
+  return {
+    id,
+    "aria-invalid": error ? (true as const) : undefined,
+    "aria-describedby": describedBy || undefined,
+  };
+}
+
+type FieldProps = {
+  id: string;
+  label: string;
+  required?: boolean;
+  optionalLabel?: string;
+  error?: string;
+  hint?: string;
+  children: ReactNode;
+  className?: string;
 };
 
-export function FormLegend({requiredText, optionalText, localeIsRTL}: FormLegendProps) {
+/** Label above, control, then hint or error below. One layout for every field. */
+export function Field({id, label, required = false, optionalLabel, error, hint, children, className = ""}: FieldProps) {
   return (
-    <div
-      className={`flex flex-wrap items-center gap-3 rounded-xl border border-[#ebe8f3] bg-[#fbf8ff] px-4 py-3 text-xs text-on-surface-variant ${
-        localeIsRTL ? "justify-end text-right" : "justify-start text-left"
-      }`}
-    >
-      <span className="font-semibold text-alfs-navy">
-        <span className="text-[#d93025]">*</span> {requiredText}
-      </span>
-      <span>{optionalText}</span>
+    <div className={className}>
+      <label htmlFor={id} className="mb-2 flex items-baseline justify-between gap-3 text-ui font-semibold text-navy-900">
+        <span>
+          {label}
+          {required ? (
+            <span className="ms-1 text-danger" aria-hidden>
+              *
+            </span>
+          ) : null}
+        </span>
+        {!required && optionalLabel ? (
+          <span className="text-sm font-normal text-ink-faint">{optionalLabel}</span>
+        ) : null}
+      </label>
+      {children}
+      {hint && !error ? (
+        <p id={`${id}-hint`} className="mt-2 text-sm text-ink-faint">
+          {hint}
+        </p>
+      ) : null}
+      <FieldError id={`${id}-error`} message={error} />
     </div>
   );
 }
 
-type FieldLabelProps = {
-  label: string;
-  required?: boolean;
-  optionalLabel?: string;
-};
-
-export function FieldLabel({label, required = false, optionalLabel}: FieldLabelProps) {
-  return (
-    <span className="mb-1.5 block text-sm font-medium text-alfs-navy">
-      {label}
-      {required ? (
-        <span className="ms-1 text-[#d93025]" aria-hidden>
-          *
-        </span>
-      ) : optionalLabel ? (
-        <span className="ms-2 rounded-full bg-[#eef1fb] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-on-surface-variant">
-          {optionalLabel}
-        </span>
-      ) : null}
-    </span>
-  );
+export function FormLegend({requiredText}: {requiredText: string; optionalText?: string; localeIsRTL?: boolean}) {
+  return <p className="text-sm text-ink-faint">{requiredText}</p>;
 }
 
-type FieldErrorProps = {
-  message?: string;
-};
-
-export function FieldError({message}: FieldErrorProps) {
+export function FieldError({message, id}: {message?: string; id?: string}) {
   if (!message) {
     return null;
   }
 
-  return <span className="mt-1.5 block text-xs font-medium text-[#d93025]">{message}</span>;
+  return (
+    <p id={id} className="mt-2 flex items-start gap-1.5 text-sm font-medium text-danger">
+      <PublicIcon name="alert" className="mt-0.5 h-4 w-4 shrink-0" />
+      <span>{message}</span>
+    </p>
+  );
 }
 
 type SubmissionNoticeProps = {
@@ -66,22 +79,48 @@ type SubmissionNoticeProps = {
   children?: ReactNode;
 };
 
-export function SubmissionNotice({
-  title,
-  description,
-  tone,
-  children,
-}: SubmissionNoticeProps) {
-  const classes =
-    tone === "success"
-      ? "border-[#cae7d3] bg-[#f3fbf6] text-[#1d5f35]"
-      : "border-[#f3d0cb] bg-[#fff5f3] text-[#9f2f22]";
+/** Announced result of a submission. Scrolls itself into view so it is never missed on small screens. */
+export function SubmissionNotice({title, description, tone, children}: SubmissionNoticeProps) {
+  const success = tone === "success";
 
   return (
-    <div className={`rounded-xl border px-4 py-3 ${classes}`}>
-      <p className="text-sm font-semibold">{title}</p>
-      <p className="mt-1 text-sm leading-6">{description}</p>
-      {children}
+    <div
+      role={success ? "status" : "alert"}
+      ref={(node) => {
+        node?.scrollIntoView({block: "center", behavior: "smooth"});
+      }}
+      className={`flex gap-3 rounded-card border p-4 ${
+        success ? "border-success-line bg-success-bg text-success" : "border-danger-line bg-danger-bg text-danger"
+      }`}
+    >
+      <PublicIcon name={success ? "success" : "alert"} className="mt-0.5 h-5 w-5 shrink-0" />
+      <div>
+        <p className="font-semibold">{title}</p>
+        <p className="mt-1 text-ui leading-relaxed">{description}</p>
+        {children}
+      </div>
     </div>
+  );
+}
+
+/** White form surface. One of the few places a card and a shadow are used. */
+export function FormCard({children, className = ""}: {children: ReactNode; className?: string}) {
+  return (
+    <div className={`rounded-card border border-line bg-surface p-5 shadow-card sm:p-8 ${className}`}>{children}</div>
+  );
+}
+
+export function SubmitButton({pending, pendingLabel, children}: {pending: boolean; pendingLabel: string; children: ReactNode}) {
+  return (
+    <button type="submit" disabled={pending} aria-busy={pending} className="btn btn-primary btn-lg w-full sm:w-auto">
+      {pending ? (
+        <>
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-navy-900/30 border-t-navy-900" aria-hidden />
+          {pendingLabel}
+        </>
+      ) : (
+        children
+      )}
+    </button>
   );
 }

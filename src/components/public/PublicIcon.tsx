@@ -2,6 +2,11 @@ import type {ComponentProps} from "react";
 import type {IconType} from "react-icons";
 import {
   FiActivity,
+  FiAlertCircle,
+  FiCheckCircle,
+  FiClock,
+  FiFileText,
+  FiUploadCloud,
   FiBookOpen,
   FiBox,
   FiCheck,
@@ -30,7 +35,7 @@ import {GiCargoShip} from "react-icons/gi";
 import {IoAirplaneOutline} from "react-icons/io5";
 import {MdOutlineFactCheck} from "react-icons/md";
 
-type IconName =
+export type IconName =
   | "menu"
   | "close"
   | "search"
@@ -60,7 +65,12 @@ type IconName =
   | "professional"
   | "training"
   | "city"
-  | "whatsapp";
+  | "whatsapp"
+  | "clock"
+  | "upload"
+  | "file"
+  | "success"
+  | "alert";
 
 const icons: Record<IconName, IconType> = {
   menu: FiMenu,
@@ -93,6 +103,11 @@ const icons: Record<IconName, IconType> = {
   training: FiBookOpen,
   city: FaCity,
   whatsapp: FaWhatsapp,
+  clock: FiClock,
+  upload: FiUploadCloud,
+  file: FiFileText,
+  success: FiCheckCircle,
+  alert: FiAlertCircle,
 };
 
 type PublicIconProps = ComponentProps<"svg"> & {

@@ -3,15 +3,19 @@
 import {useState} from "react";
 
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useTranslations} from "next-intl";
 import {Controller, useForm} from "react-hook-form";
 
 import {
-  FieldError,
-  FieldLabel,
+  Field,
+  fieldProps,
+  FormCard,
   formInputClassName,
   FormLegend,
   SubmissionNotice,
+  SubmitButton,
 } from "@/components/forms/FormPrimitives";
+import {PublicIcon} from "@/components/public/PublicIcon";
 import type {Locale} from "@/i18n/routing";
 import {
   careersCvMaxBytes,
@@ -91,6 +95,8 @@ export function CareersApplicationForm({
   });
   const [cvFileName, setCvFileName] = useState<string | null>(null);
   const [submissionState, setSubmissionState] = useState<SubmissionState>(null);
+  const commonT = useTranslations("Common.forms");
+  const isSuccess = submissionState?.tone === "success";
   const {
     register,
     control,
@@ -171,153 +177,198 @@ export function CareersApplicationForm({
   }
 
   return (
-    <div className={localeIsRTL ? "text-right" : "text-left"}>
-      <h2 className="text-[2rem] leading-[1.12] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
-        {heading}
-      </h2>
-      <p className="mt-4 max-w-[540px] text-[0.96rem] leading-7 text-on-surface-variant">{description}</p>
+    <div>
+      <h2 className="t-h2 text-navy-900">{heading}</h2>
+      <p className="t-lead mt-4 max-w-xl text-ink-soft">{description}</p>
 
-      <form
-        id="application-form"
-        className="mt-8 space-y-4 rounded-[14px] border border-[#ebe8f3] bg-white p-6 shadow-[0_14px_30px_rgba(26,47,122,0.10)] sm:p-8"
-        encType="multipart/form-data"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <FormLegend
-          requiredText={formCopy.legend.required}
-          optionalText={formCopy.legend.optional}
-          localeIsRTL={localeIsRTL}
-        />
+      <FormCard className="mt-8">
+        <form
+          id="application-form"
+          className="space-y-5"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          {submissionState ? (
+            <SubmissionNotice
+              tone={submissionState.tone}
+              title={
+                submissionState.tone === "success"
+                  ? formCopy.feedback.successTitle
+                  : formCopy.feedback.errorTitle
+              }
+              description={submissionState.message}
+            />
+          ) : null}
 
-        {submissionState ? (
-          <SubmissionNotice
-            tone={submissionState.tone}
-            title={
-              submissionState.tone === "success"
-                ? formCopy.feedback.successTitle
-                : formCopy.feedback.errorTitle
-            }
-            description={submissionState.message}
-          />
+        {isSuccess ? (
+          <button type="button" className="btn btn-secondary" onClick={() => setSubmissionState(null)}>
+            {commonT("sendAnother")}
+          </button>
         ) : null}
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
-            <FieldLabel label={fields.name} required />
-            <input type="text" {...register("name")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.name?.message} />
-          </label>
-          <label className="block">
-            <FieldLabel label={fields.email} required />
-            <input type="email" {...register("email")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.email?.message} />
-          </label>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
-            <FieldLabel label={fields.phone} required />
-            <input type="tel" {...register("phone")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.phone?.message} />
-          </label>
-          <label className="block">
-            <FieldLabel label={fields.position} required />
-            <input type="text" {...register("position")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.position?.message} />
-          </label>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
-            <FieldLabel label={fields.experience} required />
-            <select {...register("experience")} disabled={isSubmitting} className={formInputClassName}>
-              <option value="">{fields.experiencePlaceholder}</option>
-              <option value={fields.experienceLevels.entry}>{fields.experienceLevels.entry}</option>
-              <option value={fields.experienceLevels.oneToThree}>{fields.experienceLevels.oneToThree}</option>
-              <option value={fields.experienceLevels.threeToFive}>{fields.experienceLevels.threeToFive}</option>
-              <option value={fields.experienceLevels.fivePlus}>{fields.experienceLevels.fivePlus}</option>
-            </select>
-            <FieldError message={errors.experience?.message} />
-          </label>
-          <label className="block">
-            <FieldLabel label={fields.linkedin} optionalLabel={formCopy.optionalLabel} />
-            <input
-              type="url"
-              {...register("linkedin")}
-              placeholder={fields.linkedinPlaceholder}
+        <div className={isSuccess ? "hidden" : "space-y-5"}>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field id="career-name" label={fields.name} required error={errors.name?.message}>
+              <input
+                type="text"
+                autoComplete="name"
+                {...register("name")}
+                {...fieldProps("career-name", errors.name?.message)}
+                disabled={isSubmitting}
+                className={formInputClassName}
+              />
+            </Field>
+            <Field id="career-email" label={fields.email} required error={errors.email?.message}>
+              <input
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                dir="ltr"
+                {...register("email")}
+                {...fieldProps("career-email", errors.email?.message)}
+                disabled={isSubmitting}
+                className={`${formInputClassName} rtl:text-end`}
+              />
+            </Field>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field id="career-phone" label={fields.phone} required error={errors.phone?.message}>
+              <input
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                dir="ltr"
+                {...register("phone")}
+                {...fieldProps("career-phone", errors.phone?.message)}
+                disabled={isSubmitting}
+                className={`${formInputClassName} rtl:text-end`}
+              />
+            </Field>
+            <Field id="career-position" label={fields.position} required error={errors.position?.message}>
+              <input
+                type="text"
+                autoComplete="organization-title"
+                {...register("position")}
+                {...fieldProps("career-position", errors.position?.message)}
+                disabled={isSubmitting}
+                className={formInputClassName}
+              />
+            </Field>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field id="career-experience" label={fields.experience} required error={errors.experience?.message}>
+              <select
+                {...register("experience")}
+                {...fieldProps("career-experience", errors.experience?.message)}
+                disabled={isSubmitting}
+                className={formInputClassName}
+              >
+                <option value="">{fields.experiencePlaceholder}</option>
+                <option value={fields.experienceLevels.entry}>{fields.experienceLevels.entry}</option>
+                <option value={fields.experienceLevels.oneToThree}>{fields.experienceLevels.oneToThree}</option>
+                <option value={fields.experienceLevels.threeToFive}>{fields.experienceLevels.threeToFive}</option>
+                <option value={fields.experienceLevels.fivePlus}>{fields.experienceLevels.fivePlus}</option>
+              </select>
+            </Field>
+            <Field
+              id="career-linkedin"
+              label={fields.linkedin}
+              optionalLabel={formCopy.optionalLabel}
+              error={errors.linkedin?.message}
+            >
+              <input
+                type="url"
+                inputMode="url"
+                autoComplete="url"
+                dir="ltr"
+                {...register("linkedin")}
+                {...fieldProps("career-linkedin", errors.linkedin?.message)}
+                placeholder={fields.linkedinPlaceholder}
+                disabled={isSubmitting}
+                className={`${formInputClassName} rtl:text-end`}
+              />
+            </Field>
+          </div>
+          <Field id="career-message" label={fields.message} required error={errors.message?.message}>
+            <textarea
+              {...register("message")}
+              {...fieldProps("career-message", errors.message?.message)}
+              rows={5}
               disabled={isSubmitting}
               className={formInputClassName}
             />
-            <FieldError message={errors.linkedin?.message} />
-          </label>
-        </div>
-        <label className="block">
-          <FieldLabel label={fields.message} required />
-          <textarea
-            {...register("message")}
-            rows={5}
-            disabled={isSubmitting}
-            className={`${formInputClassName} resize-y`}
-          />
-          <FieldError message={errors.message?.message} />
-        </label>
-        <label className="block">
-          <FieldLabel label={fields.cv} required />
-          <div className="relative flex min-h-[120px] flex-col items-center justify-center gap-2 rounded-md border border-dashed border-outline-variant bg-[#fbf8ff] px-4 py-6 text-center transition-colors hover:border-alfs-orange/60 focus-within:border-alfs-orange focus-within:ring-2 focus-within:ring-alfs-orange/20">
-            <Controller
-              name="cv"
-              control={control}
-              render={({field}) => (
-                <input
-                  type="file"
-                  name={field.name}
-                  ref={field.ref}
-                  onBlur={field.onBlur}
-                  onChange={(event) => {
-                    const file = event.target.files?.[0];
+          </Field>
+          <Field id="career-cv" label={fields.cv} required error={errors.cv?.message}>
+            <div
+              className={`relative flex min-h-[7.5rem] flex-col items-center justify-center gap-1.5 rounded-control border border-dashed px-4 py-6 text-center transition-colors focus-within:border-navy-700 focus-within:ring-[3px] focus-within:ring-navy-700/20 hover:border-navy-800 hover:bg-navy-50 ${
+                errors.cv ? "border-danger bg-danger-bg/40" : cvFileName ? "border-navy-800 bg-navy-50" : "border-line-strong bg-paper"
+              }`}
+            >
+              <Controller
+                name="cv"
+                control={control}
+                render={({field}) => (
+                  <input
+                    type="file"
+                    name={field.name}
+                    ref={field.ref}
+                    onBlur={field.onBlur}
+                    {...fieldProps("career-cv", errors.cv?.message, "career-cv-hint")}
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
 
-                    if (!file) {
-                      setCvFileName(null);
-                      resetField("cv");
-                      return;
-                    }
+                      if (!file) {
+                        setCvFileName(null);
+                        resetField("cv");
+                        return;
+                      }
 
-                    if (file.size > careersCvMaxBytes) {
-                      setCvFileName(null);
-                      event.target.value = "";
-                      resetField("cv");
-                      setError("cv", {
-                        type: "validate",
-                        message: formCopy.validation.fileSize,
-                      });
-                      return;
-                    }
+                      if (file.size > careersCvMaxBytes) {
+                        setCvFileName(null);
+                        event.target.value = "";
+                        resetField("cv");
+                        setError("cv", {
+                          type: "validate",
+                          message: formCopy.validation.fileSize,
+                        });
+                        return;
+                      }
 
-                    setCvFileName(file.name);
-                    clearErrors("cv");
-                    field.onChange(file);
-                  }}
-                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                  disabled={isSubmitting}
-                  className="absolute inset-0 cursor-pointer opacity-0 disabled:cursor-not-allowed"
-                />
+                      setCvFileName(file.name);
+                      clearErrors("cv");
+                      field.onChange(file);
+                    }}
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    disabled={isSubmitting}
+                    className="absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
+                  />
+                )}
+              />
+              <PublicIcon name={cvFileName ? "file" : "upload"} className="h-6 w-6 text-navy-800" />
+              {cvFileName ? (
+                <span className="max-w-full truncate font-semibold text-navy-900" dir="auto">
+                  {cvFileName}
+                </span>
+              ) : (
+                <span className="font-semibold text-navy-900">{fields.cvChoose}</span>
               )}
-            />
-            <span className="text-sm font-semibold text-alfs-navy">{fields.cvChoose}</span>
-            <span className="text-xs text-on-surface-variant">{fields.cvHint}</span>
-            {cvFileName ? (
-              <span className="mt-1 max-w-full truncate text-xs font-medium text-alfs-orange">{cvFileName}</span>
-            ) : null}
+              <span id="career-cv-hint" className="text-sm text-ink-faint">
+                {fields.cvHint}
+              </span>
+            </div>
+          </Field>
+
+          <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:gap-5">
+            <SubmitButton pending={isSubmitting} pendingLabel={formCopy.status.sending}>
+              {fields.submit}
+            </SubmitButton>
+            <FormLegend requiredText={formCopy.legend.required} />
           </div>
-          <FieldError message={errors.cv?.message} />
-        </label>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber disabled:cursor-not-allowed disabled:bg-alfs-orange/70 sm:w-auto"
-        >
-          {isSubmitting ? formCopy.status.sending : fields.submit}
-        </button>
+        </div>
       </form>
+      </FormCard>
     </div>
   );
 }

@@ -1,19 +1,21 @@
 import type {Metadata} from "next";
 
 import Image from "next/image";
-import {getLocale, getTranslations} from "next-intl/server";
+import {getTranslations} from "next-intl/server";
 
-import {PublicContactDetails, getPublicContactInfo} from "@/components/public/PublicContactDetails";
 import {PublicFooter} from "@/components/public/PublicFooter";
-import {PublicIcon} from "@/components/public/PublicIcon";
-import {PublicMap} from "@/components/public/PublicMap";
+import type {IconName} from "@/components/public/PublicIcon";
 import {PublicNavbar} from "@/components/public/PublicNavbar";
-import {PageTransitionLink} from "@/components/public/PageTransitionLink";
-import {isRTL, type Locale} from "@/i18n/routing";
-import {contactInquiryHref, serviceRoutes, siteAnchors, siteRoutes} from "@/lib/site-routes";
+import {FeatureGrid, FeatureList} from "@/components/ui/Blocks";
+import {ButtonLink} from "@/components/ui/Button";
+import {ClosingBand} from "@/components/ui/ClosingBand";
+import {PageHero} from "@/components/ui/PageHero";
+import {Section} from "@/components/ui/Section";
+import {contactInquiryHref, siteRoutes} from "@/lib/site-routes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("AboutPage");
+  const coverageT = await getTranslations("CoveragePage");
 
   return {
     title: t("meta.title"),
@@ -24,450 +26,152 @@ export async function generateMetadata(): Promise<Metadata> {
 const introCardKeys = ["integratedFreight", "operationalClarity", "flexibleHandling"] as const;
 const valueKeys = ["accuracy", "speed", "flexibility", "tracking"] as const;
 const teamPointKeys = ["professionalism", "support", "training"] as const;
-const officeKeys = ["amman"] as const;
-const serviceChipKeys = [
-  "seaFreight",
-  "landTransport",
-  "airFreight",
-  "warehousing",
-  "customs",
-  "tracking",
-] as const;
 
-const aboutServiceChipRoutes: Record<(typeof serviceChipKeys)[number], string> = {
-  seaFreight: serviceRoutes.seaFreight,
-  landTransport: serviceRoutes.landFreight,
-  airFreight: serviceRoutes.airFreight,
-  warehousing: serviceRoutes.warehousing,
-  customs: serviceRoutes.customsClearance,
-  tracking: siteAnchors.track,
+const introIcons: Record<(typeof introCardKeys)[number], IconName> = {
+  integratedFreight: "layers",
+  operationalClarity: "eye",
+  flexibleHandling: "flex",
+};
+const valueIcons: Record<(typeof valueKeys)[number], IconName> = {
+  accuracy: "track",
+  speed: "speed",
+  flexibility: "flex",
+  tracking: "eye",
+};
+const teamIcons: Record<(typeof teamPointKeys)[number], IconName> = {
+  professionalism: "professional",
+  support: "support",
+  training: "training",
 };
 
 export default async function AboutPage() {
-  const locale = (await getLocale()) as Locale;
-  const localeIsRTL = isRTL(locale);
   const t = await getTranslations("AboutPage");
-  const contact = await getPublicContactInfo();
+  const coverageT = await getTranslations("CoveragePage");
 
   const introCards = introCardKeys.map((key) => ({
+    key,
     title: t(`snapshot.cards.${key}.title`),
     description: t(`snapshot.cards.${key}.description`),
-    icon:
-      key === "integratedFreight"
-        ? "spark"
-        : key === "operationalClarity"
-          ? "eye"
-          : "flex",
+    icon: introIcons[key],
   }));
 
   const values = valueKeys.map((key) => ({
+    key,
     title: t(`values.items.${key}.title`),
     description: t(`values.items.${key}.description`),
-    icon:
-      key === "accuracy"
-        ? "search"
-        : key === "speed"
-          ? "speed"
-          : key === "flexibility"
-            ? "flex"
-            : "track",
+    icon: valueIcons[key],
   }));
 
   const teamPoints = teamPointKeys.map((key) => ({
+    key,
     title: t(`team.points.${key}.title`),
     description: t(`team.points.${key}.description`),
-    icon:
-      key === "professionalism"
-        ? "professional"
-        : key === "support"
-          ? "support"
-          : "training",
+    icon: teamIcons[key],
   }));
-
-  const offices = officeKeys.map((key) => ({
-    title: t(`coverage.offices.${key}.title`),
-    address: t(`coverage.offices.${key}.address`),
-  }));
-
-  const serviceChips = serviceChipKeys.map((key) => ({
-    key,
-    label: t(`hero.support.services.${key}`),
-    href: aboutServiceChipRoutes[key],
-    icon:
-      key === "seaFreight"
-        ? "ship"
-        : key === "landTransport"
-          ? "truck"
-          : key === "airFreight"
-            ? "plane"
-            : key === "warehousing"
-              ? "warehouse"
-              : key === "customs"
-                ? "customs"
-                : "location",
-  }));
-
-  const sideHeadingAccentClass = localeIsRTL ? "ml-auto mr-0" : "mr-auto ml-0";
-  const heroOverlayClass = localeIsRTL
-    ? "bg-[linear-gradient(270deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]"
-    : "bg-[linear-gradient(90deg,rgba(13,31,92,0.92)_0%,rgba(13,31,92,0.82)_40%,rgba(13,31,92,0.34)_100%)]";
-  const ctaGlowSideClass = localeIsRTL
-    ? "left-0 bg-[linear-gradient(90deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]"
-    : "right-0 bg-[linear-gradient(270deg,rgba(26,47,122,0.70)_0%,rgba(26,47,122,0)_100%)]";
-  const mapFontFamily = localeIsRTL ? "var(--font-cairo)" : "var(--font-montserrat)";
-  const officeCardClass = localeIsRTL
-    ? "border-r-4 border-l-0 text-right"
-    : "border-l-4 border-r-0 text-left";
 
   return (
     <>
       <PublicNavbar currentPage="about" />
-      <main className="min-h-screen bg-[#fbf8ff] pt-[72px]">
-        <section className="relative overflow-hidden bg-alfs-deep-blue">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/about/about-hero.png"
-              alt={t("hero.imageAlt")}
-              fill
-              priority
-              className="object-cover object-center"
-              sizes="100vw"
-            />
-            <div className={`absolute inset-0 ${heroOverlayClass}`} />
+      <main id="main" className="pt-[var(--header-h)]">
+        <PageHero
+          title={t("hero.heading")}
+          lead={t("hero.description")}
+          image="/images/careers/careers-hero.png"
+          imageAlt={t("hero.imageAlt")}
+          imagePosition="70% 50%"
+          actions={
+            <>
+              <ButtonLink href={contactInquiryHref} size="lg">
+                {t("hero.primaryAction")}
+              </ButtonLink>
+              <ButtonLink href="/services" variant="onDark" size="lg">
+                {t("hero.secondaryAction")}
+              </ButtonLink>
+            </>
+          }
+        />
+
+        <Section tone="surface">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+            <div>
+              <h2 className="t-h2 text-navy-900">{t("snapshot.heading")}</h2>
+              <p className="t-lead mt-6 text-ink-soft">{t("snapshot.descriptionOne")}</p>
+              <p className="t-lead mt-4 text-ink-soft">{t("snapshot.descriptionTwo")}</p>
+            </div>
+            <FeatureList items={introCards} className="border-b border-line lg:self-start" />
           </div>
+        </Section>
 
-          <div className="relative mx-auto grid max-w-[1280px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8 lg:py-16">
-            <div className={`lg:col-span-7 ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-alfs-orange">
-                {t("hero.kicker")}
-              </p>
-              <h1 className="mt-3 max-w-[620px] text-[2.4rem] leading-[1.2] font-bold tracking-[-0.05em] text-white sm:text-[3.4rem] lg:text-[4rem]">
-                {t("hero.heading")}
-              </h1>
-              <p className="mt-5 max-w-[610px] text-[0.98rem] leading-7 text-white/88 sm:text-[1.02rem]">
-                {t("hero.description")}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <PageTransitionLink
-                  href={contactInquiryHref}
-                  className="inline-flex min-h-11 items-center justify-center rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber"
-                >
-                  {t("hero.primaryAction")}
-                </PageTransitionLink>
-                <PageTransitionLink
-                  href="/services"
-                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                >
-                  {t("hero.secondaryAction")}
-                </PageTransitionLink>
+        <Section tone="navy">
+          <div className="grid gap-12 md:grid-cols-2 md:gap-0">
+            {(["vision", "mission"] as const).map((key, index) => (
+              <div
+                key={key}
+                className={index === 0 ? "md:pe-12 lg:pe-20" : "border-t border-white/15 pt-12 md:border-s md:border-t-0 md:ps-12 md:pt-0 lg:ps-20"}
+              >
+                <h2 className="t-h3 border-t-2 border-orange-500 pt-5 text-white">{t(`missionVision.${key}.title`)}</h2>
+                <p className="mt-4 text-xl font-medium leading-relaxed text-white">
+                  {t(`missionVision.${key}.description`)}
+                </p>
               </div>
-            </div>
-
-            <div
-              className={`lg:col-span-5 ${
-                localeIsRTL ? "lg:justify-self-start" : "lg:justify-self-end"
-              }`}
-            >
-              <div className="max-w-[350px] rounded-[18px] border border-white/18 bg-white/14 p-6 text-white shadow-[0_18px_45px_rgba(0,0,0,0.28)] backdrop-blur-md">
-                <h2 className={`text-[1.55rem] leading-tight font-bold ${localeIsRTL ? "text-right" : "text-left"}`}>
-                  {t("hero.support.title")}
-                </h2>
-                <div className="mt-5 space-y-3">
-                  {serviceChips.map((item) => (
-                    <PageTransitionLink
-                      key={item.key}
-                      href={item.href}
-                      className="flex items-center gap-3 text-sm font-medium transition-colors hover:text-alfs-orange"
-                    >
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/12 text-alfs-orange">
-                        <PublicIcon
-                          name={item.icon as Parameters<typeof PublicIcon>[0]["name"]}
-                          className="h-4 w-4"
-                        />
-                      </span>
-                      <span>{item.label}</span>
-                    </PageTransitionLink>
-                  ))}
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
 
-        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            <div className={`max-w-[510px] ${localeIsRTL ? "text-right" : "text-left"}`}>
-              <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
-                {t("snapshot.heading")}
-              </h2>
-              <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
-              <p className="mt-6 text-[0.96rem] leading-7 text-on-surface-variant">
-                {t("snapshot.descriptionOne")}
-              </p>
-              <p className="mt-4 text-[0.96rem] leading-7 text-on-surface-variant">
-                {t("snapshot.descriptionTwo")}
-              </p>
-            </div>
+          <h2 className="t-h3 mt-16 max-w-3xl text-white lg:mt-20">{t("values.heading")}</h2>
+          <FeatureGrid items={values} columns={4} onDark className="mt-6" />
+        </Section>
 
-            <div className="space-y-3">
-              {introCards.map((card) => (
-                <article
-                  key={card.title}
-                  className={`rounded-[14px] border border-[#ebe8f3] bg-white px-5 py-4 shadow-[0_14px_30px_rgba(26,47,122,0.10)] ${localeIsRTL ? "text-right" : "text-left"}`}
-                >
-                  <div className="flex items-start gap-4">
-                    <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f3f5ff] text-alfs-royal-blue">
-                      <PublicIcon
-                        name={card.icon as Parameters<typeof PublicIcon>[0]["name"]}
-                        className="h-5 w-5"
-                      />
-                    </span>
-                    <div>
-                      <h3 className="text-[1rem] font-semibold text-alfs-navy">{card.title}</h3>
-                      <p className="mt-1.5 text-[0.82rem] leading-5 text-on-surface-variant">
-                        {card.description}
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="relative overflow-hidden bg-alfs-deep-blue px-4 py-14 sm:px-6 lg:px-8 lg:py-[4.5rem]">
-          <div
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at center, rgba(255,255,255,0.14) 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-            }}
-          />
-          <div className="relative mx-auto grid max-w-[1280px] gap-4 md:grid-cols-2">
-            <article className="rounded-[12px] bg-white px-6 py-8 text-center shadow-[0_14px_30px_rgba(0,0,0,0.18)]">
-              <h2 className="text-[1.55rem] font-bold text-alfs-navy">{t("missionVision.vision.title")}</h2>
-              <span className="mx-auto mt-3 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
-              <p className="mt-5 text-[0.92rem] leading-7 text-on-surface-variant">
-                {t("missionVision.vision.description")}
-              </p>
-            </article>
-            <article className="rounded-[12px] bg-white px-6 py-8 text-center shadow-[0_14px_30px_rgba(0,0,0,0.18)]">
-              <h2 className="text-[1.55rem] font-bold text-alfs-navy">{t("missionVision.mission.title")}</h2>
-              <span className="mx-auto mt-3 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
-              <p className="mt-5 text-[0.92rem] leading-7 text-on-surface-variant">
-                {t("missionVision.mission.description")}
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section className="bg-[#f2eff8] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-[1280px]">
-            <div className="mx-auto max-w-[880px] text-center">
-              <h2 className="text-[2rem] leading-[1.15] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
-                {t("values.heading")}
-              </h2>
-              <span className="mx-auto mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange" />
-            </div>
-
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {values.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-[12px] border border-[#e8e4ef] bg-white px-5 py-6 text-center shadow-[0_12px_28px_rgba(26,47,122,0.10)]"
-                >
-                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-alfs-orange/8 text-alfs-orange">
-                    <PublicIcon
-                      name={item.icon as Parameters<typeof PublicIcon>[0]["name"]}
-                      className="h-5 w-5"
-                    />
-                  </span>
-                  <h3 className="mt-4 text-[1.02rem] leading-6 font-semibold text-alfs-navy">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-[0.8rem] leading-5 text-on-surface-variant">
-                    {item.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
-            <div
-              className={`relative overflow-hidden rounded-[14px] shadow-[0_18px_36px_rgba(26,47,122,0.14)] ${
-                localeIsRTL ? "order-1 lg:order-2" : "order-2 lg:order-1"
-              }`}
-            >
+        <Section tone="surface">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-media bg-navy-900">
               <Image
-                src="/images/about/our-team.png"
+                src="/images/about/our-team-clean.jpg"
                 alt={t("team.imageAlt")}
-                width={880}
-                height={760}
-                className="h-full w-full object-cover"
-                sizes="(max-width: 1024px) 100vw, 48vw"
+                fill
+                sizes="(max-width: 1024px) 100vw, 600px"
+                className="object-cover object-[50%_20%]"
               />
             </div>
+            <div>
+              <h2 className="t-h2 text-navy-900">{t("team.heading")}</h2>
+              <p className="t-lead mt-6 text-ink-soft">{t("team.description")}</p>
+              <FeatureList items={teamPoints} className="mt-8 border-b border-line" />
+            </div>
+          </div>
+        </Section>
 
-            <div className={localeIsRTL ? "order-2 text-right lg:order-1" : "order-1 text-left lg:order-2"}>
-              <h2 className="max-w-[520px] text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
-                {t("team.heading")}
-              </h2>
-              <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
-              <p className="mt-6 max-w-[540px] text-[0.96rem] leading-7 text-on-surface-variant">
-                {t("team.description")}
-              </p>
-
-              <div className="mt-7 space-y-5">
-                {teamPoints.map((point) => (
-                  <div key={point.title} className="flex items-start gap-4">
-                    <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-alfs-orange/10 text-alfs-orange">
-                      <PublicIcon
-                        name={point.icon as Parameters<typeof PublicIcon>[0]["name"]}
-                        className="h-5 w-5"
-                      />
-                    </span>
-                    <div>
-                      <h3 className="text-[0.98rem] font-semibold text-alfs-navy">{point.title}</h3>
-                      <p className="mt-1.5 text-[0.84rem] leading-6 text-on-surface-variant">
-                        {point.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+        <Section tone="navy">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+            <div>
+              <h2 className="t-h2 text-white">{t("coverage.heading")}</h2>
+              <p className="t-lead mt-6 text-on-dark-soft">{t("coverage.description")}</p>
+              <div className="mt-8">
+                <ButtonLink href={siteRoutes.coverage} variant="onDark">
+                  {coverageT("link")}
+                </ButtonLink>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="overflow-hidden bg-[#f7f5fb] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div className={localeIsRTL ? "text-right" : "text-left"}>
-              <h2 className="max-w-[520px] text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.55rem]">
-                {t("coverage.heading")}
-              </h2>
-              <span className={`mt-5 block h-[3px] w-[52px] rounded-full bg-alfs-orange ${sideHeadingAccentClass}`} />
-              <p className="mt-6 max-w-[570px] text-[0.96rem] leading-7 text-on-surface-variant">
-                {t("coverage.description")}
-              </p>
-
-              <div className="mt-7 grid gap-4 sm:grid-cols-2">
-                {offices.map((office) => (
-                  <article
-                    key={office.title}
-                    className={`rounded-[10px] bg-white px-5 py-4 shadow-[0_12px_24px_rgba(26,47,122,0.08)] ${officeCardClass}`}
-                  >
-                    <h3 className="flex items-center gap-2 text-[1rem] font-semibold text-alfs-navy">
-                      <PublicIcon name="city" className="h-[18px] w-[18px] text-alfs-orange" />
-                      {office.title}
-                    </h3>
-                    <p className="mt-2 whitespace-pre-line text-[0.82rem] leading-6 text-on-surface-variant">
-                      {office.address}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-[450px]">
-              <div className="absolute inset-0 rounded-full bg-alfs-navy/6 blur-3xl" />
-              <svg
-                viewBox="0 0 400 400"
-                className="relative w-full drop-shadow-[0_18px_36px_rgba(26,47,122,0.12)]"
-                aria-label={t("coverage.mapAlt")}
-                role="img"
-              >
-                <circle cx="200" cy="200" r="150" fill="none" stroke="#1A2F7A" strokeDasharray="6 6" strokeOpacity="0.22" strokeWidth="2" />
-                <circle cx="200" cy="200" r="100" fill="none" stroke="#1A2F7A" strokeDasharray="4 4" strokeOpacity="0.28" strokeWidth="2" />
-                <path d="M200 200 Q 150 100 100 80" fill="none" stroke="#F47920" strokeLinecap="round" strokeWidth="3" />
-                <path d="M200 200 Q 300 150 350 100" fill="none" stroke="#F47920" strokeLinecap="round" strokeWidth="3" />
-                <path d="M200 200 Q 250 300 320 320" fill="none" stroke="#F47920" strokeLinecap="round" strokeWidth="3" />
-                <path d="M200 200 Q 120 250 80 300" fill="none" stroke="#F47920" strokeLinecap="round" strokeWidth="3" />
-                <path d="M200 200 Q 200 80 200 50" fill="none" stroke="#F47920" strokeLinecap="round" strokeWidth="3" />
-                <circle cx="200" cy="200" r="12" fill="#F47920" stroke="#fff" strokeWidth="4" />
-                <circle cx="100" cy="80" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <circle cx="350" cy="100" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <circle cx="320" cy="320" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <circle cx="80" cy="300" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <circle cx="200" cy="50" r="8" fill="#1A2F7A" stroke="#fff" strokeWidth="2" />
-                <text
-                  x={localeIsRTL ? "200" : "219"}
-                  y={localeIsRTL ? "238" : "214"}
-                  textAnchor={localeIsRTL ? "middle" : "start"}
-                  fill="#1A2F7A"
-                  fontFamily={mapFontFamily}
-                  fontSize="14"
-                  fontWeight="700"
-                >
-                  {t("coverage.mapLabels.hub")}
-                </text>
-                <text x="60" y="70" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
-                  {t("coverage.mapLabels.syria")}
-                </text>
-                <text x="360" y="90" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
-                  {t("coverage.mapLabels.lebanon")}
-                </text>
-                <text x="330" y="340" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
-                  {t("coverage.mapLabels.gcc")}
-                </text>
-                <text x="38" y="320" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
-                  {t("coverage.mapLabels.palestine")}
-                </text>
-                <text x="205" y="40" fill="#454651" fontFamily={mapFontFamily} fontSize="12" fontWeight="600">
-                  {t("coverage.mapLabels.global")}
-                </text>
-              </svg>
+            <div className="relative aspect-[16/11] overflow-hidden rounded-media bg-navy-950 ring-1 ring-white/10">
+              <Image
+                src="/images/services/sea_fright/sea_fright.png"
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 100vw, 640px"
+                className="object-cover"
+              />
             </div>
           </div>
-        </section>
+        </Section>
 
-        <section
-          id="final-cta"
-          className="relative overflow-hidden bg-alfs-deep-blue px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-20"
-        >
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at center, rgba(255,255,255,0.14) 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-            }}
-          />
-          <div className={`absolute inset-y-0 w-1/2 ${ctaGlowSideClass}`} />
-          <div className="relative mx-auto max-w-[760px]">
-            <h2 className="text-[2rem] leading-[1.2] font-bold tracking-[-0.04em] text-white sm:text-[2.6rem]">
-              {t("cta.heading")}
-            </h2>
-            <p className="mx-auto mt-5 max-w-[580px] text-[0.98rem] leading-7 text-white/84">
-              {t("cta.description")}
-            </p>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <PageTransitionLink
-                href={contactInquiryHref}
-                className="inline-flex min-h-11 items-center justify-center rounded-md bg-alfs-orange px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber"
-              >
-                {t("cta.primaryAction")}
-              </PageTransitionLink>
-              <PageTransitionLink
-                href={siteRoutes.contact}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/75 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-              >
-                {t("cta.secondaryAction")}
-              </PageTransitionLink>
-            </div>
-
-            <PublicContactDetails
-              className="mt-8 border-t border-white/16 pt-6"
-              variant="dark"
-            />
-          </div>
-        </section>
-
-        <PublicMap />
+        <ClosingBand
+          title={t("cta.heading")}
+          lead={t("cta.description")}
+          actions={
+            <ButtonLink href={contactInquiryHref} size="lg">
+              {t("cta.primaryAction")}
+            </ButtonLink>
+          }
+        />
       </main>
 
       <PublicFooter />
