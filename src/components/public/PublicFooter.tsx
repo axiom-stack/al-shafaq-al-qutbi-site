@@ -1,9 +1,7 @@
-import {useLocale} from "next-intl";
 import {useTranslations} from "next-intl";
 import Image from "next/image";
 
-import {isRTL, type Locale} from "@/i18n/routing";
-import {parsePhoneNumbers, serviceRoutes, siteRoutes} from "@/lib/site-routes";
+import {formatPhoneLabel, parsePhoneNumbers, serviceRoutes, siteRoutes, whatsAppHref} from "@/lib/site-routes";
 
 import {PageTransitionLink} from "./PageTransitionLink";
 import {PublicIcon} from "./PublicIcon";
@@ -18,135 +16,111 @@ const serviceKeys = [
 ] as const;
 const companyKeys = ["aboutUs", "ourNetwork", "careers", "contactUs"] as const;
 
+const companyLinks: Record<(typeof companyKeys)[number], string> = {
+  aboutUs: "/about",
+  ourNetwork: siteRoutes.coverage,
+  careers: siteRoutes.careers,
+  contactUs: "/contact",
+};
+
+const headingClass = "t-label text-on-dark-faint";
+const linkClass =
+  "inline-flex min-h-10 items-center text-base text-on-dark-soft transition-colors hover:text-white";
+
 export function PublicFooter() {
   const t = useTranslations("HomePage.footer");
   const brandT = useTranslations("HomePage.brand");
-  const locale = useLocale() as Locale;
-  const localeIsRTL = isRTL(locale);
+  const commonT = useTranslations("Common");
+  const navT = useTranslations("HomePage.navbar");
   const copyrightYear = new Date().getFullYear();
-  const locationKeys = ["amman"] as const;
-  const serviceLinks: Record<(typeof serviceKeys)[number], string> = {
-    seaFreight: serviceRoutes.seaFreight,
-    landFreight: serviceRoutes.landFreight,
-    airFreight: serviceRoutes.airFreight,
-    consolidation: serviceRoutes.consolidation,
-    warehousing: serviceRoutes.warehousing,
-    customsClearance: serviceRoutes.customsClearance,
-  };
-
-  const companyLinks: Record<(typeof companyKeys)[number], string> = {
-    aboutUs: "/about",
-    ourNetwork: "/#coverage",
-    careers: siteRoutes.careers,
-    contactUs: "/contact",
-  };
-
-  const linkListClass =
-    "space-y-2 text-[0.8125rem] leading-snug text-white/75 sm:text-sm sm:leading-normal";
 
   const email = t("contact.email");
   const phone = t("contact.phone");
   const phoneNumbers = parsePhoneNumbers(phone);
 
   return (
-    <footer id="contact" className="border-t-4 border-alfs-orange bg-alfs-deep-blue text-white">
-      <div
-        className={`mx-auto max-w-[1280px] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14 ${
-          localeIsRTL ? "text-right" : "text-left"
-        }`}
-      >
-        <div
-          className="grid grid-cols-2 gap-x-6 gap-y-8 [grid-template-areas:'brand_brand'_'services_company'_'contact_contact'] lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-10 lg:[grid-template-areas:'brand_services_company_contact']"
-        >
-          <div className="min-w-0 [grid-area:brand] space-y-3.5 lg:space-y-4">
+    <footer id="contact" className="on-dark border-t border-white/12 bg-navy-900 text-on-dark-soft">
+      <div className="shell py-12 lg:py-20">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-[1.5fr_1fr_1fr_1.35fr] lg:gap-x-8">
+          <div className="col-span-2 lg:col-span-1">
             <Image
               src="/images/ALFS_LOGO_WHITE.png"
               alt={brandT("name")}
-              width={1011}
-              height={271}
-              sizes="(max-width: 640px) 154px, (max-width: 1024px) 170px, 186px"
-              className="block h-auto w-[154px] max-w-full sm:w-[170px] lg:w-[186px]"
+              width={1024}
+              height={307}
+              sizes="200px"
+              className="h-auto w-[11.5rem]"
             />
+            <p className="t-body mt-6 max-w-sm text-on-dark-soft">{t("description")}</p>
           </div>
 
-          <div className="min-w-0 [grid-area:services]">
-            <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white/55 sm:mb-3.5 sm:text-xs sm:tracking-[0.12em]">
-              {t("services.title")}
-            </h3>
-            <ul className={linkListClass}>
+          <nav aria-label={t("services.title")}>
+            <h2 className={headingClass}>{t("services.title")}</h2>
+            <ul className="mt-4">
               {serviceKeys.map((key) => (
                 <li key={key}>
-                  <PageTransitionLink
-                    href={serviceLinks[key]}
-                    className="block py-0.5 transition-colors hover:text-alfs-orange"
-                  >
+                  <PageTransitionLink href={serviceRoutes[key]} className={linkClass}>
                     {t(`services.links.${key}`)}
                   </PageTransitionLink>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div className="min-w-0 [grid-area:company]">
-            <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white/55 sm:mb-3.5 sm:text-xs sm:tracking-[0.12em]">
-              {t("company.title")}
-            </h3>
-            <ul className={linkListClass}>
+          <nav aria-label={t("company.title")}>
+            <h2 className={headingClass}>{t("company.title")}</h2>
+            <ul className="mt-4">
               {companyKeys.map((key) => (
                 <li key={key}>
-                  <PageTransitionLink
-                    href={companyLinks[key]}
-                    className="block py-0.5 transition-colors hover:text-alfs-orange"
-                  >
-                    {t(`company.links.${key}`)}
+                  <PageTransitionLink href={companyLinks[key]} className={linkClass}>
+                    {key === "ourNetwork" ? navT("links.coverage") : t(`company.links.${key}`)}
                   </PageTransitionLink>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div className="min-w-0 [grid-area:contact] rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
-            <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white/55 sm:mb-3.5 sm:text-xs sm:tracking-[0.12em]">
-              {t("contact.title")}
-            </h3>
-            <ul className="space-y-3 text-[0.8125rem] leading-snug text-white/76 sm:space-y-3.5 sm:text-sm sm:leading-normal">
-              {locationKeys.map((key) => (
-                <li key={key} className="flex gap-2.5 sm:gap-3">
-                  <PublicIcon
-                    name="location"
-                    className="mt-0.5 h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]"
-                  />
-                  <span className="min-w-0 whitespace-pre-line">{t(`contact.locations.${key}`)}</span>
-                </li>
-              ))}
-              <li className="flex items-center gap-2.5 sm:gap-3">
-                <PublicIcon name="mail" className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]" />
-                <a href={`mailto:${email}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
+          <div className="col-span-2 lg:col-span-1">
+            <h2 className={headingClass}>{t("contact.title")}</h2>
+            <ul className="mt-4 space-y-4 text-base">
+              <li className="flex gap-3">
+                <PublicIcon name="location" className="mt-1 h-[1.125rem] w-[1.125rem] shrink-0 text-orange-500" />
+                <span className="whitespace-pre-line leading-relaxed">{t("contact.locations.amman")}</span>
+              </li>
+              <li className="flex gap-3">
+                <PublicIcon name="phone" className="mt-1 h-[1.125rem] w-[1.125rem] shrink-0 text-orange-500" />
+                <span className="flex flex-col">
+                  {phoneNumbers.map((num) => (
+                    <a key={num.tel} href={`tel:${num.tel}`} dir="ltr" className="transition-colors hover:text-white rtl:text-end">
+                      {formatPhoneLabel(num.label)}
+                    </a>
+                  ))}
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <PublicIcon name="mail" className="mt-1 h-[1.125rem] w-[1.125rem] shrink-0 text-orange-500" />
+                <a href={`mailto:${email}`} className="break-all transition-colors hover:text-white">
                   {email}
                 </a>
               </li>
-              <li className="flex items-center gap-2.5 sm:gap-3">
-                <PublicIcon name="phone" className="h-4 w-4 shrink-0 text-alfs-orange sm:h-[18px] sm:w-[18px]" />
-                <div className="flex flex-wrap gap-x-2 gap-y-1">
-                  {phoneNumbers.map((num, idx) => (
-                    <span key={num.tel} className="inline-flex items-center">
-                      <a href={`tel:${num.tel}`} className="min-w-0 break-words transition-colors hover:text-alfs-orange">
-                        {num.label}
-                      </a>
-                      {idx < phoneNumbers.length - 1 && <span className="ms-2 text-white/40">/</span>}
-                    </span>
-                  ))}
-                </div>
+              <li className="flex gap-3">
+                <PublicIcon name="whatsapp" className="mt-1 h-[1.125rem] w-[1.125rem] shrink-0 text-orange-500" />
+                <a
+                  href={whatsAppHref(phone)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
+                >
+                  {commonT("contact.whatsapp")}
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-[1280px] px-4 py-4 text-center text-xs text-white/50 sm:px-6 sm:text-sm lg:px-8">
-          {t("copyright", {year: copyrightYear})}
-        </div>
+      <div className="border-t border-white/12">
+        <div className="shell py-5 text-sm text-on-dark-faint">{t("copyright", {year: copyrightYear})}</div>
       </div>
     </footer>
   );

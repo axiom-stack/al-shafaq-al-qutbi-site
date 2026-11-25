@@ -1,0 +1,1 @@
+{"name":"alfs-visual-harness","private":true,"type":"module","description":"Screenshot and accessibility harness for the redesign. Not part of the app build.","dependencies":{"@axe-core/playwright":"^4.14.0","playwright-core":"^1.65.1"}}

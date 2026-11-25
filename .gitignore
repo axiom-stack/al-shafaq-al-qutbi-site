@@ -42,3 +42,7 @@ next-env.d.ts
 
 
 designs
+# design audit screenshots (regenerate with cook/harness/shoot.mjs)
+/design-audit/screenshots/
+
+showcase

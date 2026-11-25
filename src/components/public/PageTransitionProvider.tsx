@@ -76,7 +76,7 @@ export function PageTransitionProvider({children}: {children: ReactNode}) {
       {children}
       {pendingTransition ? (
         <div
-          className={`fixed inset-0 z-[80] overflow-y-auto bg-surface transition-opacity duration-200 ${
+          className={`fixed inset-0 z-[80] overflow-y-auto bg-paper transition-opacity duration-200 ${
             pendingTransition.visible ? "opacity-100" : "opacity-0"
           }`}
           aria-hidden="true"

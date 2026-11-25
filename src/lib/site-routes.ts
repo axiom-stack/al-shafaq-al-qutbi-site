@@ -13,6 +13,7 @@ export type ServiceRouteKey = keyof typeof serviceRoutes;
 export const siteRoutes = {
   contact: "/contact",
   careers: "/careers",
+  coverage: "/coverage",
 } as const;
 
 export const contactInquiryHref = `${siteRoutes.contact}#inquiry-form`;
@@ -20,7 +21,6 @@ export const contactInquiryHref = `${siteRoutes.contact}#inquiry-form`;
 export const siteAnchors = {
   top: "/",
   contact: "/contact",
-  coverage: "/#coverage",
   whyAlfs: "/#whyAlfs",
   track: "/#track",
   quoteForm: "#quote-form",
@@ -58,6 +58,14 @@ export function parsePhoneNumbers(phoneLabel: string) {
       tel: label.replace(/[^\d+]/g, ""),
     };
   });
+}
+
+/** "00962791010199" -> "+962 79 101 0199": same number, readable grouping. */
+export function formatPhoneLabel(label: string) {
+  const digits = label.replace(/[^\d]/g, "").replace(/^00/, "");
+  const match = /^(962)(7\d)(\d{3})(\d{4})$/.exec(digits);
+
+  return match ? `+${match[1]} ${match[2]} ${match[3]} ${match[4]}` : label;
 }
 
 export function whatsAppHref(phoneLabel: string) {

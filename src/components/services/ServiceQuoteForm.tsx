@@ -3,14 +3,17 @@
 import {useState} from "react";
 
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useTranslations} from "next-intl";
 import {useForm} from "react-hook-form";
 
 import {
-  FieldError,
-  FieldLabel,
+  Field,
+  fieldProps,
+  FormCard,
   formInputClassName,
   FormLegend,
   SubmissionNotice,
+  SubmitButton,
 } from "@/components/forms/FormPrimitives";
 import type {Locale} from "@/i18n/routing";
 import {
@@ -71,6 +74,8 @@ export function ServiceQuoteForm({
     },
   });
   const [submissionState, setSubmissionState] = useState<SubmissionState>(null);
+  const commonT = useTranslations("Common.forms");
+  const isSuccess = submissionState?.tone === "success";
   const {
     register,
     handleSubmit,
@@ -137,73 +142,83 @@ export function ServiceQuoteForm({
   }
 
   return (
-    <div className="mx-auto max-w-[720px] text-start">
-      <h2 className="text-center text-[2rem] leading-[1.12] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
-        {title}
-      </h2>
-      <p className="mx-auto mt-4 max-w-[580px] text-center text-[0.96rem] leading-7 text-on-surface-variant">
-        {subheading}
-      </p>
+    <FormCard>
+      <h2 className="t-h3 text-navy-900">{title}</h2>
+      <p className="mt-2 text-ui leading-relaxed text-ink-soft">{subheading}</p>
 
-      <form
-        id="quote-form"
-        className="mt-10 space-y-4 rounded-[14px] border border-[#ebe8f3] bg-white p-6 shadow-[0_14px_30px_rgba(26,47,122,0.10)] sm:p-8"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <FormLegend
-          requiredText={formCopy.legend.required}
-          optionalText={formCopy.legend.optional}
-          localeIsRTL={localeIsRTL}
-        />
-
+      <form id="quote-form" className="mt-6 space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
         {submissionState ? (
-          <SubmissionNotice
-            tone={submissionState.tone}
-            title={
-              submissionState.tone === "success"
-                ? formCopy.feedback.successTitle
-                : formCopy.feedback.errorTitle
-            }
-            description={submissionState.message}
-          />
+            <SubmissionNotice
+              tone={submissionState.tone}
+              title={
+                submissionState.tone === "success"
+                  ? formCopy.feedback.successTitle
+                  : formCopy.feedback.errorTitle
+              }
+              description={submissionState.message}
+            />
+          ) : null}
+
+        {isSuccess ? (
+          <button type="button" className="btn btn-secondary" onClick={() => setSubmissionState(null)}>
+            {commonT("sendAnother")}
+          </button>
         ) : null}
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
-            <FieldLabel label={fields.name} required />
-            <input type="text" {...register("name")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.name?.message} />
-          </label>
-          <label className="block">
-            <FieldLabel label={fields.email} required />
-            <input type="email" {...register("email")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.email?.message} />
-          </label>
-        </div>
-        <label className="block">
-          <FieldLabel label={fields.phone} optionalLabel={formCopy.optionalLabel} />
-          <input type="tel" {...register("phone")} disabled={isSubmitting} className={formInputClassName} />
-          <FieldError message={errors.phone?.message} />
-        </label>
-        <label className="block">
-          <FieldLabel label={fields.cargoDetails} required />
+        <div className={isSuccess ? "hidden" : "space-y-5"}>
+
+        <Field id="quote-name" label={fields.name} required error={errors.name?.message}>
+          <input
+            type="text"
+            autoComplete="name"
+            {...register("name")}
+            {...fieldProps("quote-name", errors.name?.message)}
+            disabled={isSubmitting}
+            className={formInputClassName}
+          />
+        </Field>
+        <Field id="quote-email" label={fields.email} required error={errors.email?.message}>
+          <input
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            dir="ltr"
+            {...register("email")}
+            {...fieldProps("quote-email", errors.email?.message)}
+            disabled={isSubmitting}
+            className={`${formInputClassName} rtl:text-end`}
+          />
+        </Field>
+        <Field id="quote-phone" label={fields.phone} optionalLabel={formCopy.optionalLabel} error={errors.phone?.message}>
+          <input
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            dir="ltr"
+            {...register("phone")}
+            {...fieldProps("quote-phone", errors.phone?.message)}
+            disabled={isSubmitting}
+            className={`${formInputClassName} rtl:text-end`}
+          />
+        </Field>
+        <Field id="quote-cargo" label={fields.cargoDetails} required error={errors.cargoDetails?.message}>
           <textarea
             {...register("cargoDetails")}
-            rows={5}
+            {...fieldProps("quote-cargo", errors.cargoDetails?.message)}
+            rows={4}
             disabled={isSubmitting}
-            className={`${formInputClassName} resize-y`}
+            className={formInputClassName}
           />
-          <FieldError message={errors.cargoDetails?.message} />
-        </label>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber disabled:cursor-not-allowed disabled:bg-alfs-orange/70 sm:w-auto"
-        >
-          {isSubmitting ? formCopy.status.sending : fields.submit}
-        </button>
+        </Field>
+
+        <div className="flex flex-col gap-3 pt-1">
+          <SubmitButton pending={isSubmitting} pendingLabel={formCopy.status.sending}>
+            {fields.submit}
+          </SubmitButton>
+          <FormLegend requiredText={formCopy.legend.required} />
+        </div>
+      </div>
       </form>
-    </div>
+    </FormCard>
   );
 }

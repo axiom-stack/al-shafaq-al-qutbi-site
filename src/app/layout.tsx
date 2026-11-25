@@ -35,7 +35,7 @@ export default async function RootLayout({
       dir={dir}
       className={`${montserrat.variable} ${cairo.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-surface text-on-surface">
+      <body className="min-h-full bg-paper text-ink-soft">
         <NextIntlClientProvider>
           <PageTransitionProvider>
             <LocaleClientSync />

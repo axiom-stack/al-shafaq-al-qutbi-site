@@ -22,7 +22,10 @@
       "getQuote": "Get a Quote",
       "menu": "Toggle navigation menu",
       "languageSwitch": "Switch language",
-      "switchTo": "Switch to {locale}"
+      "switchTo": "Switch to {locale}",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "primaryLabel": "Main navigation"
     },
     "hero": {
       "heading": "Integrated Logistics Solutions Across Land, Sea & Air",
@@ -107,7 +110,8 @@
     "servicesSection": {
       "heading": "Core Services",
       "description": "Comprehensive freight and logistics solutions designed for reliability and scale.",
-      "learnMore": "Learn More"
+      "learnMore": "Learn More",
+      "viewAll": "View All Services"
     },
     "services": {
       "seaFreight": {
@@ -164,7 +168,8 @@
     "finalCta": {
       "heading": "Move your cargo with clarity, speed, and confidence.",
       "description": "Partner with ALFS for logistics solutions that scale with your business.",
-      "action": "Get a Quote Today"
+      "action": "Get a Quote Today",
+      "secondaryAction": "Talk to Our Team"
     },
     "footer": {
       "description": "Integrated freight and supply chain solutions with regional expertise and global standards.",
@@ -196,7 +201,8 @@
         "email": "info@aurora-lfs.com",
         "phone": "00962791010199 / 00962797621012"
       },
-      "copyright": "© {year} ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved."
+      "copyright": "© {year} ALFS - Al Shafaq Al Qutbi Logistics Services. All rights reserved.",
+      "homeLabel": "ALFS home"
     }
   },
   "AboutPage": {
@@ -631,13 +637,27 @@
         "faster": "Faster procedures",
         "smooth": "Smooth operations"
       }
+    },
+    "index": {
+      "label": "Jump to a service"
+    },
+    "actions": {
+      "details": "Service Details",
+      "quote": "Request a Quote"
+    },
+    "closing": {
+      "heading": "Not sure which service fits?",
+      "description": "Tell us what you are moving and where. We will recommend the right mode and send you a quote.",
+      "action": "Get a Quote",
+      "secondary": "Contact Our Team"
     }
   },
   "NotFound": {
     "kicker": "Not found",
     "title": "We could not find that page.",
-    "description": "The requested route does not exist. Use the button below to return to the localized homepage.",
-    "action": "Go home"
+    "description": "The link may be out of date or the address mistyped. Head back to the homepage or browse our services.",
+    "action": "Go to Homepage",
+    "secondaryAction": "Browse Services"
   },
   "SeaFreightPage": {
     "meta": {
@@ -1751,7 +1771,7 @@
       "requiredLabel": "Required",
       "optionalLabel": "Optional",
       "legend": {
-        "required": "* Required fields",
+        "required": "Fields marked * are required.",
         "optional": "Optional fields are marked clearly."
       },
       "status": {
@@ -1782,11 +1802,31 @@
         "fileRequired": "Please upload your CV or resume.",
         "fileType": "Upload a PDF, DOC, or DOCX file.",
         "fileSize": "The file must be 10 MB or smaller."
-      }
+      },
+      "replyNote": "We reply during business hours, Sunday to Thursday.",
+      "sendAnother": "Send Another Message"
     },
     "map": {
       "title": "Our Location"
     },
-    "whatsAppLabel": "Open WhatsApp contact shortcut"
+    "whatsAppLabel": "Open WhatsApp contact shortcut",
+    "skipToContent": "Skip to content",
+    "contact": {
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "directions": "Get Directions"
+    }
+  },
+  "CoveragePage": {
+    "meta": {
+      "title": "Coverage | ALFS Logistics",
+      "description": "From our hub in Amman, ALFS covers the Levant and the Gulf by road and connects to global trade lanes through a vetted partner network."
+    },
+    "imageAlt": "Trucks on a desert highway at sunset.",
+    "regional": {
+      "heading": "Regional markets"
+    },
+    "link": "Explore Our Coverage"
   }
 }

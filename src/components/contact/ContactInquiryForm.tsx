@@ -3,14 +3,17 @@
 import {useState} from "react";
 
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useTranslations} from "next-intl";
 import {useForm} from "react-hook-form";
 
 import {
-  FieldError,
-  FieldLabel,
+  Field,
+  fieldProps,
+  FormCard,
   formInputClassName,
   FormLegend,
   SubmissionNotice,
+  SubmitButton,
 } from "@/components/forms/FormPrimitives";
 import type {Locale} from "@/i18n/routing";
 import {
@@ -79,6 +82,8 @@ export function ContactInquiryForm({
     },
   });
   const [submissionState, setSubmissionState] = useState<SubmissionState>(null);
+  const commonT = useTranslations("Common.forms");
+  const isSuccess = submissionState?.tone === "success";
   const {
     register,
     handleSubmit,
@@ -148,88 +153,109 @@ export function ContactInquiryForm({
   }
 
   return (
-    <div className={localeIsRTL ? "text-right" : "text-left"}>
-      <h2 className="text-[2rem] leading-[1.12] font-bold tracking-[-0.04em] text-alfs-navy sm:text-[2.45rem]">
-        {heading}
-      </h2>
-      <p className="mt-4 max-w-[540px] text-[0.96rem] leading-7 text-on-surface-variant">
-        {description}
-      </p>
+    <div>
+      <h2 className="t-h2 text-navy-900">{heading}</h2>
+      <p className="t-lead mt-4 max-w-xl text-ink-soft">{description}</p>
 
-      <form
-        id="inquiry-form"
-        className="mt-8 space-y-4 rounded-[14px] border border-[#ebe8f3] bg-white p-6 shadow-[0_14px_30px_rgba(26,47,122,0.10)] sm:p-8"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <FormLegend
-          requiredText={formCopy.legend.required}
-          optionalText={formCopy.legend.optional}
-          localeIsRTL={localeIsRTL}
-        />
+      <FormCard className="mt-8">
+        <form id="inquiry-form" className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
+          {submissionState ? (
+            <SubmissionNotice
+              tone={submissionState.tone}
+              title={
+                submissionState.tone === "success"
+                  ? formCopy.feedback.successTitle
+                  : formCopy.feedback.errorTitle
+              }
+              description={submissionState.message}
+            />
+          ) : null}
 
-        {submissionState ? (
-          <SubmissionNotice
-            tone={submissionState.tone}
-            title={
-              submissionState.tone === "success"
-                ? formCopy.feedback.successTitle
-                : formCopy.feedback.errorTitle
-            }
-            description={submissionState.message}
-          />
+        {isSuccess ? (
+          <button type="button" className="btn btn-secondary" onClick={() => setSubmissionState(null)}>
+            {commonT("sendAnother")}
+          </button>
         ) : null}
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
-            <FieldLabel label={fields.name} required />
-            <input type="text" {...register("name")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.name?.message} />
-          </label>
-          <label className="block">
-            <FieldLabel label={fields.email} required />
-            <input type="email" {...register("email")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.email?.message} />
-          </label>
+        <div className={isSuccess ? "hidden" : "space-y-5"}>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field id="inquiry-name" label={fields.name} required error={errors.name?.message}>
+              <input
+                type="text"
+                autoComplete="name"
+                {...register("name")}
+                {...fieldProps("inquiry-name", errors.name?.message)}
+                disabled={isSubmitting}
+                className={formInputClassName}
+              />
+            </Field>
+            <Field id="inquiry-email" label={fields.email} required error={errors.email?.message}>
+              <input
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                dir="ltr"
+                {...register("email")}
+                {...fieldProps("inquiry-email", errors.email?.message)}
+                disabled={isSubmitting}
+                className={`${formInputClassName} rtl:text-end`}
+              />
+            </Field>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field
+              id="inquiry-phone"
+              label={fields.phone}
+              optionalLabel={formCopy.optionalLabel}
+              error={errors.phone?.message}
+            >
+              <input
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                dir="ltr"
+                {...register("phone")}
+                {...fieldProps("inquiry-phone", errors.phone?.message)}
+                disabled={isSubmitting}
+                className={`${formInputClassName} rtl:text-end`}
+              />
+            </Field>
+            <Field id="inquiry-subject" label={fields.subject} required error={errors.subject?.message}>
+              <select
+                {...register("subject")}
+                {...fieldProps("inquiry-subject", errors.subject?.message)}
+                disabled={isSubmitting}
+                className={formInputClassName}
+              >
+                <option value="">{fields.subjectPlaceholder}</option>
+                <option value={fields.subjects.quote}>{fields.subjects.quote}</option>
+                <option value={fields.subjects.tracking}>{fields.subjects.tracking}</option>
+                <option value={fields.subjects.general}>{fields.subjects.general}</option>
+              </select>
+            </Field>
+          </div>
+
+          <Field id="inquiry-message" label={fields.message} required error={errors.message?.message}>
+            <textarea
+              {...register("message")}
+              {...fieldProps("inquiry-message", errors.message?.message)}
+              rows={5}
+              disabled={isSubmitting}
+              className={formInputClassName}
+            />
+          </Field>
+
+          <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:gap-5">
+            <SubmitButton pending={isSubmitting} pendingLabel={formCopy.status.sending}>
+              {fields.submit}
+            </SubmitButton>
+            <FormLegend requiredText={formCopy.legend.required} />
+          </div>
         </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block">
-            <FieldLabel label={fields.phone} optionalLabel={formCopy.optionalLabel} />
-            <input type="tel" {...register("phone")} disabled={isSubmitting} className={formInputClassName} />
-            <FieldError message={errors.phone?.message} />
-          </label>
-          <label className="block">
-            <FieldLabel label={fields.subject} required />
-            <select {...register("subject")} disabled={isSubmitting} className={formInputClassName}>
-              <option value="">{fields.subjectPlaceholder}</option>
-              <option value={fields.subjects.quote}>{fields.subjects.quote}</option>
-              <option value={fields.subjects.tracking}>{fields.subjects.tracking}</option>
-              <option value={fields.subjects.general}>{fields.subjects.general}</option>
-            </select>
-            <FieldError message={errors.subject?.message} />
-          </label>
-        </div>
-
-        <label className="block">
-          <FieldLabel label={fields.message} required />
-          <textarea
-            {...register("message")}
-            rows={5}
-            disabled={isSubmitting}
-            className={`${formInputClassName} resize-y`}
-          />
-          <FieldError message={errors.message?.message} />
-        </label>
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full rounded-md bg-alfs-orange px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-alfs-amber disabled:cursor-not-allowed disabled:bg-alfs-orange/70 sm:w-auto"
-        >
-          {isSubmitting ? formCopy.status.sending : fields.submit}
-        </button>
       </form>
+      </FormCard>
     </div>
   );
 }

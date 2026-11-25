@@ -8,13 +8,15 @@ import {persistLocale} from "@/i18n/localePersistence";
 import {locales, type Locale} from "@/i18n/routing";
 
 import {usePageTransition} from "./PageTransitionProvider";
+import {PublicIcon} from "./PublicIcon";
 
-const labels: Record<Locale, string> = {
-  en: "EN",
-  ar: "AR",
+/** Each language is named in its own script, so the label never needs translating. */
+const endonyms: Record<Locale, string> = {
+  en: "English",
+  ar: "العربية",
 };
 
-export function LocaleSwitch() {
+export function LocaleSwitch({className = ""}: {className?: string}) {
   const router = useRouter();
   const t = useTranslations("HomePage.navbar");
   const locale = useLocale() as Locale;
@@ -25,7 +27,9 @@ export function LocaleSwitch() {
     setActiveLocale(locale);
   }, [locale]);
 
-  function handleLocaleChange(nextLocale: Locale) {
+  const nextLocale = locales.find((value) => value !== activeLocale) ?? activeLocale;
+
+  function handleLocaleChange() {
     if (nextLocale === activeLocale) {
       return;
     }
@@ -40,31 +44,15 @@ export function LocaleSwitch() {
   }
 
   return (
-    <div
-      className="inline-flex items-center rounded-full border border-outline-variant bg-white p-1 shadow-sm"
-      aria-label={t("languageSwitch")}
-      role="group"
+    <button
+      type="button"
+      onClick={handleLocaleChange}
+      lang={nextLocale}
+      aria-label={`${t("languageSwitch")}: ${endonyms[nextLocale]}`}
+      className={`inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-ui font-semibold text-navy-800 transition-colors hover:bg-navy-50 ${className}`}
     >
-      {locales.map((nextLocale) => {
-        const isActive = nextLocale === activeLocale;
-
-        return (
-          <button
-            key={nextLocale}
-            type="button"
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.18em] transition-colors ${
-              isActive
-                ? "bg-alfs-orange text-white"
-                : "text-on-surface-variant hover:text-alfs-navy"
-            }`}
-            aria-pressed={isActive}
-            onClick={() => handleLocaleChange(nextLocale)}
-          >
-            <span className="sr-only">{t("switchTo", {locale: nextLocale})}</span>
-            <span aria-hidden="true">{labels[nextLocale]}</span>
-          </button>
-        );
-      })}
-    </div>
+      <PublicIcon name="globe" className="h-[1.125rem] w-[1.125rem] text-ink-faint" />
+      <span className={nextLocale === "ar" ? "font-arabic" : "font-sans"}>{endonyms[nextLocale]}</span>
+    </button>
   );
 }
